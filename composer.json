@@ -1,5 +1,16 @@
 {
-    "require": {
+    "name": "easeappphp/eablueprint",
+    "description": "EaseApp is a PHP based Micro Framework, that can be helpful in writing both Web Applications and REST APIs in a simple and easier way.",
+    "type": "project",
+	"require": {
         "easeappphp/easeapp": "dev-master"
-    }
+    },
+	"homepage": "https://github.com/easeappphp/EABlueprint",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raghuveer Dendukuri",
+            "email": "securitywonks@gmail.com"
+        }
+    ]
 }
