@@ -1,0 +1,5 @@
+{
+    "require": {
+        "easeappphp/easeapp": "dev-master"
+    }
+}
