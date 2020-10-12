@@ -1,16 +1,22 @@
 {
     "name": "easeappphp/eablueprint",
-    "description": "EaseApp is a PHP based Micro Framework, that can be helpful in writing both Web Applications and REST APIs in a simple and easier way.",
-    "type": "project",
+    "description": "EABlueprint is the application that can be used to create either MVC or API Application.",
+    "type": "application",
 	"require": {
         "easeappphp/easeapp": "dev-master"
     },
 	"homepage": "https://github.com/easeappphp/EABlueprint",
-    "license": "MIT",
+	"license": "MIT",
     "authors": [
         {
             "name": "Raghuveer Dendukuri",
             "email": "securitywonks@gmail.com"
         }
-    ]
+    ],
+	"autoload": {
+       
+	   "psr-4": {
+            "EaseAppPHP\\EABlueprint\\": ""
+        }
+    }
 }

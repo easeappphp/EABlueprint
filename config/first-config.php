@@ -70,7 +70,7 @@ return [
     | Base Path
     |--------------------------------------------------------------------------
     |
-    | This is the Base Path of the Application. This will be the Same for both Web & Commandline.
+    | This is the Base Path of the Application. This will be the Same for both Web & Commandline. This is the place .env is expected to be placed ingeneral.
     |
     */
 
@@ -87,11 +87,11 @@ return [
 
     'web_root_path' => env('APP_WEB_ROOT_PATH'),
 	
-	'siteroot_basedir' => env('APP_BASE_PATH') . 'public_html',
-	'siteroot_basedir_command_line' => env('APP_BASE_PATH') . 'public_html',
-	'siteroot_basedir_command_line_dev' => env('APP_BASE_PATH') . 'public_html',
-	'site_home_path_full' => env('APP_BASE_PATH'),
-	'site_home_path_full_dev' => env('APP_BASE_PATH'),
+    'siteroot_basedir' => env('APP_BASE_PATH') . 'public_html',
+    'siteroot_basedir_command_line' => env('APP_BASE_PATH') . 'public_html',
+    'siteroot_basedir_command_line_dev' => env('APP_BASE_PATH') . 'public_html',
+    'site_home_path_full' => env('APP_BASE_PATH'),
+    'site_home_path_full_dev' => env('APP_BASE_PATH'),
 	
 	
 	/*
@@ -245,8 +245,8 @@ return [
             'url' => env('MYSQL_DB_URL'),
             'host' => env('MYSQL_DB_HOST', '127.0.0.1'),
             'port' => env('MYSQL_DB_PORT', '3306'),
-            'database' => env('MYSQL_DB_DATABASE', 'forge'),
-            'username' => env('MYSQL_DB_USERNAME', 'forge'),
+            'database' => env('MYSQL_DB_DATABASE', 'easeapp'),
+            'username' => env('MYSQL_DB_USERNAME', 'easeapp'),
             'password' => env('MYSQL_DB_PASSWORD', ''),
             'unix_socket' => env('MYSQl_DB_SOCKET', ''),
             'charset' => 'utf8mb4',
@@ -282,10 +282,17 @@ return [
     |
     */
 
-    'routing_engine_rule_files' => [
+    /* 'routing_engine_rule_files' => [
 		__DIR__.'/routing-engine-app-core-rules.php',
 		__DIR__.'/routing-engine-app-specific-rules1.php',
 		__DIR__.'/routing-engine-app-specific-rules2.php',
+	], */
+	'routing_engine_rule_files' => [
+		__DIR__.'/../routes/web.php',
+		__DIR__.'/../routes/ajax.php',
+		__DIR__.'/../routes/ajax-api-common.php',
+		__DIR__.'/../routes/rest-api.php',
+		__DIR__.'/../routes/soap-api.php',
 	],
 	
 	/*
@@ -324,7 +331,7 @@ return [
 
     'route_rel_template_context' => '',
 	
-	/*
+    /*
     |--------------------------------------------------------------------------
     | Other Config
     |--------------------------------------------------------------------------
@@ -335,11 +342,11 @@ return [
 
    
 	'project_main_folder' => '',
-	'live_url_main_domain_name' => 'filepetitions.com',
-	'cli_dev_account_ref' => 'apidev-filepetitions',
-	'cli_live_account_ref' => 'apilive-filepetitions',
-	'organisation_name' => 'Federal Soft Systems',
-	'organisation_name_full' => 'Federal Soft Systems Inc',
+	'live_url_main_domain_name' => 'easeapp.org',
+	'cli_dev_account_ref' => 'apidev-easeapp',
+	'cli_live_account_ref' => 'apilive-easeapp',
+	'organisation_name' => 'EaseApp',
+	'organisation_name_full' => 'EaseApp',
 	
 	'encr_filename_salt_length' => '20',
 	'encr_filename_length' => '45',
@@ -349,7 +356,7 @@ return [
 	'username_max_length' => '20',
 	'debug_mode' => 'ON',
 	'app_site_status' => 'live',
-	'contact_page_email' => 'raghuveer.dendukuri@gmail.com',
+	'contact_page_email' => 'securitywonks@gmail.com',
 	'contact_phone_primary' => '+91-234-1234567',
 	'currency_symbol' => 'Rs.',
 	'log_lifetime_settings_seconds' => '32140800',
@@ -358,7 +365,7 @@ return [
 	'show_page_load_db_query_info' => '1',
 	'check_email_activation_login' => 'yes',
 	
-	/*
+    /*
     |--------------------------------------------------------------------------
     | Third Party Provider Keys Storage Settings
     |--------------------------------------------------------------------------
@@ -384,7 +391,57 @@ return [
 	'vonage_communications_application_name' => env('VONAGE_COMMUNICATIONS_APPLICATION_NAME'),
 	'vonage_communications_application_id' => env('VONAGE_COMMUNICATIONS_APPLICATION_ID'),
 	'vonage_communications_application_rel_private_key_filename' => env('VONAGE_COMMUNICATIONS_APPLICATION_REL_PRIVATE_KEY_FILENAME'),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Autoloaded Service Providers
+    |--------------------------------------------------------------------------
+    |
+    | The service providers listed here will be automatically loaded on the
+    | request to your application. Feel free to add your own services to
+    | this array to grant expanded functionality to your applications.
+    |
+    */
+
+    'providers' => [
+
+        /*
+         * EaseApp PHP Framework Service Providers...
+         */
+        
+        /*
+         * Package Service Providers...
+         */
+
+        /*
+         * Application Service Providers...
+         */
+        \EaseAppPHP\EABlueprint\app\Providers\AppServiceProvider::class,
+        \EaseAppPHP\EABlueprint\app\Providers\RouteServiceProvider::class,
+
+    ],
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Route Type Middlware Group Mapping
+    |--------------------------------------------------------------------------
+    |
+    | The Different Route_type and corresponding MiddlwareGroup name mapping.
+    | route_type: ajax | soap-web-service | rest-web-service | ajax-web-service-common | frontend-web-app | backend-web-app | web-app-common
+    */
 	
+    'route_type_middleware_group_mapping' => [
+        
+            'ajax' => 'ajax',
+            'ajax-web-service-common' => 'ajax',
+            'rest-web-service' => 'api',
+            'soap-web-service' => 'api',
+            'frontend-web-app' => 'web',
+            'backend-web-app' => 'web',
+            'web-app-common' => 'web',
+    
+    ],
+    
 	
 ];
 ?>
