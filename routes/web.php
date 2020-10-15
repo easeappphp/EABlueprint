@@ -8,6 +8,8 @@ return [
 		'route_type' => 'web-app-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -18,6 +20,8 @@ return [
 		'route_type' => 'web-app-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -28,6 +32,8 @@ return [
 		'route_type' => 'web-app-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -38,6 +44,8 @@ return [
 		'route_type' => 'web-app-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -48,6 +56,8 @@ return [
 		'route_type' => 'web-app-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -58,6 +68,8 @@ return [
 		'route_type' => 'web-app-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -69,6 +81,8 @@ return [
 		'route_type' => 'frontend-web-app',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -80,6 +94,8 @@ return [
 		'route_type' => 'frontend-web-app',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -90,6 +106,8 @@ return [
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -100,6 +118,8 @@ return [
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'oop-mapped',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -110,6 +130,8 @@ return [
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -120,6 +142,8 @@ return [
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => 'auth,hostnamecheck',
                 'without_middleware' => 'startsession'
 	],
@@ -130,6 +154,8 @@ return [
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -140,6 +166,8 @@ return [
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -151,6 +179,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -162,6 +192,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -173,6 +205,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -184,6 +218,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -195,6 +231,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -206,6 +244,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -217,6 +257,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -228,6 +270,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -239,6 +283,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -250,6 +296,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -261,6 +309,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -272,6 +322,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
@@ -283,6 +335,8 @@ return [
 		'route_type' => 'rest-web-service',
 		'allowed_request_method' => 'POST',
                 'controller_type' => 'procedural',
+                'controller_class_name' => '',
+                'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],						
