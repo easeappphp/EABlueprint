@@ -8,6 +8,6 @@ class WebController extends \EaseAppPHP\Foundation\BaseWebController
 {
     
     //use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    
     
 }

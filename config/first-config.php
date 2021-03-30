@@ -290,7 +290,7 @@ return [
 	'routing_engine_rule_files' => [
 		__DIR__.'/../routes/web.php',
 		__DIR__.'/../routes/ajax.php',
-		__DIR__.'/../routes/ajax-api-common.php',
+		__DIR__.'/../routes/ajax-web-service-common.php',
 		__DIR__.'/../routes/rest-api.php',
 		__DIR__.'/../routes/soap-api.php',
 	],

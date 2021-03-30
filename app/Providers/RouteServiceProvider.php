@@ -64,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
             //WORKING var_dump($this->container->get('config')["first-config"]["routing_engine_rule_files"]);
             //TO TRY var_dump(getDataFromContainer('config')["first-config"]["routing_engine_rule_files"]);
 
-            //Get Routes from /routes folder w.r.t. web, ajax, ajax-api-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
+            //Get Routes from /routes folder w.r.t. web, ajax, ajax-web-service-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
             $this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["first-config"]["routing_engine_rule_files"]);
             //var_dump($this->routes);
             $this->container->instance('routes', $this->routes);
@@ -78,33 +78,33 @@ class RouteServiceProvider extends ServiceProvider
             //$this->routesList = $this->container->get('matchedRouteResponse');
                         
             echo "<pre>";
-            print_r($this->container->get('matchedRouteResponse'));
+            //print_r($this->container->get('matchedRouteResponse'));
             /*echo "<br>";
             print_r($this->routesList);
             */
-            $required_matched_page_filename = $this->container->get('matchedRouteResponse')["matched_page_filename"];
-            $required_route_type = "";
+            $requiredMatchedPageFilename = $this->container->get('matchedRouteResponse')["matched_page_filename"];
+            $requiredRouteType = "";
             foreach($this->routesList as $key => $value){
-                if($key ==  $required_matched_page_filename){
+                if($key ==  $requiredMatchedPageFilename){
                     print_r($value);
-                    $required_route_type = $value["route_type"];
-                    $required_with_middleware = $value["with_middleware"];
-                    $required_without_middleware = $value["without_middleware"];
-                    if($required_with_middleware != ""){
-                        $required_with_middleware_array = explode(",", $required_with_middleware);
+                    $requiredRouteType = $value["route_type"];
+                    $requiredWithMiddleware = $value["with_middleware"];
+                    $requiredWithoutMiddleware = $value["without_middleware"];
+                    if($requiredWithMiddleware != ""){
+                        $requiredWithMiddlewareArray = explode(",", $requiredWithMiddleware);
                     }
-                    if($required_without_middleware != ""){
-                        $required_without_middleware_array = explode(",", $required_without_middleware);
+                    if($requiredWithoutMiddleware != ""){
+                        $requiredWithoutMiddlewareArray = explode(",", $requiredWithoutMiddleware);
                     }
                     break;
                 }
             }
             // echo "<br>";
-             var_dump($this->config["first-config"]["route_type_middleware_group_mapping"]);
+            //var_dump($this->config["first-config"]["route_type_middleware_group_mapping"]);
 
-            if($required_route_type != "" && array_key_exists($required_route_type, $this->config["first-config"]["route_type_middleware_group_mapping"])){
-                $required_route_type_middleware_group_mapping_value = $this->config["first-config"]["route_type_middleware_group_mapping"][$required_route_type];
-				//echo "required_route_type_middleware_group_mapping_value: " . $required_route_type_middleware_group_mapping_value . "<br>\n";
+            if($requiredRouteType != "" && array_key_exists($requiredRouteType, $this->config["first-config"]["route_type_middleware_group_mapping"])){
+                $requiredRouteTypeMiddlewareGroupMappingValue = $this->config["first-config"]["route_type_middleware_group_mapping"][$requiredRouteType];
+				//echo "requiredRouteTypeMiddlewareGroupMappingValue: " . $requiredRouteTypeMiddlewareGroupMappingValue . "<br>\n";
             }
             // Step 1: Do something first
             $appClassData = [
@@ -151,10 +151,10 @@ class RouteServiceProvider extends ServiceProvider
             //print_r($this->constructedResponse);
             
             foreach ($this->config["middleware"]["middlewareGroups"] as $singleMiddlewareGroupRowKey => $singleMiddlewareGroupRowValue) {
-                //echo "required_route_type_middleware_group_mapping_value: " . $required_route_type_middleware_group_mapping_value . "<br>\n";
+                //echo "requiredRouteTypeMiddlewareGroupMappingValue: " . $requiredRouteTypeMiddlewareGroupMappingValue . "<br>\n";
 				//echo "singleMiddlewareGroupRowKey: " . $singleMiddlewareGroupRowKey . "<br>\n";
                 $expectedMiddlewareGroupsList = array("web", "api", "ajax");
-                if (($required_route_type_middleware_group_mapping_value == $singleMiddlewareGroupRowKey) && (in_array($singleMiddlewareGroupRowKey, $expectedMiddlewareGroupsList))) {
+                if (($requiredRouteTypeMiddlewareGroupMappingValue == $singleMiddlewareGroupRowKey) && (in_array($singleMiddlewareGroupRowKey, $expectedMiddlewareGroupsList))) {
                     //echo "enter<br>";
                     foreach($singleMiddlewareGroupRowValue as $singleMiddlewareGroupRowValueEntry){
                         //echo "enter1<br>";
@@ -206,18 +206,18 @@ class RouteServiceProvider extends ServiceProvider
                 }
               //break;
             }
-            //echo "required_route_type: " . $required_route_type . "<br>\n";
+            //echo "requiredRouteType: " . $requiredRouteType . "<br>\n";
             //echo "<pre>";
             //echo "constructed response TOTAL: <br>";
             //print_r($this->constructedResponse);
-            if(isset($required_with_middleware_array)){
-                foreach($required_with_middleware_array as $required_with_middleware_array_entry){
-                    //echo "required_with_middleware_array_entry: " . $required_with_middleware_array_entry . "<br>";
+            if(isset($requiredWithMiddlewareArray)){
+                foreach($requiredWithMiddlewareArray as $requiredWithMiddlewareArrayEntry){
+                    //echo "requiredWithMiddlewareArrayEntry: " . $requiredWithMiddlewareArrayEntry . "<br>";
                     foreach($this->config["middleware"]["routeMiddleware"] as $singlerouteMiddlewareKey => $singlerouteMiddlewareValue){
 
-                        if($required_with_middleware_array_entry == $singlerouteMiddlewareKey){
+                        if($requiredWithMiddlewareArrayEntry == $singlerouteMiddlewareKey){
                             
-                            if(!isset($this->constructedResponse[$required_with_middleware_array_entry])){
+                            if(!isset($this->constructedResponse[$requiredWithMiddlewareArrayEntry])){
                                 $this->constructedResponse[] = $singlerouteMiddlewareValue;
                             }
                             
@@ -226,14 +226,14 @@ class RouteServiceProvider extends ServiceProvider
                     }
                 }
             }
-            if(isset($required_without_middleware_array)){
-                foreach($required_without_middleware_array as $required_without_middleware_array_entry){
+            if(isset($requiredWithoutMiddlewareArray)){
+                foreach($requiredWithoutMiddlewareArray as $requiredWithoutMiddlewareArrayEntry){
                     foreach($this->config["middleware"]["routeMiddleware"] as $singlerouteMiddlewareKey => $singlerouteMiddlewareValue){
 
-                        if($required_without_middleware_array_entry == $singlerouteMiddlewareKey){
+                        if($requiredWithoutMiddlewareArrayEntry == $singlerouteMiddlewareKey){
                             
-                            if(isset($this->constructedResponse[$required_without_middleware_array_entry])){
-                                unset($this->constructedResponse[$required_without_middleware_array_entry]);
+                            if(isset($this->constructedResponse[$requiredWithoutMiddlewareArrayEntry])){
+                                unset($this->constructedResponse[$requiredWithoutMiddlewareArrayEntry]);
                                 echo "middleware removed";
                                 
                                 //ISSUE TO BE FIXED
