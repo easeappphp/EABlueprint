@@ -349,7 +349,7 @@ return [
 		'allowed_request_method' => 'ANY',
                 'controller_type' => 'oop-mapped',
                 'controller_class_name' => \EaseAppPHP\EABlueprint\app\Http\Controllers\AllUserDetails\GetController::class,
-                'method_name' => 'Index',
+                'method_name' => 'index',
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
