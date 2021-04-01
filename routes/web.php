@@ -117,8 +117,8 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_method' => 'ANY',
-                'controller_type' => 'oop-mapped',
-                'controller_class_name' => '',
+                'controller_type' => 'procedural',
+                'controller_class_name' => \EaseAppPHP\EABlueprint\app\Http\Controllers\ProceduralController::class,
                 'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
@@ -339,7 +339,20 @@ return [
                 'method_name' => '',
                 'with_middleware' => '',
                 'without_middleware' => ''
-	],						
+	],
+        'rest-get-all-user-details' => [
+		'route_value' => '/rest/all-user-details/get',
+		'auth_check_requirements' => 'none',
+		'page_filename' => '',
+		'redirect_to' => '',
+		'route_type' => 'rest-web-service',
+		'allowed_request_method' => 'ANY',
+                'controller_type' => 'oop-mapped',
+                'controller_class_name' => \EaseAppPHP\EABlueprint\app\Http\Controllers\AllUserDetails\GetController::class,
+                'method_name' => 'Index',
+                'with_middleware' => '',
+                'without_middleware' => ''
+	],
 
 ];	
 ?>
