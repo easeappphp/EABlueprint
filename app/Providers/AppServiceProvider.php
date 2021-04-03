@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EaseAppPHP\EABlueprint\app\Providers;
+namespace EaseAppPHP\EABlueprint\App\Providers;
 
 use \EaseAppPHP\Foundation\ServiceProvider;
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EaseAppPHP\EABlueprint\app\Providers;
+namespace EaseAppPHP\EABlueprint\App\Providers;
 
 use \EaseAppPHP\Foundation\ServiceProvider;
 
@@ -59,18 +59,14 @@ class RouteServiceProvider extends ServiceProvider
             $this->config = $this->container->get('config');
             $this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
 
-
-
-            //WORKING var_dump($this->container->get('config')["first-config"]["routing_engine_rule_files"]);
-            //TO TRY var_dump(getDataFromContainer('config')["first-config"]["routing_engine_rule_files"]);
+            $time_start = microtime(true);
 
             //Get Routes from /routes folder w.r.t. web, ajax, ajax-web-service-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
             $this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["first-config"]["routing_engine_rule_files"]);
             //var_dump($this->routes);
             $this->container->instance('routes', $this->routes);
             $this->routesList = $this->container->get('routes');
-            //var_dump($this->routesList);
-
+            
             //Match Route			
             $this->matchedRouteResponse = $this->eaRouterinstance->matchRoute($this->routes, $this->serverRequest->getUri()->getPath(), $this->serverRequest->getQueryParams(), $this->serverRequest->getMethod(), $this->config["first-config"]["routing_rule_length"]);
             //var_dump($this->matchedRouteResponse);
@@ -82,24 +78,35 @@ class RouteServiceProvider extends ServiceProvider
             /*echo "<br>";
             print_r($this->routesList);
             */
-            $requiredMatchedPageFilename = $this->container->get('matchedRouteResponse')["matched_page_filename"];
-            $requiredRouteType = "";
-            foreach($this->routesList as $key => $value){
-                if($key ==  $requiredMatchedPageFilename){
-                    print_r($value);
-                    $requiredRouteType = $value["route_type"];
-                    $requiredWithMiddleware = $value["with_middleware"];
-                    $requiredWithoutMiddleware = $value["without_middleware"];
-                    if($requiredWithMiddleware != ""){
-                        $requiredWithMiddlewareArray = explode(",", $requiredWithMiddleware);
-                    }
-                    if($requiredWithoutMiddleware != ""){
-                        $requiredWithoutMiddlewareArray = explode(",", $requiredWithoutMiddleware);
-                    }
-                    break;
-                }
-            }
-            // echo "<br>";
+      
+			$matchedRouteKey = $this->container->get('matchedRouteResponse')["matched_route_key"];
+			
+			$this->container->instance('MatchedRouteKey', $matchedRouteKey);
+			$this->matchedRouteKey = $this->container->get('MatchedRouteKey'); 
+			
+			$matchedRouteDetails = $this->routesList[$this->matchedRouteKey];
+			
+			$this->container->instance('MatchedRouteDetails', $matchedRouteDetails);
+			$this->matchedRouteDetails = $this->container->get('MatchedRouteDetails'); 
+			
+			$time_end = microtime(true);
+			$time = $time_end - $time_start;
+
+			echo "Matching Route took $time seconds\n";
+			//print_r($this->matchedRouteDetails);
+			
+			$requiredRouteType = "";
+			$requiredRouteType = $this->matchedRouteDetails["route_type"];
+			$requiredWithMiddleware = $this->matchedRouteDetails["with_middleware"];
+			$requiredWithoutMiddleware = $this->matchedRouteDetails["without_middleware"];
+			if($requiredWithMiddleware != ""){
+				$pageWithMiddlewareArray = explode(",", $requiredWithMiddleware);
+			}
+			if($requiredWithoutMiddleware != ""){
+				$pageWithoutMiddlewareArray = explode(",", $requiredWithoutMiddleware);
+			}
+			
+			// echo "<br>";
             //var_dump($this->config["first-config"]["route_type_middleware_group_mapping"]);
 
             if($requiredRouteType != "" && array_key_exists($requiredRouteType, $this->config["first-config"]["route_type_middleware_group_mapping"])){
