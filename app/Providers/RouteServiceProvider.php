@@ -134,7 +134,7 @@ class RouteServiceProvider extends ServiceProvider
             //run EaseAppPHPApplication\app\Http\Middleware\PassingAppClassDataToMiddleware
             //Middleware is expected to pass on the details as attributes of serverRequest to the next middleware
             //$this->middlewarePipeQueue->pipe(new \EaseAppPHP\Http\Middleware\PassingAppClassDataToMiddleware($appClassData));
-            $this->middlewarePipeQueue->pipe(new \EaseAppPHP\EABlueprint\app\Http\Middleware\PassingAppClassDataToMiddleware($appClassData));
+            $this->middlewarePipeQueue->pipe(new \EaseAppPHP\EABlueprint\App\Http\Middleware\PassingAppClassDataToMiddleware($appClassData));
             
             
             //echo "<pre>";

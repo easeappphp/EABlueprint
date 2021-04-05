@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails;
 
-use \EaseAppPHP\EABlueprint\app\Models\AllUserDetails\Get;
+use \EaseAppPHP\EABlueprint\App\Models\AllUserDetails\Get;
 
-class GetController extends \EaseAppPHP\Foundation\BaseWebController
+class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebController
 {
     
     /**
