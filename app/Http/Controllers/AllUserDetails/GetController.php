@@ -19,15 +19,18 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
     {
         //echo "Welcome to EaseApp OOP";
 		$getModel = new Get($this->matchedRouteDetails, $this->queryParams);
-		echo $getModel->index() . "\n";
+		//echo $getModel->index() . "\n";
+		$dataArray = $getModel->index();
 		//print_r($parametersArray);
+		print_r($this->eaConfig);
+		echo "\n";
 		print_r($this->matchedRouteDetails);
 		echo "\n";
 		print_r($this->queryParams);
 		echo "\n";
 		
 		$filename = "myfile.php";
-		$dataArray = array("name" => "srirama", "place" => "ayodhya");
+		//$dataArray = array("name" => "srirama", "place" => "ayodhya");
 		
 		$getView = new BaseWebView($filename, $dataArray);
 		

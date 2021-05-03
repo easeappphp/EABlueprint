@@ -9,6 +9,7 @@ class Get extends \EaseAppPHP\Foundation\BaseWebModel
     
     protected $matchedRouteDetails;
 	protected $queryParams;
+	protected $processedModelResponse = [];
 
 	public function __construct($matchedRouteDetails, $queryParams)
 	{
@@ -19,7 +20,7 @@ class Get extends \EaseAppPHP\Foundation\BaseWebModel
 	}
 	
 	/**
-     * Process Ajax/API Call
+     * Process index method
      *
      * @return array
      */
@@ -31,6 +32,12 @@ class Get extends \EaseAppPHP\Foundation\BaseWebModel
 		echo "\n";
 		print_r($this->queryParams);
 		echo "\n";
+		
+		$dataArray = array("name" => "srirama", "place" => "ayodhya");
+		$this->processedModelResponse = $dataArray;
+		
+		return $this->processedModelResponse;
+		
     }
     
     
