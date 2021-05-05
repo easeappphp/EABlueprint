@@ -62,13 +62,13 @@ class RouteServiceProvider extends ServiceProvider
             $time_start = microtime(true);
 
             //Get Routes from /routes folder w.r.t. web, ajax, ajax-web-service-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
-            $this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["first-config"]["routing_engine_rule_files"]);
+            $this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["mainconfig"]["routing_engine_rule_files"]);
             //var_dump($this->routes);
             $this->container->instance('routes', $this->routes);
             $this->routesList = $this->container->get('routes');
             
             //Match Route			
-            $this->matchedRouteResponse = $this->eaRouterinstance->matchRoute($this->routes, $this->serverRequest->getUri()->getPath(), $this->serverRequest->getQueryParams(), $this->serverRequest->getMethod(), $this->config["first-config"]["routing_rule_length"]);
+            $this->matchedRouteResponse = $this->eaRouterinstance->matchRoute($this->routes, $this->serverRequest->getUri()->getPath(), $this->serverRequest->getQueryParams(), $this->serverRequest->getMethod(), $this->config["mainconfig"]["routing_rule_length"]);
             //var_dump($this->matchedRouteResponse);
             $this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
             //$this->routesList = $this->container->get('matchedRouteResponse');
@@ -107,10 +107,10 @@ class RouteServiceProvider extends ServiceProvider
 			}
 			
 			// echo "<br>";
-            //var_dump($this->config["first-config"]["route_type_middleware_group_mapping"]);
+            //var_dump($this->config["mainconfig"]["route_type_middleware_group_mapping"]);
 
-            if($requiredRouteType != "" && array_key_exists($requiredRouteType, $this->config["first-config"]["route_type_middleware_group_mapping"])){
-                $requiredRouteTypeMiddlewareGroupMappingValue = $this->config["first-config"]["route_type_middleware_group_mapping"][$requiredRouteType];
+            if($requiredRouteType != "" && array_key_exists($requiredRouteType, $this->config["mainconfig"]["route_type_middleware_group_mapping"])){
+                $requiredRouteTypeMiddlewareGroupMappingValue = $this->config["mainconfig"]["route_type_middleware_group_mapping"][$requiredRouteType];
 				//echo "requiredRouteTypeMiddlewareGroupMappingValue: " . $requiredRouteTypeMiddlewareGroupMappingValue . "<br>\n";
             }
             // Step 1: Do something first

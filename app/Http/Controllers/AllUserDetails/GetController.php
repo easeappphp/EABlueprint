@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails;
 
+use Illuminate\Container\Container;
+
 use \EaseAppPHP\EABlueprint\App\Models\AllUserDetails\Get;
 
 use \EaseAppPHP\Foundation\BaseWebView;
@@ -11,29 +13,30 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 {
     
     /**
-     * Process Ajax/API Call
+     * Process index method
      *
      * @return array
      */
     public function index()
     {
-        //echo "Welcome to EaseApp OOP";
-		$getModel = new Get($this->matchedRouteDetails, $this->queryParams);
-		//echo $getModel->index() . "\n";
-		$dataArray = $getModel->index();
-		//print_r($parametersArray);
-		print_r($this->eaConfig);
-		echo "\n";
-		print_r($this->matchedRouteDetails);
-		echo "\n";
-		print_r($this->queryParams);
-		echo "\n";
+        
+		$getModel = new Get($this->eaConfig, $this->matchedRouteDetails, $this->queryParams);
 		
-		$filename = "myfile.php";
-		//$dataArray = array("name" => "srirama", "place" => "ayodhya");
+		$dataObject = $getModel->index();
 		
-		$getView = new BaseWebView($filename, $dataArray);
+		$viewPageFileName = $dataObject->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		
+		if (file_exists($viewPageFileName)) {
+			
+			$getView = new BaseWebView($viewPageFileName, $dataObject);
+			
+		} else {
+			
+			$getView = new BaseWebView($viewPageFileName, $dataObject);
+			
+		}
+		clearstatcache();
+				
 		$getView->render();
 		
     }

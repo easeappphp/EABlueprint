@@ -12,9 +12,9 @@ return [
     */
 
     'middleware' => [
-        \EaseAppPHP\EABlueprint\app\Http\Middleware\EARequestResponseTimeMiddleware::class,
-        \EaseAppPHP\EABlueprint\app\Http\Middleware\EACorsMiddleware::class,
-        \EaseAppPHP\EABlueprint\app\Http\Middleware\EAAppBrowserCacheHeadersMiddleware::class,
+        \EaseAppPHP\EABlueprint\App\Http\Middleware\EARequestResponseTimeMiddleware::class,
+        \EaseAppPHP\EABlueprint\App\Http\Middleware\EACorsMiddleware::class,
+        \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppBrowserCacheHeadersMiddleware::class,
         
         
     ],
@@ -30,14 +30,14 @@ return [
 
     'middlewareGroups' => [
         'ajax' => [
-            \EaseAppPHP\EABlueprint\app\Http\Middleware\EAAppSecurityHeadersMiddleware::class,
-            \EaseAppPHP\EABlueprint\app\Http\Middleware\StartSession::class,
+            \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppSecurityHeadersMiddleware::class,
+            \EaseAppPHP\EABlueprint\App\Http\Middleware\StartSession::class,
         ],
         'web' => [
             
         ],
         'api' => [
-            \EaseAppPHP\EABlueprint\app\Http\Middleware\HelloMiddleware::class,
+            \EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
         ],
         
     ],
@@ -52,10 +52,10 @@ return [
     */
 
     'routeMiddleware' => [
-        'throttle' => \EaseAppPHP\EABlueprint\app\Http\Middleware\HelloMiddleware::class,
-        'auth' => \EaseAppPHP\EABlueprint\app\Http\Middleware\Auth::class,
-        'hostnamecheck' => \EaseAppPHP\EABlueprint\app\Http\Middleware\HostnameCheck::class,
-        'startsession' => \EaseAppPHP\EABlueprint\app\Http\Middleware\StartSession::class,
+        'throttle' => \EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
+        'auth' => \EaseAppPHP\EABlueprint\App\Http\Middleware\Auth::class,
+        'hostnamecheck' => \EaseAppPHP\EABlueprint\App\Http\Middleware\HostnameCheck::class,
+        'startsession' => \EaseAppPHP\EABlueprint\App\Http\Middleware\StartSession::class,
     ],
     
     /*

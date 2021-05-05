@@ -3,22 +3,10 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Models\AllUserDetails;
 
-
 class Get extends \EaseAppPHP\Foundation\BaseWebModel
 {
     
-    protected $matchedRouteDetails;
-	protected $queryParams;
-	protected $processedModelResponse = [];
-
-	public function __construct($matchedRouteDetails, $queryParams)
-	{
-		
-		$this->matchedRouteDetails = $matchedRouteDetails;
-		$this->queryParams = $queryParams;
-		
-	}
-	
+   
 	/**
      * Process index method
      *
@@ -26,21 +14,19 @@ class Get extends \EaseAppPHP\Foundation\BaseWebModel
      */
     public function index()
     {
-        echo "Welcome to EaseApp OOP - MODEL";
-		echo "\nINSIDE MODEL:\n";
-		print_r($this->matchedRouteDetails);
-		echo "\n";
-		print_r($this->queryParams);
-		echo "\n";
+        
+		$this->processedModelResponse->name = "srirama";
+		$this->processedModelResponse->place = "ayodhya";
+		$this->processedModelResponse->x = "10";
+		$this->processedModelResponse->colors = array("red", "green", "blue", "yellow");
 		
-		$dataArray = array("name" => "srirama", "place" => "ayodhya");
-		$this->processedModelResponse = $dataArray;
-		
+		$this->processedModelResponse->routeRelTemplateContext = $this->getRouteRelTemplateContext();
+		$this->processedModelResponse->routeRelTemplateFolderPathPrefix = $this->getRouteRelTemplateFolderPathPrefix();
 		return $this->processedModelResponse;
 		
     }
-    
-    
+	
+	
 
     
 }
