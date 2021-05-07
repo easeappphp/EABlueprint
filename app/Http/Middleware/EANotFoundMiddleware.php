@@ -16,14 +16,10 @@ class EANotFoundMiddleware implements MiddlewareInterface
     ) : ResponseInterface {
         
 		
-        //$request->getserverParams()['HTTP_HOST'];
-		$response = $response->withStatus(404);
+        $response = $response->withStatus(404);
                 $response->getBody()->write(
                     'error::404 in ' . $request->getserverParams()['HTTP_HOST']
                 );
-		
-		//$response = $handler->handle($request);
-		
 		
 		//echo "404 - Not Found Handler";
 		return $response;

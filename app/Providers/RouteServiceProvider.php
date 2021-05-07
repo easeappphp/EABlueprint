@@ -73,7 +73,7 @@ class RouteServiceProvider extends ServiceProvider
             $this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
             //$this->routesList = $this->container->get('matchedRouteResponse');
                         
-            echo "<pre>";
+            //echo "<pre>";
             //print_r($this->container->get('matchedRouteResponse'));
             /*echo "<br>";
             print_r($this->routesList);
@@ -92,7 +92,7 @@ class RouteServiceProvider extends ServiceProvider
 			$time_end = microtime(true);
 			$time = $time_end - $time_start;
 
-			echo "Matching Route took $time seconds\n";
+			//echo "Matching Route took $time seconds\n";
 			//print_r($this->matchedRouteDetails);
 			
 			$requiredRouteType = "";
@@ -133,7 +133,6 @@ class RouteServiceProvider extends ServiceProvider
             
             //run EaseAppPHPApplication\app\Http\Middleware\PassingAppClassDataToMiddleware
             //Middleware is expected to pass on the details as attributes of serverRequest to the next middleware
-            //$this->middlewarePipeQueue->pipe(new \EaseAppPHP\Http\Middleware\PassingAppClassDataToMiddleware($appClassData));
             $this->middlewarePipeQueue->pipe(new \EaseAppPHP\EABlueprint\App\Http\Middleware\PassingAppClassDataToMiddleware($appClassData));
             
             
@@ -205,7 +204,7 @@ class RouteServiceProvider extends ServiceProvider
 					   //echo "enter else foreach 2<br>";
 						if(!in_array($singleMiddlewareGroupRowValueEntry, $this->constructedResponse)){
 							$this->constructedResponse[] = $singleMiddlewareGroupRowValueEntry;
-							echo "singleMiddlewareGroupRowValueEntry: " . $singleMiddlewareGroupRowValueEntry . "<br>\n";
+							//echo "singleMiddlewareGroupRowValueEntry: " . $singleMiddlewareGroupRowValueEntry . "<br>\n";
 						}
 					   //$this->middlewarePipeQueue->pipe(new $singleMiddlewareGroupRowValueEntry());
 					}
@@ -241,7 +240,7 @@ class RouteServiceProvider extends ServiceProvider
                             
                             if(isset($this->constructedResponse[$requiredWithoutMiddlewareArrayEntry])){
                                 unset($this->constructedResponse[$requiredWithoutMiddlewareArrayEntry]);
-                                echo "middleware removed";
+                                //echo "middleware removed";
                                 
                                 //ISSUE TO BE FIXED
                             }
@@ -265,19 +264,14 @@ class RouteServiceProvider extends ServiceProvider
              * Before and after middleware logic along with terminable middleware logic to be considered for middleware implementation
              */
             
-            //var_dump($this->middlewarePipeQueue);
-            
             //Laminas 404 Not Found Handler. The namespace to be changed later to Laminas\Stratigility\Handler\NotFoundHandler
             $this->middlewarePipeQueue->pipe(new \Laminas\Stratigility\Middleware\NotFoundHandler(function () {
 				return new \Laminas\Diactoros\Response();
 			}));
             
-           //Assign MiddlewarePipe entries into container
+            //Assign MiddlewarePipe entries into container
             $this->container->instance('middlewarePipeQueueEntries', $this->middlewarePipeQueue);
-            /*$this->middlewarePipeQueueEntries = $this->container->get('middlewarePipeQueueEntries');
             
-            echo "<pre>";
-            print_r($this->middlewarePipeQueueEntries);*/
             
         }
         

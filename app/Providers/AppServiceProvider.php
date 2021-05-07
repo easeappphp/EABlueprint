@@ -38,8 +38,6 @@ class AppServiceProvider extends ServiceProvider
             //Bind an existing "serverRequest" class instance to the container, by defining the Class Name as instance reference in the container
             $this->container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
 
-           //echo "app registered";
-        
         }
         
         

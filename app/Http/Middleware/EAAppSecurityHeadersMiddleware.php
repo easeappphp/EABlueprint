@@ -18,17 +18,6 @@ class EAAppSecurityHeadersMiddleware implements MiddlewareInterface
 		// Step 1: Grab the data from the request and use it
         $data = $request->getAttribute(PassingAppClassDataToMiddleware::class);
 		
-		/* echo "<pre>";
-		print_r($data); */
-		
-		/* // Step 1: Grab the data from the request and use it
-        $data1234 = $request->getAttribute(EaseAppPHP\App::class);
-		
-		echo "<pre>";
-		print_r($data1234);  
-		 */
-		//var_dump($request);
-		
         // Step 2: Call the next middleware and wait for the response
         $response = $handler->handle($request);	
 		//$response = $handler->handle($request);

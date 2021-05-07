@@ -1,12 +1,7 @@
-<b> hello everyone, my name is <?php echo $name; ?></b>
-
-<?php
-for ($x = 0; $x <= 10; $x++) {
-  echo "The number is: " . $x . "\n";
-} 
-
-echo "\n";
-foreach ($colors as $value) {
-  echo "$value \n";
-}
-?>
+<html>
+ <body>
+ <h1><?=$name?></h1>
+ <div><?php echo $place; ?></div>
+ <div><?php echo htmlspecialchars("Srirama<script>Antabagundali", ENT_QUOTES); ?> </div>
+ </body>
+</html>

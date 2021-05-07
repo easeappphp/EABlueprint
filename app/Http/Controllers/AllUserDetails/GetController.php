@@ -37,7 +37,11 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		}
 		clearstatcache();
 				
-		$getView->render();
+		$renderedResult = $getView->render();
+		
+		$this->container->instance('ParsedView', $renderedResult);
+		
+		
 		
     }
     

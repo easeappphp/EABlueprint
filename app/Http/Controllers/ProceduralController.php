@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Http\Controllers;
 
+use Illuminate\Container\Container;
 
-class ProceduralController extends \EaseAppPHP\Foundation\BaseWebController
+use \EaseAppPHP\EABlueprint\App\Models\AllUserDetails\Get;
+
+use \EaseAppPHP\Foundation\BaseWebView;
+
+class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebController
 {
     
     /**

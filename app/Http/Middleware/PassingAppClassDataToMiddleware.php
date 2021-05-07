@@ -35,8 +35,7 @@ class PassingAppClassDataToMiddleware implements MiddlewareInterface
 			
 			$response = $handler->handle($request);
 			return $response;
-			
-			
+						
 		}
 		
     }

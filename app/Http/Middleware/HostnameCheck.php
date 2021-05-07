@@ -14,10 +14,7 @@ class HostnameCheck implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ) : ResponseInterface {
-        // ... do something and return response
-        // or call request handler:
-        // return $handler->handle($request);
-		return $handler->handle($request);
+        return $handler->handle($request);
 		
     }
 }

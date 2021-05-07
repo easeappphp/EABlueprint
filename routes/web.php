@@ -354,5 +354,4 @@ return [
                 'without_middleware' => ''
 	],
 
-];	
-?>
+];

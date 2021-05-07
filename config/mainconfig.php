@@ -1,5 +1,4 @@
 <?php
-//require_once "get-environment-variables.php";
 
 return [
 
@@ -455,4 +454,3 @@ return [
     
 	
 ];
-?>
