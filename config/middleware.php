@@ -15,7 +15,7 @@ return [
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EARequestResponseTimeMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EACorsMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppBrowserCacheHeadersMiddleware::class,
-        
+        \EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         
     ],
     

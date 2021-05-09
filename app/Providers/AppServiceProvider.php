@@ -3,14 +3,19 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Providers;
 
+use Illuminate\Container\Container;
+
 use \EaseAppPHP\Foundation\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     protected $container;
+	
+	protected $serverRequest;
+	
+	protected $response;
     
-    protected $serverRequest;
-    
+     
     /**
      * Create a new Illuminate application instance.
      *
@@ -37,6 +42,12 @@ class AppServiceProvider extends ServiceProvider
 
             //Bind an existing "serverRequest" class instance to the container, by defining the Class Name as instance reference in the container
             $this->container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
+			
+			//2. Create a Response Object
+			$responseInstance = \EaseAppPHP\Foundation\BaseWebResponse();
+			
+			//Bind an existing "response" class instance to the container, by defining the Class Name as instance reference in the container
+            $this->container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance);
 
         }
         
@@ -53,6 +64,9 @@ class AppServiceProvider extends ServiceProvider
         if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
             
             $this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
+			
+			$this->response = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
+			
         
         }
     }

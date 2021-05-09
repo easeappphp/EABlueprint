@@ -20,7 +20,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
     public function index()
     {
         
-		$getModel = new Get($this->eaConfig, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		
@@ -32,6 +32,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 			
 		} else {
 			
+			//put not-found scenario related filename
 			$getView = new BaseWebView($viewPageFileName, $dataObject);
 			
 		}

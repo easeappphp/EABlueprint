@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Providers;
 
+use Illuminate\Container\Container;
+
 use \EaseAppPHP\Foundation\ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -97,11 +99,13 @@ class RouteServiceProvider extends ServiceProvider
             }
             // Step 1: Do something first
             $appClassData = [
-                    'config' => $this->config,
+                    'container' => $this->container,
+					'config' => $this->config,
                     'routes' => $this->routes,
                     'eaRouterinstance' => $this->eaRouterinstance,
                     'matchedRouteResponse' => $this->matchedRouteResponse,
-                    //'httpKernel' => $this->kernelInstance,
+					'matchedRouteKey' => $this->matchedRouteKey,
+					'matchedRouteDetails' => $this->matchedRouteDetails,
             ];
             
             //Define Laminas Stratigility Middlewarepipe
@@ -194,7 +198,7 @@ class RouteServiceProvider extends ServiceProvider
             $this->middlewarePipeQueue->pipe(new \Laminas\Stratigility\Middleware\NotFoundHandler(function () {
 				return new \Laminas\Diactoros\Response();
 			}));
-            
+			
             //Assign MiddlewarePipe entries into container
             $this->container->instance('middlewarePipeQueueEntries', $this->middlewarePipeQueue);
             

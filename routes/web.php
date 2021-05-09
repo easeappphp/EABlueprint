@@ -346,7 +346,7 @@ return [
 		'page_filename' => 'index',
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
-		'allowed_request_methods' => ['POST'],
+		'allowed_request_methods' => ['GET'],
                 'controller_type' => 'oop-mapped',
                 'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails\GetController::class,
                 'method_name' => 'index',
