@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
             $this->container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
 			
 			//2. Create a Response Object
-			$responseInstance = \EaseAppPHP\Foundation\BaseWebResponse();
+			$responseInstance = new \EaseAppPHP\Foundation\BaseWebResponse($this->container);
 			
 			//Bind an existing "response" class instance to the container, by defining the Class Name as instance reference in the container
             $this->container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance);

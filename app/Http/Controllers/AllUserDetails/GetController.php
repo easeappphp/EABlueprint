@@ -29,20 +29,41 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		if (file_exists($viewPageFileName)) {
 			
 			$getView = new BaseWebView($viewPageFileName, $dataObject);
+			$renderedView = $getView->render();
 			
 		} else {
 			
 			//put not-found scenario related filename
 			$getView = new BaseWebView($viewPageFileName, $dataObject);
+			$renderedView = $getView->render();
 			
 		}
 		clearstatcache();
 				
-		$renderedResult = $getView->render();
+		//$result = $this->response->setText("SriRama", 200);
 		
-		$this->container->instance('ParsedView', $renderedResult);
+		$result = $this->response->setHtml($renderedView, 200);
 		
+		/* $xml="<note>
+		<to>Tove</to>
+		<from>Jani</from>
+		<heading>Reminder</heading>
+		<body>Don't forget me this weekend!</body>
+		</note>";
 		
+		$result = $this->response->setXml($xml, 200); */
+		
+		//$data = array("name"=>"srirama","place"=>"ayodhya"); 
+		/* $data = new \stdClass;
+		$data->name = "srirama";
+		$data->place ="ayodhya"; */ 
+		//$data_json_encoded = json_encode($data);
+		
+		//$result = $this->response->setJson($data, 200);
+		
+		//$result = $this->response->setEmpty(204);
+		
+		$this->container->instance('ParsedResponse', $result);	
 		
     }
     

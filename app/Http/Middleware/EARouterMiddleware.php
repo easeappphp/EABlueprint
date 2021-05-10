@@ -145,92 +145,19 @@ class EARouterMiddleware implements MiddlewareInterface
 			
 		}
 		//how to respond in router middleware psr
-		$viewResponse = $this->container->get('ParsedView');
-		//echo "ParsedView (from controller): \n";
-		//echo $viewResponse; 
+		$response = $this->container->get('ParsedResponse');
 		
-		/* $response = new \Laminas\Diactoros\Response();
-		$response = $response->withStatus(200);
-        $response->getBody()->write('SriRama');
-		echo "response getbody:\n";
-		var_dump($response->getBody()); */
-		//return $response;
-		//return $handler->handle($request);
-		
-		//https://docs.laminas.dev/laminas-diactoros/v2/custom-responses/
-		//$response = new \Laminas\Diactoros\Response\TextResponse('SriRama');
+		if (is_object($response)) {
+			
+			return $response;
+			
+		} else {
+			
+			return $handler->handle($request);
+			
+		}
 		
 		
-		/* $response = new \Laminas\Diactoros\Response\TextResponse(
-			'SriRama',
-			200,
-			['Content-Type' => ['text/plain']]
-		); */
-		
-		//$htmlContent = $viewResponse;
-		//$response = new \Laminas\Diactoros\Response\HtmlResponse($htmlContent);
-		
-		/* $response = new \Laminas\Diactoros\Response\HtmlResponse(
-			$htmlContent,
-			200,
-			['Content-Type' => ['application/xhtml+xml']]
-		); */
-		
-		/* $xml="<note>
-		<to>Tove</to>
-		<from>Jani</from>
-		<heading>Reminder</heading>
-		<body>Don't forget me this weekend!</body>
-		</note>";
-		$response = new \Laminas\Diactoros\Response\XmlResponse($xml);
-		
-		$response = new \Laminas\Diactoros\Response\XmlResponse(
-			$xml,
-			200,
-			['Content-Type' => ['application/hal+xml']]
-		);
-		 */
-		$data = array("name"=>"srirama","place"=>"ayodhya"); 
-		$data_json_encoded = json_encode($data);
-		//$response = new \Laminas\Diactoros\Response\JsonResponse($data_json_encoded);
-		
-		/* $response = new \Laminas\Diactoros\Response\JsonResponse(
-			$data_json_encoded,
-			200,
-			['Content-Type' => ['application/json']]
-		); */
-		
-		
-		// Basic 204 response:
-		//$response = new \Laminas\Diactoros\Response\EmptyResponse();
-		
-		//$url = "https://www.google.com/";
-		 // 201 response with location header:
-		/* $response = new \Laminas\Diactoros\Response\EmptyResponse(201, [
-			'Location' => [ $url ],
-		]); */
-
-		// Alternately, set the header after instantiation:
-		//$response = (new \Laminas\Diactoros\Response\EmptyResponse(201))->withHeader('Location', $url);
-		
-		//use Laminas\Diactoros\Response\RedirectResponse;
-
-		// 302 redirect:
-		//$response = new \Laminas\Diactoros\Response\RedirectResponse('/user/login');
-
-		/* // 301 redirect:
-		$response = new \Laminas\Diactoros\Response\RedirectResponse('/user/login', 301);
-
-		// using a URI instance (e.g., by altering the request URI instance)
-		$uri = $request->getUri();
-		$response = new \Laminas\Diactoros\Response\RedirectResponse($uri->withPath('/login'));
-		 */
-		/* echo "response getbody:\n";
-		var_dump($response->getBody()); */
-		
-		echo "vardump response: \n";
-		var_dump($response);
-		return $response;
 		
 		
     }
