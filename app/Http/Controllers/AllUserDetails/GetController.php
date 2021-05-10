@@ -33,7 +33,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 			
 		} else {
 			
-			//put not-found scenario related filename
+			//View file missing scenario
 			$getView = new BaseWebView($viewPageFileName, $dataObject);
 			$renderedView = $getView->render();
 			
@@ -44,7 +44,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		
 		$result = $this->response->setHtml($renderedView, 200);
 		
-		/* $xml="<note>
+		/*  $xml="<note>
 		<to>Tove</to>
 		<from>Jani</from>
 		<heading>Reminder</heading>
@@ -54,10 +54,9 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		$result = $this->response->setXml($xml, 200); */
 		
 		//$data = array("name"=>"srirama","place"=>"ayodhya"); 
-		/* $data = new \stdClass;
+		/*  $data = new \stdClass;
 		$data->name = "srirama";
-		$data->place ="ayodhya"; */ 
-		//$data_json_encoded = json_encode($data);
+		$data->place ="ayodhya";  */
 		
 		//$result = $this->response->setJson($data, 200);
 		

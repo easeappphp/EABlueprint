@@ -141,23 +141,15 @@ class EARouterMiddleware implements MiddlewareInterface
 				//echo "404 error\n";
 			//} 
 			
-			echo "404 error\n";
-			
-		}
-		//how to respond in router middleware psr
-		$response = $this->container->get('ParsedResponse');
-		
-		if (is_object($response)) {
-			
-			return $response;
-			
-		} else {
+			//echo "404 error\n";
 			
 			return $handler->handle($request);
 			
 		}
 		
-		
+		//how to respond in router middleware psr
+		$response = $this->container->get('ParsedResponse');
+		return $response;
 		
 		
     }
