@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
 			
 			//Bind an existing "response" class instance to the container, by defining the Class Name as instance reference in the container
             $this->container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance);
-
+			
         }
         
         
@@ -67,7 +67,6 @@ class AppServiceProvider extends ServiceProvider
 			
 			$this->response = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
 			
-        
         }
     }
 }

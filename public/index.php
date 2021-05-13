@@ -13,8 +13,7 @@ define("START", "No Direct Access");
 | Check If Application Is Under Maintenance
 |--------------------------------------------------------------------------
 |
-| If the application is maintenance / demo mode via the "down" command we
-| will require this file so that any prerendered template can be shown
+| If the application is maintenance, a file will be loaded
 | instead of starting the framework, which could cause an exception.
 |
 */
@@ -40,14 +39,14 @@ use Illuminate\Container\Container;
 use EaseAppPHP\App;
 
 //use ParagonIE\Halite\File;
-use ParagonIE\Halite\KeyFactory;
+/* use ParagonIE\Halite\KeyFactory;
 use ParagonIE\Halite\Symmetric\Crypto as Symmetric;
-use ParagonIE\HiddenString\HiddenString;
+use ParagonIE\HiddenString\HiddenString; */
 
-use Ramsey\Uuid\Uuid;
+/* use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
-
-use EARouter\EARouter;
+ */
+//use EARouter\EARouter;
 
 // In public/index.php:
 use Laminas\Diactoros\Response;
@@ -60,7 +59,6 @@ use Laminas\Stratigility\Middleware\NotFoundHandler;
 
 use Psr\Http\Message\ResponseInterface;
 
-//use Psr\Http\Message\ServerRequestInterface;
 use Laminas\Diactoros\Response\TextResponse;
 use Laminas\Stratigility\MiddlewarePipe;
 
@@ -71,7 +69,6 @@ use Laminas\Diactoros\Response\EmptyResponse;
 use function Laminas\Stratigility\middleware;
 use function Laminas\Stratigility\path;
 
-//use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
@@ -82,12 +79,12 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 | Run The Application
 |--------------------------------------------------------------------------
 |
-| Once we have the application, we can handle the incoming request using
-| the application's HTTP kernel. Then, we will send the response back
-| to this client's browser, allowing them to enjoy our application.
+| Once we have the application, we can handle the incoming server request using
+| the application.A response will be sent back
+| to the client's browser.
 |
 */
-//$app = new \EaseAppPHP\App($_ENV['APP_BASE_PATH'] ?? dirname(dirname(__FILE__)));
+
 $container = require_once __DIR__.'/../bootstrap/app.php';
 
 $envFilePath = dirname(dirname(__FILE__));

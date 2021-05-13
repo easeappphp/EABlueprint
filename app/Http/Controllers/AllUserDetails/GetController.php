@@ -28,21 +28,19 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		
 		if (file_exists($viewPageFileName)) {
 			
-			$getView = new BaseWebView($viewPageFileName, $dataObject);
-			$renderedView = $getView->render();
+			$renderedView = BaseWebView::render($viewPageFileName, $dataObject);
 			
 		} else {
 			
 			//View file missing scenario
-			$getView = new BaseWebView($viewPageFileName, $dataObject);
-			$renderedView = $getView->render();
+			$renderedView = BaseWebView::render($viewPageFileName, $dataObject);
 			
 		}
 		clearstatcache();
 				
 		//$result = $this->response->setText("SriRama", 200);
 		
-		$result = $this->response->setHtml($renderedView, 200);
+		//$result = $this->response->setHtml($renderedView, 200);
 		
 		/*  $xml="<note>
 		<to>Tove</to>
@@ -53,16 +51,16 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		
 		$result = $this->response->setXml($xml, 200); */
 		
-		//$data = array("name"=>"srirama","place"=>"ayodhya"); 
+		$data = array("name"=>"srirama","place"=>"ayodhya"); 
 		/*  $data = new \stdClass;
 		$data->name = "srirama";
 		$data->place ="ayodhya";  */
 		
-		//$result = $this->response->setJson($data, 200);
+		$result = $this->response->setJson($data, 200);
 		
 		//$result = $this->response->setEmpty(204);
 		
-		$this->container->instance('ParsedResponse', $result);	
+		return $result;
 		
     }
     

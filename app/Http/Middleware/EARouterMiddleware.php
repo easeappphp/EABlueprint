@@ -22,6 +22,7 @@ class EARouterMiddleware implements MiddlewareInterface
 	private $matchedRouteResponse;
 	private $matchedRouteKey;
 	private $matchedRouteDetails;
+	private $response;
 	
 	public function process(
         ServerRequestInterface $request,
@@ -111,7 +112,7 @@ class EARouterMiddleware implements MiddlewareInterface
 						
 						if ($this->matchedController->checkIfActionExists($pageMethodName)) {
 							
-							$this->matchedController->$pageMethodName();
+							$this->response = $this->matchedController->$pageMethodName();
 							//$this->matchedController->callAction($pageMethodName, $this->serverRequest->getQueryParams());
 							//$this->matchedController->callAction($pageMethodName, array("three", "four"));
 							//$this->matchedController->$pageMethodName($this->serverRequest->getQueryParams());
@@ -143,13 +144,13 @@ class EARouterMiddleware implements MiddlewareInterface
 			
 			//echo "404 error\n";
 			
+			//Pass the request to the next middleware
 			return $handler->handle($request);
 			
 		}
 		
-		//how to respond in router middleware psr
-		$response = $this->container->get('ParsedResponse');
-		return $response;
+		//Send Response
+		return $this->response;
 		
 		
     }
