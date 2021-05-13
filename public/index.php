@@ -6,7 +6,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 //To prevent direct access to a file inside public root or public_html or www folder, 
-define("START", "No Direct Access");
+defined('START') or define("START", "No Direct Access");
 
 /*
 |--------------------------------------------------------------------------
