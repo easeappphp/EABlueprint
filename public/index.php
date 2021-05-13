@@ -10,20 +10,6 @@ defined('START') or define("START", "No Direct Access");
 
 /*
 |--------------------------------------------------------------------------
-| Check If Application Is Under Maintenance
-|--------------------------------------------------------------------------
-|
-| If the application is maintenance, a file will be loaded
-| instead of starting the framework, which could cause an exception.
-|
-*/
-
-/* if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
-    require __DIR__.'/../storage/framework/maintenance.php';
-} */
-
-/*
-|--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
 |
