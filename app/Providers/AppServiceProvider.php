@@ -63,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
             
-            //$this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
+            $this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
 			
 			//$this->response = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
 			
