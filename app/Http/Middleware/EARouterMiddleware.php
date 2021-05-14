@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Http\Middleware;
 
-//use Illuminate\Container\Container;
-use EaseAppPHP\Http\Middleware\Kernel;
-
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -13,9 +10,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class EARouterMiddleware implements MiddlewareInterface
 {
-    //private $eaRouter;
-	//private $eaRouterUriPathParams;
-	private $container;
+    private $container;
 	private $config;
 	private $routes;
 	private $eaRouterinstance;

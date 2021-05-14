@@ -60,8 +60,8 @@ class RouteServiceProvider extends ServiceProvider
         
             $this->config = $this->container->get('config');
             $this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
-
-            //Get Routes from /routes folder w.r.t. web, ajax, ajax-web-service-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
+			
+			//Get Routes from /routes folder w.r.t. web, ajax, ajax-web-service-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
             $this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["mainconfig"]["routing_engine_rule_files"]);
             //var_dump($this->routes);
             $this->container->instance('routes', $this->routes);
@@ -93,6 +93,17 @@ class RouteServiceProvider extends ServiceProvider
 				$pageWithoutMiddlewareArray = explode(",", $requiredWithoutMiddleware);
 			}
 			
+			if ((($requiredRouteType == "ajax") || ($requiredRouteType == "soap-web-service") || ($requiredRouteType == "rest-web-service") || ($requiredRouteType == "ajax-web-service-common")) && ($this->serverRequest->getServerParams()['APP_DEBUG'] == "true")) {
+
+				$whoopsHandler = $this->container->get('\Whoops\Run');
+				$whoopsHandler->pushHandler(new \Whoops\Handler\XmlResponseHandler());
+				$whoopsHandler->pushHandler(new \Whoops\Handler\JsonResponseHandler());
+				$whoopsHandler->register();
+
+			}
+			
+			//throw new \RuntimeException("Oopsie!");
+			
 			if($requiredRouteType != "" && array_key_exists($requiredRouteType, $this->config["mainconfig"]["route_type_middleware_group_mapping"])){
                 $requiredRouteTypeMiddlewareGroupMappingValue = $this->config["mainconfig"]["route_type_middleware_group_mapping"][$requiredRouteType];
 				//echo "requiredRouteTypeMiddlewareGroupMappingValue: " . $requiredRouteTypeMiddlewareGroupMappingValue . "<br>\n";
@@ -114,7 +125,7 @@ class RouteServiceProvider extends ServiceProvider
             $this->middlewarePipeQueue = $this->container->get('\Laminas\Stratigility\MiddlewarePipe');
             
             //Default Whoops based Error Handler using Whoops Middleware
-            $this->middlewarePipeQueue->pipe(new \Franzl\Middleware\Whoops\WhoopsMiddleware);
+            //$this->middlewarePipeQueue->pipe(new \Franzl\Middleware\Whoops\WhoopsMiddleware);
             
             //Middleware is expected to pass on the details as attributes of serverRequest to the next middleware
             $this->middlewarePipeQueue->pipe(new \EaseAppPHP\EABlueprint\App\Http\Middleware\PassingAppClassDataToMiddleware($appClassData));
