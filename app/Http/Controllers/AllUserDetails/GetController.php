@@ -63,8 +63,116 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		return $result;
 		
     }
+	
+	public function restApiJsonOutput()
+    {
+        
+		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		
+		$dataObject = $getModel->index();
+		
+		$data = array("name"=>"srirama","place"=>"ayodhya"); 
+		/*  $data = new \stdClass;
+		$data->name = "srirama";
+		$data->place ="ayodhya";  */
+		
+		$result = $this->response->setJson($data, 200);
+		
+		return $result;
+		
+    }
+	
+	public function restApiXmlOutput()
+    {
+        
+		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		
+		$dataObject = $getModel->index();
+		
+		$xml='<?xml version="1.0" encoding="UTF-8"?><note>
+		<to>Ram</to>
+		<from>Bharat</from>
+		<heading>Reminder</heading>
+		<body>To return as promised</body>
+		</note>';
+		
+		$result = $this->response->setXml($xml, 200);
+		
+		return $result;
+		
+    }
+	
+	public function ajaxJsonOutput()
+    {
+        
+		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		
+		$dataObject = $getModel->index();
+		
+		$data = array("name"=>"srirama","place"=>"ayodhya"); 
+		/*  $data = new \stdClass;
+		$data->name = "srirama";
+		$data->place ="ayodhya";  */
+		
+		$result = $this->response->setJson($data, 200);
+		
+		return $result;
+		
+    }
     
-    
+    public function ajaxXmlOutput()
+    {
+        
+		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		
+		$dataObject = $getModel->index();
+		
+		$xml='<?xml version="1.0" encoding="UTF-8"?><note>
+		<to>Ram</to>
+		<from>Bharat</from>
+		<heading>Reminder</heading>
+		<body>To return as promised</body>
+		</note>';
+		
+		$result = $this->response->setXml($xml, 200);
+		
+		return $result;
+		
+    }
+	
+	public function ajaxHtmlOutput()
+    {
+        
+		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		
+		$dataObject = $getModel->index();
+		
+		$renderedView = "<!DOCTYPE html>
+<html>
+ <body>
+ <h1>Ram</h1>
+ <div>Ayodhya</div>
+ </body>
+</html>";
+		
+		$result = $this->response->setHtml($renderedView, 200);
+		
+		return $result;
+		
+    }
+	
+	public function ajaxTextOutput()
+    {
+        
+		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		
+		$dataObject = $getModel->index();
+		
+		$result = $this->response->setText("SriRama", 200);
+		
+		return $result;
+		
+    }
 
     
 }

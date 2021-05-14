@@ -340,7 +340,7 @@ return [
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
-        'rest-get-all-user-details' => [
+    'rest-get-all-user-details' => [
 		'route_value' => '/rest/all-user-details/get',
 		'auth_check_requirements' => 'none',
 		'page_filename' => 'index',
