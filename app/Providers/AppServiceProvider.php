@@ -67,6 +67,27 @@ class AppServiceProvider extends ServiceProvider
 			
 			//$this->response = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
 			
+			if ($this->serverRequest->getServerParams()['APP_DEBUG'] == "true") {
+				
+				//Note: Plaintexthandler to be defined for logging additionally
+				$whoopsHandler = $this->container->get('\Whoops\Run');
+				$whoopsHandler->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+				//$whoopsHandler->pushHandler(new \Whoops\Handler\PlainTextHandler());
+				//$whoopsHandler->pushHandler(new \Whoops\Handler\XmlResponseHandler());
+				//$whoopsHandler->pushHandler(new \Whoops\Handler\JsonResponseHandler());
+				$whoopsHandler->register();
+				
+				
+				//throw new \RuntimeException("Oopsie!");
+				
+			} else {
+				
+				$whoopsHandler = $this->container->get('\Whoops\Run');
+				$whoopsHandler->pushHandler(new \Whoops\Handler\PlainTextHandler());
+				$whoopsHandler->register();
+				
+			}
+			
         }
     }
 }
