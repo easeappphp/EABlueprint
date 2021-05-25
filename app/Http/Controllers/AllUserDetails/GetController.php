@@ -15,7 +15,6 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
     /**
      * Process index method
      *
-     * @return array
      */
     public function index()
     {

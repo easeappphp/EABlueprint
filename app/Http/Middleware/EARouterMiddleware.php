@@ -62,7 +62,7 @@ class EARouterMiddleware implements MiddlewareInterface
 		
 		if ((isset($this->matchedRouteKey)) && ($this->matchedRouteKey != "header-response-only-404-not-found")) {
 			//oop_mapped controller or procedural controller
-			if ((isset($pageControllerType)) && ($pageControllerType == "procedural")) {
+			/*if ((isset($pageControllerType)) && ($pageControllerType == "procedural")) {
 
 				//echo "Load Procedural Route Controller\n";
 				
@@ -124,6 +124,35 @@ class EARouterMiddleware implements MiddlewareInterface
 
 					echo "Invalid Controller Type Value\n";
 
+			}*/
+			
+			if ((isset($pageControllerType)) && (($pageControllerType == "procedural") || ($pageControllerType == "oop-mapped"))) {
+				
+				if (class_exists($pageControllerClassName)) {
+					$matchedController = new $pageControllerClassName($this->container);
+				
+					$this->container->instance('MatchedControllerName', $matchedController);
+					$this->matchedController = $this->container->get('MatchedControllerName');
+					
+					if ($this->matchedController->checkIfActionExists($pageMethodName)) {
+						
+						$this->response = $this->matchedController->$pageMethodName();
+						//$this->matchedController->callAction($pageMethodName, $this->serverRequest->getQueryParams());
+						//$this->matchedController->callAction($pageMethodName, array("three", "four"));
+						//$this->matchedController->$pageMethodName($this->serverRequest->getQueryParams());
+						
+					} else {
+					
+						throw new Exception($pageMethodName . " action does not exist!");
+						
+					}
+					
+				} else {
+					
+					throw new Exception($pageControllerClassName . " controller does not exist!");
+					
+				}
+				
 			}
 		} else {
 			//do automated check for oop controller enumeration

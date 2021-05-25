@@ -353,5 +353,31 @@ return [
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
+	'backend-procedural-get-all-user-details' => [
+		'route_value' => '/backend/procedural/all-user-details/get',
+		'auth_check_requirements' => 'none',
+		'page_filename' => 'index',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET'],
+        'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'frontend-procedural-get-all-user-details' => [
+		'route_value' => '/frontend/procedural/all-user-details/get',
+		'auth_check_requirements' => 'none',
+		'page_filename' => 'index',
+		'redirect_to' => '',
+		'route_type' => 'frontend-web-app',
+		'allowed_request_methods' => ['GET'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
 
 ];
