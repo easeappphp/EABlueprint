@@ -67,10 +67,11 @@ class RouteServiceProvider extends ServiceProvider
             $this->container->instance('routes', $this->routes);
             $this->routesList = $this->container->get('routes');
             
-            //Match Route			
+			
+			//Match Route			
             $this->matchedRouteResponse = $this->eaRouterinstance->matchRoute($this->routes, $this->serverRequest->getUri()->getPath(), $this->serverRequest->getQueryParams(), $this->serverRequest->getMethod(), $this->config["mainconfig"]["routing_rule_length"]);
             
-            $this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
+			$this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
                   
 			$matchedRouteKey = $this->container->get('matchedRouteResponse')["matched_route_key"];
 			
@@ -78,6 +79,12 @@ class RouteServiceProvider extends ServiceProvider
 			$this->matchedRouteKey = $this->container->get('MatchedRouteKey'); 
 			
 			$matchedRouteDetails = $this->routesList[$this->matchedRouteKey];
+			
+			if ($matchedRouteKey == "header-response-only-405-method-not-allowed") {
+				
+				$matchedRouteDetails["allowed_request_methods"] = $this->matchedRouteResponse["allowed_request_methods"];
+				
+			}
 			
 			$this->container->instance('MatchedRouteDetails', $matchedRouteDetails);
 			$this->matchedRouteDetails = $this->container->get('MatchedRouteDetails'); 

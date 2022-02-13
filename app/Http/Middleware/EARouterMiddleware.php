@@ -39,10 +39,15 @@ class EARouterMiddleware implements MiddlewareInterface
 		$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
 		$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
 		
+
 		$pageFilename = $this->matchedRouteDetails["page_filename"];
 		//echo "pageFilename: " . $pageFilename . "\n";
 		$pageRouteType = $this->matchedRouteDetails["route_type"];
 		//echo "pageRouteType: " . $pageRouteType . "\n";
+		$pageAllowedRequestMethods = $this->matchedRouteDetails["allowed_request_methods"];
+		//echo "pageAllowedRequestMethods: " . $pageRouteType . "\n";
+		$implodedPageAllowedRequestMethods = implode(", ",$pageAllowedRequestMethods);
+		
 		$pageControllerType = $this->matchedRouteDetails["controller_type"];
 		//echo "pageControllerType: " . $pageControllerType . "\n";
 		$pageControllerClassName = $this->matchedRouteDetails["controller_class_name"];
@@ -61,45 +66,77 @@ class EARouterMiddleware implements MiddlewareInterface
 		}
 		
 		if ((isset($this->matchedRouteKey)) && ($this->matchedRouteKey != "header-response-only-404-not-found")) {
-			//oop_mapped controller or procedural controller
-			/*if ((isset($pageControllerType)) && ($pageControllerType == "procedural")) {
-
-				//echo "Load Procedural Route Controller\n";
+			
+			if ((isset($this->matchedRouteKey)) && ($this->matchedRouteKey != "header-response-only-405-method-not-allowed")) {
 				
-				if (class_exists($pageControllerClassName)) {
-					$matchedController = new $pageControllerClassName($this->container);
-					
-					$this->container->instance('MatchedControllerName', $matchedController);
-					$this->matchedController = $this->container->get('MatchedControllerName'); 
-					
-					//Ajax Requests / REST Web Services: This does the loading of the respective resource for ajax / REST Web Service Requests
-					if (($pageRouteType == "ajax") || ($pageRouteType == "soap-web-service") || ($pageRouteType == "rest-web-service") || ($pageRouteType == "ajax-web-service-common")) {
+				//oop_mapped controller or procedural controller
+				/*if ((isset($pageControllerType)) && ($pageControllerType == "procedural")) {
 
-						$this->matchedController->processAjaxApiCall($pageRouteType, $pageFilename);
-
-					} elseif (($pageRouteType == "frontend-web-app") || ($pageRouteType == "backend-web-app") || ($pageRouteType == "web-app-common")) {
-						//$config["route_rel_template_context"]
-						$this->matchedController->processWebCall($pageRouteType, $this->getConfig()["mainconfig"]["route_rel_template_context"], $this->getConfig()["mainconfig"]["chosen_template"], $this->getConfig()["mainconfig"]["chosen_frontend_template"], $pageFilename);
-
-					} else {
-
-							//Alert User to Define Correct Route related Template Context
-							echo "Invalid Route related Template Context Definition.";
-
-					}
-		
-				} else {
-					echo $pageControllerClassName . " does not exist!";
-				}
-				
-				
-			} else if ((isset($pageControllerType)) && ($pageControllerType == "oop-mapped")) {
-
-					//echo "Load oop-mapped Route Controller\n";
+					//echo "Load Procedural Route Controller\n";
 					
 					if (class_exists($pageControllerClassName)) {
-						//$matchedController = new $pageControllerClassName();
-						//$matchedController = new $pageControllerClassName($this->container, $this->config, $this->matchedRouteDetails, $this->serverRequest->getQueryParams());
+						$matchedController = new $pageControllerClassName($this->container);
+						
+						$this->container->instance('MatchedControllerName', $matchedController);
+						$this->matchedController = $this->container->get('MatchedControllerName'); 
+						
+						//Ajax Requests / REST Web Services: This does the loading of the respective resource for ajax / REST Web Service Requests
+						if (($pageRouteType == "ajax") || ($pageRouteType == "soap-web-service") || ($pageRouteType == "rest-web-service") || ($pageRouteType == "ajax-web-service-common")) {
+
+							$this->matchedController->processAjaxApiCall($pageRouteType, $pageFilename);
+
+						} elseif (($pageRouteType == "frontend-web-app") || ($pageRouteType == "backend-web-app") || ($pageRouteType == "web-app-common")) {
+							//$config["route_rel_template_context"]
+							$this->matchedController->processWebCall($pageRouteType, $this->getConfig()["mainconfig"]["route_rel_template_context"], $this->getConfig()["mainconfig"]["chosen_template"], $this->getConfig()["mainconfig"]["chosen_frontend_template"], $pageFilename);
+
+						} else {
+
+								//Alert User to Define Correct Route related Template Context
+								echo "Invalid Route related Template Context Definition.";
+
+						}
+			
+					} else {
+						echo $pageControllerClassName . " does not exist!";
+					}
+					
+					
+				} else if ((isset($pageControllerType)) && ($pageControllerType == "oop-mapped")) {
+
+						//echo "Load oop-mapped Route Controller\n";
+						
+						if (class_exists($pageControllerClassName)) {
+							//$matchedController = new $pageControllerClassName();
+							//$matchedController = new $pageControllerClassName($this->container, $this->config, $this->matchedRouteDetails, $this->serverRequest->getQueryParams());
+							$matchedController = new $pageControllerClassName($this->container);
+						
+							$this->container->instance('MatchedControllerName', $matchedController);
+							$this->matchedController = $this->container->get('MatchedControllerName');
+							
+							if ($this->matchedController->checkIfActionExists($pageMethodName)) {
+								
+								$this->response = $this->matchedController->$pageMethodName();
+								//$this->matchedController->callAction($pageMethodName, $this->serverRequest->getQueryParams());
+								//$this->matchedController->callAction($pageMethodName, array("three", "four"));
+								//$this->matchedController->$pageMethodName($this->serverRequest->getQueryParams());
+								
+							}
+							
+						} else {
+							echo $pageControllerClassName . " does not exist!";
+						}
+
+						
+
+				} else {
+
+						echo "Invalid Controller Type Value\n";
+
+				}*/
+				
+				if ((isset($pageControllerType)) && (($pageControllerType == "procedural") || ($pageControllerType == "oop-mapped"))) {
+					
+					if (class_exists($pageControllerClassName)) {
 						$matchedController = new $pageControllerClassName($this->container);
 					
 						$this->container->instance('MatchedControllerName', $matchedController);
@@ -112,48 +149,37 @@ class EARouterMiddleware implements MiddlewareInterface
 							//$this->matchedController->callAction($pageMethodName, array("three", "four"));
 							//$this->matchedController->$pageMethodName($this->serverRequest->getQueryParams());
 							
+						} else {
+						
+							throw new Exception($pageMethodName . " action does not exist!");
+							
 						}
 						
 					} else {
-						echo $pageControllerClassName . " does not exist!";
-					}
-
-					
-
-			} else {
-
-					echo "Invalid Controller Type Value\n";
-
-			}*/
-			
-			if ((isset($pageControllerType)) && (($pageControllerType == "procedural") || ($pageControllerType == "oop-mapped"))) {
-				
-				if (class_exists($pageControllerClassName)) {
-					$matchedController = new $pageControllerClassName($this->container);
-				
-					$this->container->instance('MatchedControllerName', $matchedController);
-					$this->matchedController = $this->container->get('MatchedControllerName');
-					
-					if ($this->matchedController->checkIfActionExists($pageMethodName)) {
 						
-						$this->response = $this->matchedController->$pageMethodName();
-						//$this->matchedController->callAction($pageMethodName, $this->serverRequest->getQueryParams());
-						//$this->matchedController->callAction($pageMethodName, array("three", "four"));
-						//$this->matchedController->$pageMethodName($this->serverRequest->getQueryParams());
-						
-					} else {
-					
-						throw new Exception($pageMethodName . " action does not exist!");
+						throw new Exception($pageControllerClassName . " controller does not exist!");
 						
 					}
-					
-				} else {
-					
-					throw new Exception($pageControllerClassName . " controller does not exist!");
 					
 				}
 				
+			} else {
+				
+				//echo "405 error\n";
+				
+				// Call the next middleware and wait for the response
+				$this->response = $handler->handle($request);
+				
+				//Add Allow header in the response in 405 method not allowed scenario example: Allow: GET, POST, HEAD
+				if (!$this->response->hasHeader('Allow')) {
+					$this->response = $this->response->withHeader('Allow', $implodedPageAllowedRequestMethods);
+				}
+				
+				//Pass the request to the next middleware
+				return $this->response;
+				
 			}
+			
 		} else {
 			//do automated check for oop controller enumeration
 			
@@ -169,7 +195,13 @@ class EARouterMiddleware implements MiddlewareInterface
 			//echo "404 error\n";
 			
 			//Pass the request to the next middleware
-			return $handler->handle($request);
+			//return $handler->handle($request);
+			
+			// Call the next middleware and wait for the response
+			$this->response = $handler->handle($request);
+			
+			//Pass the request to the next middleware
+			return $this->response;
 			
 		}
 		
