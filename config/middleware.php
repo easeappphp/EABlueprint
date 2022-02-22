@@ -14,7 +14,9 @@ return [
     'middleware' => [
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EARequestResponseTimeMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EACorsMiddleware::class,
+		\EaseAppPHP\EABlueprint\App\Http\Middleware\EAPreventRequestsDuringMaintenanceMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppBrowserCacheHeadersMiddleware::class,
+		\EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppSecurityHeadersMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         
     ],
@@ -30,11 +32,10 @@ return [
 
     'middlewareGroups' => [
         'ajax' => [
-            \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppSecurityHeadersMiddleware::class,
-            \EaseAppPHP\EABlueprint\App\Http\Middleware\StartSession::class,
+            
         ],
         'web' => [
-            
+            \EaseAppPHP\EABlueprint\App\Http\Middleware\EAStartSessionMiddleware::class,
         ],
         'api' => [
             \EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
@@ -52,10 +53,9 @@ return [
     */
 
     'routeMiddleware' => [
-        'throttle' => \EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
-        'auth' => \EaseAppPHP\EABlueprint\App\Http\Middleware\Auth::class,
-        'hostnamecheck' => \EaseAppPHP\EABlueprint\App\Http\Middleware\HostnameCheck::class,
-        'startsession' => \EaseAppPHP\EABlueprint\App\Http\Middleware\StartSession::class,
+        'throttle' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAThrottleRequestsMiddleware::class,
+		'hostnamecheck' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
+        'auth' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAuthMiddleware::class,        
     ],
     
     /*

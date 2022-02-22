@@ -38,7 +38,15 @@ class EARouterMiddleware implements MiddlewareInterface
 		$this->matchedRouteResponse =  $dataFromAppClass["matchedRouteResponse"];
 		$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
 		$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
-		
+		$json_encoded_matchedRoute_details = json_encode($this->matchedRouteDetails);
+		//echo "<pre>";print_r($this->matchedRouteDetails);
+		$file = '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/logfile.txt';
+// The new person to add to the file
+$person = "in EAROUTERMIDDLEWARE:" . $json_encoded_matchedRoute_details . "\n";
+// Write the contents to the file, 
+// using the FILE_APPEND flag to append the content to the end of the file
+// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
+file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
 
 		$pageFilename = $this->matchedRouteDetails["page_filename"];
 		//echo "pageFilename: " . $pageFilename . "\n";
@@ -47,7 +55,13 @@ class EARouterMiddleware implements MiddlewareInterface
 		$pageAllowedRequestMethods = $this->matchedRouteDetails["allowed_request_methods"];
 		//echo "pageAllowedRequestMethods: " . $pageRouteType . "\n";
 		$implodedPageAllowedRequestMethods = implode(", ",$pageAllowedRequestMethods);
-		
+		$file = '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/logfile.txt';
+// The new person to add to the file
+$person = "in EAROUTERMIDDLEWARE, implodedPageAllowedRequestMethods:" . $implodedPageAllowedRequestMethods . "\n";
+// Write the contents to the file, 
+// using the FILE_APPEND flag to append the content to the end of the file
+// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
+file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
 		$pageControllerType = $this->matchedRouteDetails["controller_type"];
 		//echo "pageControllerType: " . $pageControllerType . "\n";
 		$pageControllerClassName = $this->matchedRouteDetails["controller_class_name"];

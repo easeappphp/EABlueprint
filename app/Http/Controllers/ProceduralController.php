@@ -16,7 +16,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     
     public function webHtmlOutput()
     {
-        include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+        //echo "before models<br>";
+		include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		
 		$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		

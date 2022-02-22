@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 	
 	/*
     |--------------------------------------------------------------------------
@@ -451,6 +451,17 @@ return [
             'web-app-common' => 'web',
     
     ],
+	
+	/*
+    |--------------------------------------------------------------------------
+    | App Site Status
+    |--------------------------------------------------------------------------
+    |
+    | This shows the App Site Status. This will be the Same for both Web & Commandline. The expected values are: CONSTRUCTION | MAINTENANCE | LIVE
+    |
+    */
+
+    'app_site_status' => env('APP_SITE_STATUS', 'LIVE'),
     
 	
 ];

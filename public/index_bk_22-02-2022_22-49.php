@@ -39,8 +39,7 @@ $container = require_once __DIR__.'/../bootstrap/app.php';
 $envFilePath = dirname(dirname(__FILE__));
 $singleFolderConfigFilePath = dirname(dirname(__FILE__)).'/config';
 
-//$application = new App($envFilePath, $container, 'From-Single-Folder', 'string', $singleFolderConfigFilePath);
-$application = new App($container);
+$application = new App($envFilePath, $container, 'From-Single-Folder', 'string', $singleFolderConfigFilePath);
 $container->instance('App', $application);
 
 $app = $container->get('App');

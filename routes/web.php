@@ -79,7 +79,7 @@ return [
 		'page_filename' => 'index',
 		'redirect_to' => '',
 		'route_type' => 'frontend-web-app',
-		'allowed_request_methods' => ['POST','HEAD'],
+		'allowed_request_methods' => ['POST','HEAD','GET'],
                 'controller_type' => 'procedural',
                 'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
                 'method_name' => 'webHtmlOutput',
