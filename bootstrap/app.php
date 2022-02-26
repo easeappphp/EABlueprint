@@ -1,6 +1,12 @@
 <?php
 use \Illuminate\Container\Container;
 use \EaseAppPHP\Core\EAConfig;
+use \EaseAppPHP\Other\Log;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -69,6 +75,26 @@ $responseInstance = new \EaseAppPHP\Foundation\BaseWebResponse($container);
 
 //Bind an existing "response" class instance to the container, by defining the Class Name as instance reference in the container
 $container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance);
+
+
+//Log using \EaseAppPHP\Other\Log class, that internally uses Monolog
+Log::channel($container, 'emergency')->emergency('Something happened!');
+
+// Create some handlers
+$stream = new StreamHandler('/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/storage/logs/easeapp.log', Logger::DEBUG);
+$firephp = new FirePHPHandler();
+
+// Create the main logger of the app
+$logger = new Logger('my_logger');
+$logger->pushHandler($stream);
+$logger->pushHandler($firephp);
+
+//Bind an existing "logger" class instance with my_logger channel to the container
+$container->instance('\Monolog\Logger\channel-myLogger', $logger);
+
+// You can now use your logger
+$container->get('\Monolog\Logger\channel-myLogger')->info("My logger is now ready with first channel, based on single line container based logging object");
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
