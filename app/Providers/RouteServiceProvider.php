@@ -7,6 +7,8 @@ use Illuminate\Container\Container;
 
 use \EaseAppPHP\Foundation\ServiceProvider;
 
+use \EaseAppPHP\Other\Log;
+
 class RouteServiceProvider extends ServiceProvider
 {
     protected $container;
@@ -66,29 +68,11 @@ class RouteServiceProvider extends ServiceProvider
             //var_dump($this->routes);
             $this->container->instance('routes', $this->routes);
             $this->routesList = $this->container->get('routes');
-            
-			
-			$file = '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/logfile.txt';
-// The new person to add to the file
-$person = "serverrequest->geturi->getpath: " . json_encode($this->serverRequest->getUri()->getPath()) . "\n" . "serverrequest->getqueryparams: " . json_encode($this->serverRequest->getQueryParams()) . " \n" . "serverrequest->getmethod: " . json_encode($this->serverRequest->getMethod()) . "\n";
-// Write the contents to the file, 
-// using the FILE_APPEND flag to append the content to the end of the file
-// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
-file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
-
+        
             //Match Route			
             $this->matchedRouteResponse = $this->eaRouterinstance->matchRoute($this->routes, $this->serverRequest->getUri()->getPath(), $this->serverRequest->getQueryParams(), $this->serverRequest->getMethod(), $this->config["mainconfig"]["routing_rule_length"]);
             
-			$file = '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/logfile.txt';
-// The new person to add to the file
-$person = "matchedRouteResponse: " . json_encode($this->matchedRouteResponse) . "\n";
-// Write the contents to the file, 
-// using the FILE_APPEND flag to append the content to the end of the file
-// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
-file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
-
-
-            $this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
+			$this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
                   
 			$matchedRouteKey = $this->container->get('matchedRouteResponse')["matched_route_key"];
 			

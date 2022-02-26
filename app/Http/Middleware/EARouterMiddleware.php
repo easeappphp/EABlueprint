@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use \EaseAppPHP\Other\Log;
 
 class EARouterMiddleware implements MiddlewareInterface
 {
@@ -38,30 +39,17 @@ class EARouterMiddleware implements MiddlewareInterface
 		$this->matchedRouteResponse =  $dataFromAppClass["matchedRouteResponse"];
 		$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
 		$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
-		$json_encoded_matchedRoute_details = json_encode($this->matchedRouteDetails);
-		//echo "<pre>";print_r($this->matchedRouteDetails);
-		$file = '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/logfile.txt';
-// The new person to add to the file
-$person = "in EAROUTERMIDDLEWARE:" . $json_encoded_matchedRoute_details . "\n";
-// Write the contents to the file, 
-// using the FILE_APPEND flag to append the content to the end of the file
-// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
-file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
+		
 
 		$pageFilename = $this->matchedRouteDetails["page_filename"];
 		//echo "pageFilename: " . $pageFilename . "\n";
 		$pageRouteType = $this->matchedRouteDetails["route_type"];
 		//echo "pageRouteType: " . $pageRouteType . "\n";
 		$pageAllowedRequestMethods = $this->matchedRouteDetails["allowed_request_methods"];
-		//echo "pageAllowedRequestMethods: " . $pageRouteType . "\n";
+		//echo "pageAllowedRequestMethods: " . $pageAllowedRequestMethods . "\n";
 		$implodedPageAllowedRequestMethods = implode(", ",$pageAllowedRequestMethods);
-		$file = '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/logfile.txt';
-// The new person to add to the file
-$person = "in EAROUTERMIDDLEWARE, implodedPageAllowedRequestMethods:" . $implodedPageAllowedRequestMethods . "\n";
-// Write the contents to the file, 
-// using the FILE_APPEND flag to append the content to the end of the file
-// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
-file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
+		//echo "implodedPageAllowedRequestMethods: " . $implodedPageAllowedRequestMethods . "\n";
+		
 		$pageControllerType = $this->matchedRouteDetails["controller_type"];
 		//echo "pageControllerType: " . $pageControllerType . "\n";
 		$pageControllerClassName = $this->matchedRouteDetails["controller_class_name"];
@@ -82,71 +70,6 @@ file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
 		if ((isset($this->matchedRouteKey)) && ($this->matchedRouteKey != "header-response-only-404-not-found")) {
 			
 			if ((isset($this->matchedRouteKey)) && ($this->matchedRouteKey != "header-response-only-405-method-not-allowed")) {
-				
-				//oop_mapped controller or procedural controller
-				/*if ((isset($pageControllerType)) && ($pageControllerType == "procedural")) {
-
-					//echo "Load Procedural Route Controller\n";
-					
-					if (class_exists($pageControllerClassName)) {
-						$matchedController = new $pageControllerClassName($this->container);
-						
-						$this->container->instance('MatchedControllerName', $matchedController);
-						$this->matchedController = $this->container->get('MatchedControllerName'); 
-						
-						//Ajax Requests / REST Web Services: This does the loading of the respective resource for ajax / REST Web Service Requests
-						if (($pageRouteType == "ajax") || ($pageRouteType == "soap-web-service") || ($pageRouteType == "rest-web-service") || ($pageRouteType == "ajax-web-service-common")) {
-
-							$this->matchedController->processAjaxApiCall($pageRouteType, $pageFilename);
-
-						} elseif (($pageRouteType == "frontend-web-app") || ($pageRouteType == "backend-web-app") || ($pageRouteType == "web-app-common")) {
-							//$config["route_rel_template_context"]
-							$this->matchedController->processWebCall($pageRouteType, $this->getConfig()["mainconfig"]["route_rel_template_context"], $this->getConfig()["mainconfig"]["chosen_template"], $this->getConfig()["mainconfig"]["chosen_frontend_template"], $pageFilename);
-
-						} else {
-
-								//Alert User to Define Correct Route related Template Context
-								echo "Invalid Route related Template Context Definition.";
-
-						}
-			
-					} else {
-						echo $pageControllerClassName . " does not exist!";
-					}
-					
-					
-				} else if ((isset($pageControllerType)) && ($pageControllerType == "oop-mapped")) {
-
-						//echo "Load oop-mapped Route Controller\n";
-						
-						if (class_exists($pageControllerClassName)) {
-							//$matchedController = new $pageControllerClassName();
-							//$matchedController = new $pageControllerClassName($this->container, $this->config, $this->matchedRouteDetails, $this->serverRequest->getQueryParams());
-							$matchedController = new $pageControllerClassName($this->container);
-						
-							$this->container->instance('MatchedControllerName', $matchedController);
-							$this->matchedController = $this->container->get('MatchedControllerName');
-							
-							if ($this->matchedController->checkIfActionExists($pageMethodName)) {
-								
-								$this->response = $this->matchedController->$pageMethodName();
-								//$this->matchedController->callAction($pageMethodName, $this->serverRequest->getQueryParams());
-								//$this->matchedController->callAction($pageMethodName, array("three", "four"));
-								//$this->matchedController->$pageMethodName($this->serverRequest->getQueryParams());
-								
-							}
-							
-						} else {
-							echo $pageControllerClassName . " does not exist!";
-						}
-
-						
-
-				} else {
-
-						echo "Invalid Controller Type Value\n";
-
-				}*/
 				
 				if ((isset($pageControllerType)) && (($pageControllerType == "procedural") || ($pageControllerType == "oop-mapped"))) {
 					
