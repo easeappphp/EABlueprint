@@ -1,12 +1,6 @@
 <?php
 use \Illuminate\Container\Container;
 use \EaseAppPHP\Core\EAConfig;
-use \EaseAppPHP\Other\Log;
-
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\FirePHPHandler;
-
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -75,43 +69,6 @@ $responseInstance = new \EaseAppPHP\Foundation\BaseWebResponse($container);
 
 //Bind an existing "response" class instance to the container, by defining the Class Name as instance reference in the container
 $container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance);
-
-
-//Log::channel($container, 'slack')->info('Something happened!');
-Log::channel($container, 'emergency')->emergency('Something happened!');
-
-// Create some handlers
-$stream = new StreamHandler(__DIR__.'/my_app.log', Logger::DEBUG);
-$firephp = new FirePHPHandler();
-
-// Create the main logger of the app
-$logger = new Logger('my_logger');
-$logger->pushHandler($stream);
-$logger->pushHandler($firephp);
-
-//Bind an existing "logger" class instance with my_logger channel to the container
-$container->instance('\Monolog\Logger\channel-myLogger', $logger);
-
-//Logger with security channel
-$securityLogger = $logger->withName('security');
-
-//Bind an existing "logger" class instance with my_logger channel to the container
-$container->instance('\Monolog\Logger\channel-security', $securityLogger);
-
-//Get Logger object for channel: my_logger
-$myLoggerGet = $container->get('\Monolog\Logger\channel-myLogger');
-
-//Get Logger object for channel: security
-$securityLoggerGet = $container->get('\Monolog\Logger\channel-security');
-
-// You can now use your logger
-$myLoggerGet->emergency('My logger is now ready with first channel, based on container get object');
-
-$container->get('\Monolog\Logger\channel-myLogger')->info("My logger is now ready with first channel, based on single line container based logging object");
-
-// You can now use your logger
-$securityLoggerGet->info('My logger is now ready with security channel');
-
 /*
 |--------------------------------------------------------------------------
 | Return The Application
