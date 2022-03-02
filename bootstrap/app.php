@@ -26,7 +26,9 @@ $whoops = new \Whoops\Run();
 $container->instance('\Whoops\Run', $whoops);
 
 $singleFolderConfigFilePath = dirname(dirname(__FILE__)).'/config';
+$config = [];
 $collectedConfigData = [];
+$dotSeparatedKeyBasedConfigArrayData =[];
 
 //Bind an existing "config" class instance to the container, by defining the Class Name as instance reference in the container
 $eaConfig = new EAConfig();
@@ -55,7 +57,17 @@ if (($configSource == 'As-Array') && ($configSourceValueDataType == 'array') && 
 }
 
 $container->instance('config', $collectedConfigData);                
-//$this->config = $container->get('config');   
+//$config = $container->get('config');  
+
+$dotSeparatedKeyBasedConfigArrayData = $container->get('EAConfig')->generateDotSeparatedKeyBasedConfigArray($collectedConfigData, $prefix = '');
+$container->instance('dotSeparatedConfig', $dotSeparatedKeyBasedConfigArrayData);
+/* echo "<pre>"; 
+echo $container->get('EAConfig')->getDotSeparatedKeyValue("session.driver");
+print_r($container->get('EAConfig')->getDotSeparatedKeyValue("hashing"));
+echo "<br><hr><br>";
+echo $eaConfig->getDotSeparatedKeyValue("session.driver");
+print_r($eaConfig->getDotSeparatedKeyValue("hashing"));
+ */
 
 $envFilePath = dirname(dirname(__FILE__));
 
