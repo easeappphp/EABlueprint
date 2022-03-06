@@ -5,8 +5,9 @@ $data->name = "srirama";
 $data->place = "ayodhya";
 $data->yuga = "Tretayuga";
 $data->routeRelTemplateContext = "backend";
-$data->routeRelTemplateFolderPathPrefix = "/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/public/templates/default-admin";
-
+$data->routeRelTemplateFolderPathPrefix = "/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/public/templates/default-frontend";
+$this->session->set('home_area', 'yellareddyguda, Hyderabad');
+$data->home_area = $this->container->get('\Odan\Session\PhpSession')->get('home_area');
 /* $this->processedModelResponse->name = "srirama";
 $this->processedModelResponse->place = "ayodhya";
 $this->processedModelResponse->x = "10";

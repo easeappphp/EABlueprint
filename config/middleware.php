@@ -12,12 +12,10 @@ return [
     */
 
     'middleware' => [
-        \EaseAppPHP\EABlueprint\App\Http\Middleware\EARequestResponseTimeMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EACorsMiddleware::class,
 		\EaseAppPHP\EABlueprint\App\Http\Middleware\EAPreventRequestsDuringMaintenanceMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppBrowserCacheHeadersMiddleware::class,
 		\EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppSecurityHeadersMiddleware::class,
-        \EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         
     ],
     
@@ -32,13 +30,17 @@ return [
 
     'middlewareGroups' => [
         'ajax' => [
-            
+            \EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'web' => [
-            \EaseAppPHP\EABlueprint\App\Http\Middleware\EAStartSessionMiddleware::class,
+            //\EaseAppPHP\EABlueprint\App\Http\Middleware\SessionMiddleware::class,
+			//\Mezzio\Session\SessionMiddleware::class,
+			\Odan\Session\Middleware\SessionMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'api' => [
             \EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         
     ],

@@ -23,7 +23,8 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		
 		$dataObject = $getModel->index();
 		
-		$viewPageFileName = $dataObject->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		//$viewPageFileName = $dataObject->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$viewPageFileName = $dataObject->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
 		if (file_exists($viewPageFileName)) {
 			

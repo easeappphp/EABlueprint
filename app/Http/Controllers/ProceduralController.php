@@ -16,11 +16,34 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     
     public function webHtmlOutput()
     {
-        //echo "before models<br>";
-		include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+        //Get the instance of \Odan\Session\PhpSession
+		//$this->session = $this->container->get('\Odan\Session\PhpSession')->get('Srirama1');
+		$ses = $this->container->get('\Odan\Session\PhpSession')->get('Srirama1');
+		// You can now use your logger
+		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging done in ProceduralController - ");
 		
-		$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in ProceduralController - " . $ses);
+		/* echo $this->session->get('Srirama');
+			echo "<br>";
+			echo $this->session->get('Srirama1');
+			echo "<br>";
+			echo $this->session->get('bar');
+			 exit; */
 		
+		//echo "before models<br>";
+		//include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
+		
+		$data->userSessionInfo = $this->container->get('\Odan\Session\PhpSession')->get('Srirama');
+		//$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
+		
+	$requestTimer = $this->container->get('\SebastianBergmann\Timer\Timer');
+$duration = $requestTimer->stop();
+//echo "as seconds: " . $duration->asNanoseconds()/1000000000 . "<br>";
+$data->requestTimeInSeconds = $duration->asNanoseconds()/1000000000;
+
+
 		if (file_exists($viewPageFileName)) {
 			
 			$renderedView = BaseWebView::render($viewPageFileName, $data);
@@ -36,6 +59,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 		//$result = $this->response->setText("SriRama", 200);
 		
 		$result = $this->response->setHtml($renderedView, 200);
+		
+		$result = $result->withHeader(self::RESPONSEHEADER, $data->requestTimeInSeconds . " seconds");
 		
 		/*  $xml="<note>
 		<to>Tove</to>
@@ -63,7 +88,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 	public function restApiJsonOutput()
     {
         
-		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		//$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
 		if (file_exists($modelPageFileName)) {
 			
@@ -102,7 +128,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 		
 		
 		
-		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		//$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
 		if (file_exists($modelPageFileName)) {
 			
@@ -128,7 +155,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 	public function ajaxJsonOutput()
     {
         
-		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		//$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
 		if (file_exists($modelPageFileName)) {
 			
@@ -154,7 +182,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     public function ajaxXmlOutput()
     {
         
-		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		//$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
 		if (file_exists($modelPageFileName)) {
 			
@@ -181,7 +210,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 	public function ajaxHtmlOutput()
     {
         
-		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		//$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
 		if (file_exists($modelPageFileName)) {
 			
@@ -208,7 +238,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 	public function ajaxTextOutput()
     {
         
-		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		//$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
+		$modelPageFileName = "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
 		if (file_exists($modelPageFileName)) {
 			

@@ -21,6 +21,17 @@ use Monolog\Handler\FirePHPHandler;
 //Create Illuminate Container, outside Laravel Framework
 $container = Container::getInstance();
 
+use SebastianBergmann\Timer\Timer;
+
+$timer = new Timer;
+$container->instance('\SebastianBergmann\Timer\Timer', $timer);
+$requestTimer = $container->get('\SebastianBergmann\Timer\Timer');
+$requestTimer->start();
+
+/* foreach (\range(0, 100000) as $i) {
+    // ...
+}
+ */
 //Create Whoops Error & Exception Handler object
 $whoops = new \Whoops\Run();
 $container->instance('\Whoops\Run', $whoops);
@@ -66,8 +77,8 @@ echo $container->get('EAConfig')->getDotSeparatedKeyValue("session.driver");
 print_r($container->get('EAConfig')->getDotSeparatedKeyValue("hashing"));
 echo "<br><hr><br>";
 echo $eaConfig->getDotSeparatedKeyValue("session.driver");
-print_r($eaConfig->getDotSeparatedKeyValue("hashing"));
- */
+print_r($eaConfig->getDotSeparatedKeyValue("hashing"));   */
+ 
 
 $envFilePath = dirname(dirname(__FILE__));
 

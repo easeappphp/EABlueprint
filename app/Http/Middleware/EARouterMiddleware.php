@@ -18,6 +18,7 @@ class EARouterMiddleware implements MiddlewareInterface
 	private $matchedRouteResponse;
 	private $matchedRouteKey;
 	private $matchedRouteDetails;
+	private $session;
 	private $response;
 	
 	public function process(
@@ -39,8 +40,32 @@ class EARouterMiddleware implements MiddlewareInterface
 		$this->matchedRouteResponse =  $dataFromAppClass["matchedRouteResponse"];
 		$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
 		$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
+		$this->session =  $dataFromAppClass["session"];
 		
+		//echo "set session values in EARouterMiddleware:<br>";
+		// Set session value
+		$this->session->set('bar', 'foo');
 
+		
+		$this->session->set('Srirama', 'Namaskaram Srirama');
+		
+		// Set session value
+		$this->session->set('bar1', 'foo1');
+
+		
+		$this->session->set('Srirama1', 'Namaskaram1');
+		
+		/* echo "get session values in EARouterMiddleware:<br>";
+		echo $this->session->get('Srirama');
+		echo "<br>";
+		echo $this->session->get('Srirama1');
+		echo "<br>";
+		echo $this->session->get('bar'); 
+		exit; */
+		$ses = $this->session->get('Srirama1');
+		// You can now use your logger
+		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in EARouterMiddleware - " . $ses);
+		 
 		$pageFilename = $this->matchedRouteDetails["page_filename"];
 		//echo "pageFilename: " . $pageFilename . "\n";
 		$pageRouteType = $this->matchedRouteDetails["route_type"];

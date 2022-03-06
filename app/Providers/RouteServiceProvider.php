@@ -9,6 +9,8 @@ use \EaseAppPHP\Foundation\ServiceProvider;
 
 use \EaseAppPHP\Other\Log;
 
+//use \Odan\Session\PhpSession;
+
 class RouteServiceProvider extends ServiceProvider
 {
     protected $container;
@@ -22,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     private $middlewarePipeQueue;
     protected $middlewarePipeQueueEntries;
     private $constructedResponse = [];
+	protected $session;
     
     /**
      * Create a new Illuminate application instance.
@@ -116,6 +119,16 @@ class RouteServiceProvider extends ServiceProvider
                 $requiredRouteTypeMiddlewareGroupMappingValue = $this->config["mainconfig"]["route_type_middleware_group_mapping"][$requiredRouteType];
 				//echo "requiredRouteTypeMiddlewareGroupMappingValue: " . $requiredRouteTypeMiddlewareGroupMappingValue . "<br>\n";
             }
+			
+			if ($this->container->has('\Odan\Session\PhpSession') === true) {
+				
+				//Get the instance of \Odan\Session\PhpSession
+				$this->session = $this->container->get('\Odan\Session\PhpSession');
+				
+			} else {
+				//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
+			}
+			
             // Step 1: Do something first
             $appClassData = [
                     'container' => $this->container,
@@ -125,6 +138,7 @@ class RouteServiceProvider extends ServiceProvider
                     'matchedRouteResponse' => $this->matchedRouteResponse,
 					'matchedRouteKey' => $this->matchedRouteKey,
 					'matchedRouteDetails' => $this->matchedRouteDetails,
+					'session' => $this->session,
             ];
             
             //Define Laminas Stratigility Middlewarepipe
@@ -201,12 +215,49 @@ class RouteServiceProvider extends ServiceProvider
                 }
             }
             
+			
+			//Get the instance of \Odan\Session\PhpSession
+			//$this->session = $this->container->get('\Odan\Session\PhpSession');
             
-            foreach ($this->constructedResponse as $constructedResponseRowKey => $constructedResponseRowValue) {
-                
-                $this->middlewarePipeQueue->pipe(new $constructedResponseRowValue());
+            foreach ($this->constructedResponse as $constructedResponseRowKey => $constructedResponseRowValue) 
+			{
+                //To provide input to constructor for SessionMiddleware
+				if ($constructedResponseRowValue == "Odan\Session\Middleware\SessionMiddleware") {
+					
+					$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue($this->session));
+					
+				} else {
+					
+					$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue());
+					
+				}
+                //$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue());
                 
             }
+			/* // Set session value
+			$this->session->set('bar', 'foo');
+
+			
+			$this->session->set('Srirama', 'Namaskaram Srirama');
+			
+			// Set session value
+			$this->session->set('bar1', 'foo1');
+
+			
+			$this->session->set('Srirama1', 'Namaskaram1'); */
+			
+			
+			
+			/* echo $this->session->get('Srirama');
+			echo "<br>";
+			echo $this->session->get('Srirama1');
+			echo "<br>";
+			echo $this->session->get('bar');
+			 exit; */
+
+			// Commit and close the session
+			//$this->session->save();
+			
             /*
              * FEATURES POSTPONED w.r.t. IMPLEMENTATION middleware priority, adding/removing specific middleware to/from a ROUTE, postponing these two features andi for now
              * skip middleware parameters as we tried using attributes concept of server request. need to load list of middleware that i sloaded and checks to be made when loading other middleware to prevent duplication.

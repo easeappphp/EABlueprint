@@ -427,6 +427,7 @@ return [
          * Application Service Providers...
          */
         \EaseAppPHP\EABlueprint\App\Providers\AppServiceProvider::class,
+		\EaseAppPHP\EABlueprint\App\Providers\OdanSessionServiceProvider::class,
         \EaseAppPHP\EABlueprint\App\Providers\RouteServiceProvider::class,
 
     ],

@@ -76,7 +76,7 @@ return [
 	'default-home' => [
 		'route_value' => '/',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index',
+		'page_filename' => 'index.php',
 		'redirect_to' => '',
 		'route_type' => 'frontend-web-app',
 		'allowed_request_methods' => ['POST','HEAD','GET'],
@@ -343,7 +343,7 @@ return [
     'rest-get-all-user-details' => [
 		'route_value' => '/rest/all-user-details/get',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index',
+		'page_filename' => 'index.php',
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
 		'allowed_request_methods' => ['GET'],
@@ -356,7 +356,7 @@ return [
 	'backend-procedural-get-all-user-details' => [
 		'route_value' => '/backend/procedural/all-user-details/get',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index',
+		'page_filename' => 'index.php',
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
 		'allowed_request_methods' => ['ANY'],
@@ -369,7 +369,7 @@ return [
 	'frontend-procedural-get-all-user-details' => [
 		'route_value' => '/frontend/procedural/all-user-details/get',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index',
+		'page_filename' => 'index.php',
 		'redirect_to' => '',
 		'route_type' => 'frontend-web-app',
 		'allowed_request_methods' => ['GET'],
