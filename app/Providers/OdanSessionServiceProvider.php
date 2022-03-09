@@ -43,7 +43,7 @@ class OdanSessionServiceProvider extends ServiceProvider
 			// You can use all the standard PHP session configuration options
 			// https://secure.php.net/manual/en/session.configuration.php
 
-			$session->setOptions([
+			/* $session->setOptions([
 				'name' => 'easeapp_session',
 				'session.cookie_httponly' => 1,
 				'session.cookie_lifetime' => 0,
@@ -54,6 +54,19 @@ class OdanSessionServiceProvider extends ServiceProvider
 				'session.gc_probability' => 1,
 				'session.gc_divisor' => 100,
 				'session.same_site' => 'lax',
+			]); */
+			$session->setOptions([
+				'name' => 'easeapp_session',
+				'cookie_httponly' => 1,
+				'cookie_secure' => 1,
+				'cookie_lifetime' => 0,
+				'use_cookies' => 1,
+				'use_only_cookies' => 1,
+				'use_trans_sid' => 0,
+				'gc_maxlifetime' => 86400,
+				'gc_probability' => 1,
+				'gc_divisor' => 100,
+				'same_site' => 'lax',
 			]);
 			
 			// Commit and close the session

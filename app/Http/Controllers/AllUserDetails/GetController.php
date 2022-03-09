@@ -23,8 +23,16 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		
 		$dataObject = $getModel->index();
 		
+		$dataObject->userSessionInfo = $this->container->get('\Odan\Session\PhpSession')->get('bar');
+		$dataObject->license = $this->container->get('\Odan\Session\PhpSession')->get('license');
+		
 		//$viewPageFileName = $dataObject->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		$viewPageFileName = $dataObject->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
+		
+		$requestTimer = $this->container->get('\SebastianBergmann\Timer\Timer');
+		$duration = $requestTimer->stop();
+		//echo "as seconds: " . $duration->asNanoseconds()/1000000000 . "<br>";
+		$dataObject->requestTimeInSeconds = $duration->asNanoseconds()/1000000000;
 		
 		if (file_exists($viewPageFileName)) {
 			
@@ -51,12 +59,15 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		
 		$result = $this->response->setXml($xml, 200); */
 		
-		$data = array("name"=>"srirama","place"=>"ayodhya"); 
+		//$data = array("name"=>"srirama","place"=>"ayodhya"); 
 		/*  $data = new \stdClass;
 		$data->name = "srirama";
 		$data->place ="ayodhya";  */
 		
-		$result = $this->response->setJson($data, 200);
+		//$result = $this->response->setJson($data, 200);
+		$result = $this->response->setHtml($renderedView, 200);
+		
+		$result = $result->withHeader(self::RESPONSEHEADER, $dataObject->requestTimeInSeconds . " seconds");
 		
 		//$result = $this->response->setEmpty(204);
 		
@@ -71,7 +82,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		
 		$dataObject = $getModel->index();
 		
-		$data = array("name"=>"srirama","place"=>"ayodhya"); 
+		$data = array("name"=>"srirama","place"=>"ayodhya, near Saryu River"); 
 		/*  $data = new \stdClass;
 		$data->name = "srirama";
 		$data->place ="ayodhya";  */

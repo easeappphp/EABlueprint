@@ -139,7 +139,7 @@ return [
 	|
     */
 
-    'session_based_authentication' => '0',
+    'session_based_authentication' => '1',
 	'active_session_backend' => env('SESSION_DRIVER', 'file'),
 	'files_based_session_storage_location_choice' => env('SESSION_STORAGE_LOCATION_SETTING', 'custom-location'),
 	'files_based_session_storage_custom_path' => env('APP_BASE_PATH') . 'sessions',
@@ -164,7 +164,7 @@ return [
 	|
     */
 
-    'token_based_authentication' => '1',
+    'token_based_authentication' => '0',
 	'token_based_authentication_type' => 'JWT',
 	'concurrent_token_based_logins_setting' => '1',
 	'max_allowed_active_concurrent_tokens_count_setting' => '200',
@@ -236,7 +236,7 @@ return [
     | choice installed on your machine before you begin development.
     |
     */
-	
+	/* 
     'connections' => [
 
         'mysql' => [
@@ -247,6 +247,29 @@ return [
             'database' => env('MYSQL_DB_DATABASE', 'easeapp'),
             'username' => env('MYSQL_DB_USERNAME', 'easeapp'),
             'password' => env('MYSQL_DB_PASSWORD', ''),
+            'unix_socket' => env('MYSQl_DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+    ], */
+	'connections' => [
+
+        'mysql' => [
+            'driver' => 'mysql',
+            'url' => env('MYSQL_DB_URL'),
+            'host' => env('MYSQL_DB_HOST', 'localhost'),
+            'port' => env('MYSQL_DB_PORT', '3306'),
+            'database' => env('MYSQL_DB_DATABASE', 'ccc_dev1'),
+            'username' => env('MYSQL_DB_USERNAME', 'ccc_dev'),
+            'password' => env('MYSQL_DB_PASSWORD', 'ccc_dev'),
             'unix_socket' => env('MYSQl_DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -427,6 +450,7 @@ return [
          * Application Service Providers...
          */
         \EaseAppPHP\EABlueprint\App\Providers\AppServiceProvider::class,
+		\EaseAppPHP\EABlueprint\App\Providers\DBServiceProvider::class,
 		\EaseAppPHP\EABlueprint\App\Providers\OdanSessionServiceProvider::class,
         \EaseAppPHP\EABlueprint\App\Providers\RouteServiceProvider::class,
 

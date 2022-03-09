@@ -45,24 +45,7 @@ class EARouterMiddleware implements MiddlewareInterface
 		//echo "set session values in EARouterMiddleware:<br>";
 		// Set session value
 		$this->session->set('bar', 'foo');
-
-		
-		$this->session->set('Srirama', 'Namaskaram Srirama');
-		
-		// Set session value
-		$this->session->set('bar1', 'foo1');
-
-		
-		$this->session->set('Srirama1', 'Namaskaram1');
-		
-		/* echo "get session values in EARouterMiddleware:<br>";
-		echo $this->session->get('Srirama');
-		echo "<br>";
-		echo $this->session->get('Srirama1');
-		echo "<br>";
-		echo $this->session->get('bar'); 
-		exit; */
-		$ses = $this->session->get('Srirama1');
+		$ses = $this->session->get('bar');
 		// You can now use your logger
 		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in EARouterMiddleware - " . $ses);
 		 

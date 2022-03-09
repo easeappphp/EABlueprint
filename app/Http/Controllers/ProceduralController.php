@@ -17,27 +17,21 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     public function webHtmlOutput()
     {
         //Get the instance of \Odan\Session\PhpSession
-		//$this->session = $this->container->get('\Odan\Session\PhpSession')->get('Srirama1');
-		$ses = $this->container->get('\Odan\Session\PhpSession')->get('Srirama1');
+		$ses = $this->container->get('\Odan\Session\PhpSession')->get('bar');
 		// You can now use your logger
 		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging done in ProceduralController - ");
 		
 		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in ProceduralController - " . $ses);
-		/* echo $this->session->get('Srirama');
-			echo "<br>";
-			echo $this->session->get('Srirama1');
-			echo "<br>";
-			echo $this->session->get('bar');
-			 exit; */
+		
 		
 		//echo "before models<br>";
 		//include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
-		$data->userSessionInfo = $this->container->get('\Odan\Session\PhpSession')->get('Srirama');
+		$data->userSessionInfo = $this->container->get('\Odan\Session\PhpSession')->get('bar');
 		//$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
-		
+		//echo "viewPageFileName: " . $viewPageFileName . "<br>";exit;
 	$requestTimer = $this->container->get('\SebastianBergmann\Timer\Timer');
 $duration = $requestTimer->stop();
 //echo "as seconds: " . $duration->asNanoseconds()/1000000000 . "<br>";

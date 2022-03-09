@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
 	
 	protected $serverRequest;
 	
+	protected $whoopsHandler;
+	
 	//protected $response;
     
      
@@ -89,5 +91,6 @@ class AppServiceProvider extends ServiceProvider
 			}
 			
         }
+		
     }
 }

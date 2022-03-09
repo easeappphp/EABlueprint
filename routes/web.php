@@ -171,6 +171,19 @@ return [
                 'with_middleware' => '',
                 'without_middleware' => ''
 	],
+	'admin-user-login' => [
+		'route_value' => '/admin-user/login',
+		'auth_check_requirements' => 'pre-login',
+		'page_filename' => 'admin-user-login.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['POST'],
+                'controller_type' => 'procedural',
+                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+                'method_name' => 'webHtmlOutput',
+                'with_middleware' => '',
+                'without_middleware' => ''
+	],								
 	'rest-login' => [
 		'route_value' => '/rest/login',
 		'auth_check_requirements' => 'pre-login',
@@ -346,6 +359,19 @@ return [
 		'page_filename' => 'index.php',
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET'],
+                'controller_type' => 'oop-mapped',
+                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails\GetController::class,
+                'method_name' => 'restApiJsonOutput',
+                'with_middleware' => '',
+                'without_middleware' => ''
+	],
+	'frontend-oop-mapped-get-all-user-details' => [
+		'route_value' => '/frontend/oop-mapped/all-user-details/get',
+		'auth_check_requirements' => 'none',
+		'page_filename' => 'index.php',
+		'redirect_to' => '',
+		'route_type' => 'frontend-web-app',
 		'allowed_request_methods' => ['GET'],
                 'controller_type' => 'oop-mapped',
                 'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails\GetController::class,

@@ -7,6 +7,8 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
 
+use SebastianBergmann\Timer\Timer;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -21,17 +23,11 @@ use Monolog\Handler\FirePHPHandler;
 //Create Illuminate Container, outside Laravel Framework
 $container = Container::getInstance();
 
-use SebastianBergmann\Timer\Timer;
-
 $timer = new Timer;
 $container->instance('\SebastianBergmann\Timer\Timer', $timer);
 $requestTimer = $container->get('\SebastianBergmann\Timer\Timer');
 $requestTimer->start();
 
-/* foreach (\range(0, 100000) as $i) {
-    // ...
-}
- */
 //Create Whoops Error & Exception Handler object
 $whoops = new \Whoops\Run();
 $container->instance('\Whoops\Run', $whoops);
@@ -68,7 +64,16 @@ if (($configSource == 'As-Array') && ($configSourceValueDataType == 'array') && 
 }
 
 $container->instance('config', $collectedConfigData);                
-//$config = $container->get('config');  
+$config = $container->get('config');  
+
+//Define default timezone
+if(function_exists("date_default_timezone_set")) {
+		
+	//Define the Default timezone.	
+	date_default_timezone_set($container->get('config')["mainconfig"]["timezone"]); //timezone from /config/main-config.php
+
+}
+	
 
 $dotSeparatedKeyBasedConfigArrayData = $container->get('EAConfig')->generateDotSeparatedKeyBasedConfigArray($collectedConfigData, $prefix = '');
 $container->instance('dotSeparatedConfig', $dotSeparatedKeyBasedConfigArrayData);
