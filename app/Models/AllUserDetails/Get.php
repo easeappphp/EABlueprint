@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Models\AllUserDetails;
 
+use Illuminate\Container\Container;
+
 class Get extends \EaseAppPHP\Foundation\BaseWebModel
 {
     
@@ -22,6 +24,8 @@ class Get extends \EaseAppPHP\Foundation\BaseWebModel
 		
 		$this->processedModelResponse->routeRelTemplateContext = $this->getRouteRelTemplateContext();
 		$this->processedModelResponse->routeRelTemplateFolderPathPrefix = $this->getRouteRelTemplateFolderPathPrefix();
+		$this->processedModelResponse->userSessionInfo = $this->container->get('\Odan\Session\PhpSession')->get('bar');
+		
 		return $this->processedModelResponse;
 		
     }

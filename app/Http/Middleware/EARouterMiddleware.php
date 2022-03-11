@@ -40,15 +40,23 @@ class EARouterMiddleware implements MiddlewareInterface
 		$this->matchedRouteResponse =  $dataFromAppClass["matchedRouteResponse"];
 		$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
 		$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
-		$this->session =  $dataFromAppClass["session"];
+		$this->response = $dataFromAppClass["baseWebResponse"];
+		//echo "matched route key (in EARouterMiddleware): " . $this->matchedRouteKey . "<br>";
+		//exit;
+		if ($this->container->has('\Odan\Session\PhpSession') === true) {
 		
-		//echo "set session values in EARouterMiddleware:<br>";
-		// Set session value
-		$this->session->set('bar', 'foo');
-		$ses = $this->session->get('bar');
-		// You can now use your logger
-		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in EARouterMiddleware - " . $ses);
-		 
+			$this->session =  $dataFromAppClass["session"];
+			
+			// Set session value
+			$this->session->set('bar', 'foo');
+			$ses = $this->session->get('bar');
+			// You can now use your logger
+			$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in EARouterMiddleware - " . $ses);
+			
+		} else {
+			//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
+		}
+
 		$pageFilename = $this->matchedRouteDetails["page_filename"];
 		//echo "pageFilename: " . $pageFilename . "\n";
 		$pageRouteType = $this->matchedRouteDetails["route_type"];

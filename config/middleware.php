@@ -30,12 +30,15 @@ return [
 
     'middlewareGroups' => [
         'ajax' => [
-            \EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
+            \Odan\Session\Middleware\SessionMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\EASessionAuthCheckMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'web' => [
             //\EaseAppPHP\EABlueprint\App\Http\Middleware\SessionMiddleware::class,
 			//\Mezzio\Session\SessionMiddleware::class,
 			\Odan\Session\Middleware\SessionMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\EASessionAuthCheckMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'api' => [

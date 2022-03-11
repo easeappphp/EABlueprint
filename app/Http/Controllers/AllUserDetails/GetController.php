@@ -19,11 +19,11 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
     public function index()
     {
         
-		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		
-		$dataObject->userSessionInfo = $this->container->get('\Odan\Session\PhpSession')->get('bar');
+		
 		$dataObject->license = $this->container->get('\Odan\Session\PhpSession')->get('license');
 		
 		//$viewPageFileName = $dataObject->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
@@ -78,7 +78,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 	public function restApiJsonOutput()
     {
         
-		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		
@@ -96,7 +96,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 	public function restApiXmlOutput()
     {
         
-		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		
@@ -116,7 +116,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 	public function ajaxJsonOutput()
     {
         
-		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		
@@ -134,7 +134,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
     public function ajaxXmlOutput()
     {
         
-		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		
@@ -154,7 +154,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 	public function ajaxHtmlOutput()
     {
         
-		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		
@@ -175,7 +175,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 	public function ajaxTextOutput()
     {
         
-		$getModel = new Get($this->config, $this->matchedRouteDetails, $this->queryParams);
+		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
 		$dataObject = $getModel->index();
 		

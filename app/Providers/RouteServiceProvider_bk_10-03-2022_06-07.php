@@ -25,7 +25,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $middlewarePipeQueueEntries;
     private $constructedResponse = [];
 	protected $session;
-	protected $baseWebResponse;
     
     /**
      * Create a new Illuminate application instance.
@@ -82,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
 			
 			$this->container->instance('MatchedRouteKey', $matchedRouteKey);
 			$this->matchedRouteKey = $this->container->get('MatchedRouteKey'); 
-			//echo "matched route key (before mutation, in RouteServiceProvider): " . $this->matchedRouteKey . "<br>";
+			
 			$matchedRouteDetails = $this->routesList[$this->matchedRouteKey];
 			
 			if ($matchedRouteKey == "header-response-only-405-method-not-allowed") {
@@ -121,44 +120,26 @@ class RouteServiceProvider extends ServiceProvider
 				//echo "requiredRouteTypeMiddlewareGroupMappingValue: " . $requiredRouteTypeMiddlewareGroupMappingValue . "<br>\n";
             }
 			
-			$this->baseWebResponse = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
+			if ($this->container->has('\Odan\Session\PhpSession') === true) {
+				
+				//Get the instance of \Odan\Session\PhpSession
+				$this->session = $this->container->get('\Odan\Session\PhpSession');
+				
+			} else {
+				//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
+			}
 			
-			// Step 1: Do something first
-			$appClassData = [
-					'container' => $this->container,
+            // Step 1: Do something first
+            $appClassData = [
+                    'container' => $this->container,
 					'config' => $this->config,
-					'routes' => $this->routes,
-					'eaRouterinstance' => $this->eaRouterinstance,
-					'matchedRouteResponse' => $this->matchedRouteResponse,
+                    'routes' => $this->routes,
+                    'eaRouterinstance' => $this->eaRouterinstance,
+                    'matchedRouteResponse' => $this->matchedRouteResponse,
 					'matchedRouteKey' => $this->matchedRouteKey,
 					'matchedRouteDetails' => $this->matchedRouteDetails,
-					'baseWebResponse' => $this->baseWebResponse,
-			];
-			
-	/* 		'session_based_authentication' => '1',
-	'active_session_backend' => env('SESSION_DRIVER', 'file'),
-	'files_based_session_storage_location_choice' => env('SESSION_STORAGE_LOCATION_SETTING', 'custom-location'),
-	'files_based_session_storage_custom_path' => env('APP_BASE_PATH') . 'sessions',
-	
-	'single_redis_server_session_backend_host' => 'tcp://localhost:6379',
-	'session_lifetime' => env('SESSION_LIFETIME', '86400'),
-	 */
-	
-			
-			if (($requiredRouteType == "frontend-web-app") || ($requiredRouteType == "backend-web-app") || ($requiredRouteType == "web-app-common") || ($requiredRouteType == "ajax") || ($requiredRouteType == "ajax-web-service-common")) {
-
-				if ($this->container->has('\Odan\Session\PhpSession') === true) {
-			
-					//Get the instance of \Odan\Session\PhpSession
-					$this->session = $this->container->get('\Odan\Session\PhpSession');
-					
-					$appClassData["session"] = $this->session;
-					
-				} else {
-					//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
-				}
-				
-			}
+					'session' => $this->session,
+            ];
             
             //Define Laminas Stratigility Middlewarepipe
             $middlewarePipe = new \Laminas\Stratigility\MiddlewarePipe();  // API middleware collection
@@ -243,23 +224,7 @@ class RouteServiceProvider extends ServiceProvider
                 //To provide input to constructor for SessionMiddleware
 				if ($constructedResponseRowValue == "Odan\Session\Middleware\SessionMiddleware") {
 					
-					//$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue($this->session));
-					
-					if (($requiredRouteType == "frontend-web-app") || ($requiredRouteType == "backend-web-app") || ($requiredRouteType == "web-app-common") || ($requiredRouteType == "ajax") || ($requiredRouteType == "ajax-web-service-common")) {
-
-						if ($this->container->has('\Odan\Session\PhpSession') === true) {
-						
-							$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue($this->session));
-							
-						} else {
-							//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
-						}
-
-					} else {
-						
-						throw new \Exception("Sessions will be enabled only for ajax and web requests. Do remove Session Middleware otherwise.");
-						
-					}
+					$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue($this->session));
 					
 				} else {
 					

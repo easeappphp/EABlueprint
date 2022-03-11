@@ -3,7 +3,7 @@
     "description": "EABlueprint is the application that can be used to create either MVC or API Application.",
     "type": "application",
 	"require": {
-        "easeappphp/easeapp": "1.0.12"
+        "easeappphp/easeapp": "1.0.13"
     },
 	"homepage": "https://github.com/easeappphp/EABlueprint",
 	"license": "MIT",

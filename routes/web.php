@@ -177,7 +177,7 @@ return [
 		'page_filename' => 'admin-user-login.php',
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
-		'allowed_request_methods' => ['POST'],
+		'allowed_request_methods' => ['GET','POST'],
                 'controller_type' => 'procedural',
                 'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
                 'method_name' => 'webHtmlOutput',

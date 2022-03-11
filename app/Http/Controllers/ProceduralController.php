@@ -28,7 +28,7 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 		//include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
-		$data->userSessionInfo = $this->container->get('\Odan\Session\PhpSession')->get('bar');
+		
 		//$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		//echo "viewPageFileName: " . $viewPageFileName . "<br>";exit;
