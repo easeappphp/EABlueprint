@@ -1,80 +1,125 @@
 <?php
+declare(strict_types=1);
+
 use \Illuminate\Container\Container;
 use \EaseAppPHP\Core\EAConfig;
 use \EaseAppPHP\Other\Log;
-
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
-
 use SebastianBergmann\Timer\Timer;
 
 /*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new EaseApp PHP Framework based application instance
-| that serves as the "glue" for different components of EaseApp PHP Framework. Laravel IOC Container
-| is used in the scope of PSR-11 Container.
-|
+*--------------------------------------------------------------------------
+* Instantiate Container
+*--------------------------------------------------------------------------
+*
+* The first thing we will do is create a new EaseApp PHP Framework based application instance
+* that serves as the "glue" for different components of EaseApp PHP Framework. Laravel IOC Container
+* is used in the scope of PSR-11 Container.
+*
+* This is to create Illuminate Container, outside Laravel Framework.
 */
-
-//Create Illuminate Container, outside Laravel Framework
 $container = Container::getInstance();
 
+/*
+*--------------------------------------------------------------------------
+* Create the Timer
+*--------------------------------------------------------------------------
+*
+* Create a Timer that can be used to calculate time taken across the application by stopping the timer and finding the difference where needed. 
+* Attach the timer instance to the container.
+*
+* This uses standalone timer class of PHPUnit.
+*/
 $timer = new Timer;
 $container->instance('\SebastianBergmann\Timer\Timer', $timer);
 $requestTimer = $container->get('\SebastianBergmann\Timer\Timer');
 $requestTimer->start();
 
-//Create Whoops Error & Exception Handler object
+/*
+*--------------------------------------------------------------------------
+* Instantiate Exception Handler
+*--------------------------------------------------------------------------
+*
+* Instantiate Exception handler. 
+* Attach the exception handler instance to the container.
+*
+* This uses Whoops library as default exception handler.
+*/
 $whoops = new \Whoops\Run();
 $container->instance('\Whoops\Run', $whoops);
 
+/*
+*--------------------------------------------------------------------------
+* Attach the Config class instance to the container by defining the Class Name as instance reference in the container
+*--------------------------------------------------------------------------
+*
+*/
+$eaConfig = new EAConfig();
+$container->instance('EAConfig', $eaConfig);
+
+/*
+*--------------------------------------------------------------------------
+* Define Folder path of the Config folder
+*--------------------------------------------------------------------------
+*
+* This uses a concrete class of EaseApp Framework.
+*/
 $singleFolderConfigFilePath = dirname(dirname(__FILE__)).'/config';
 $config = [];
 $collectedConfigData = [];
 $dotSeparatedKeyBasedConfigArrayData =[];
-
-//Bind an existing "config" class instance to the container, by defining the Class Name as instance reference in the container
-$eaConfig = new EAConfig();
-$container->instance('EAConfig', $eaConfig);
-
 $configSource = 'From-Single-Folder';
 $configSourceValueDataType = 'string';
 $configSourceValueData = $singleFolderConfigFilePath;
 
 if (($configSource == 'As-Array') && ($configSourceValueDataType == 'array') && (is_array($configSourceValueData))) {
 
-		$collectedConfigData = $container->get('EAConfig')->getAsArray($configSourceValueData);
+	$collectedConfigData = $container->get('EAConfig')->getAsArray($configSourceValueData);
 
-} else if (($configSource == 'From-Single-File') && ($configSourceValueDataType == 'string') && (is_string($configSourceValueData))) {
+} elseif (($configSource == 'From-Single-File') && ($configSourceValueDataType == 'string') && (is_string($configSourceValueData))) {
 
-		$collectedConfigData = $container->get('EAConfig')->getFromSingleFile($configSourceValueData);
+	$collectedConfigData = $container->get('EAConfig')->getFromSingleFile($configSourceValueData);
 
-} else if (($configSource == 'From-Single-Folder') && ($configSourceValueDataType == 'string') && (is_string($configSourceValueData))) {
+} elseif (($configSource == 'From-Single-Folder') && ($configSourceValueDataType == 'string') && (is_string($configSourceValueData))) {
 
-		$collectedConfigData = $container->get('EAConfig')->getFromSingleFolder($configSourceValueData);
+	$collectedConfigData = $container->get('EAConfig')->getFromSingleFolder($configSourceValueData);
 
-} else if (($configSource == 'From-Filepaths-Array') && ($configSourceValueDataType == 'array') && (is_array($configSourceValueData))) {
+} elseif (($configSource == 'From-Filepaths-Array') && ($configSourceValueDataType == 'array') && (is_array($configSourceValueData))) {
 
-		$collectedConfigData = $container->get('EAConfig')->getFromFilepathsArray($configSourceValueData);
+	$collectedConfigData = $container->get('EAConfig')->getFromFilepathsArray($configSourceValueData);
 
 }
 
+/*
+*--------------------------------------------------------------------------
+* Attach the config data instance to the container
+*--------------------------------------------------------------------------
+*
+*/
 $container->instance('config', $collectedConfigData);                
 $config = $container->get('config');  
 
-//Define default timezone
-if(function_exists("date_default_timezone_set")) {
+/*
+*--------------------------------------------------------------------------
+* Define Default timezone
+*--------------------------------------------------------------------------
+*
+*/
+if (function_exists("date_default_timezone_set")) {
 		
-	//Define the Default timezone.	
-	date_default_timezone_set($container->get('config')["mainconfig"]["timezone"]); //timezone from /config/main-config.php
+	date_default_timezone_set($container->get('config')["mainconfig"]["timezone"]);
 
 }
 	
-
+/*
+*--------------------------------------------------------------------------
+* Create Dot separated Config array
+*--------------------------------------------------------------------------
+* Attach dot separated config array to the container.
+*
+*/
 $dotSeparatedKeyBasedConfigArrayData = $container->get('EAConfig')->generateDotSeparatedKeyBasedConfigArray($collectedConfigData, $prefix = '');
 $container->instance('dotSeparatedConfig', $dotSeparatedKeyBasedConfigArrayData);
 /* echo "<pre>"; 
@@ -83,31 +128,61 @@ print_r($container->get('EAConfig')->getDotSeparatedKeyValue("hashing"));
 echo "<br><hr><br>";
 echo $eaConfig->getDotSeparatedKeyValue("session.driver");
 print_r($eaConfig->getDotSeparatedKeyValue("hashing"));   */
- 
 
+/*
+*--------------------------------------------------------------------------
+* Define Folder path of the .env file
+*--------------------------------------------------------------------------
+*
+*/
 $envFilePath = dirname(dirname(__FILE__));
 
-//Load info from .env file
+/*
+*--------------------------------------------------------------------------
+* Load config data from .env file
+*--------------------------------------------------------------------------
+*
+*/
 $dotenv = \Dotenv\Dotenv::createImmutable($envFilePath);
 $dotenv->load();
 
-//Create a Server Request using Laminas\Diactoros PSR-7 Library
-// Returns new ServerRequest instance, using values from superglobals:
+/*
+*--------------------------------------------------------------------------
+* Create a Server Request using Laminas\Diactoros PSR-7 Library
+*--------------------------------------------------------------------------
+* This returns new ServerRequest instance, using values from superglobals.
+* Attach the ServerRequest instance to the container.
+*
+*/
 $serverRequestInstance = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
-
-//Bind an existing "serverRequest" class instance to the container, by defining the Class Name as instance reference in the container
 $container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
 
-//Create a Response Object
+/*
+*--------------------------------------------------------------------------
+* Create a Response Object
+*--------------------------------------------------------------------------
+* Attach the response object instance to the container.
+*
+*/
 $responseInstance = new \EaseAppPHP\Foundation\BaseWebResponse($container);
-
-//Bind an existing "response" class instance to the container, by defining the Class Name as instance reference in the container
 $container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance);
 
+/*
+*--------------------------------------------------------------------------
+* Log using \EaseAppPHP\Other\Log class, that internally uses Monolog
+*--------------------------------------------------------------------------
+*
+*/
+Log::channel($container, 'emergency')->emergency('This logs to the file handler using Log class, that uses Monolog internally');
 
-//Log using \EaseAppPHP\Other\Log class, that internally uses Monolog
-Log::channel($container, 'emergency')->emergency('Something happened!');
-
+/*
+*--------------------------------------------------------------------------
+* Create a Logger object
+*--------------------------------------------------------------------------
+* This uses Monolog as default logger library.
+* Attach the logger object instance to the container.
+*
+*/
 // Create some handlers
 $stream = new StreamHandler('/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/storage/logs/easeapp.log', Logger::DEBUG);
 $firephp = new FirePHPHandler();
@@ -121,17 +196,16 @@ $logger->pushHandler($firephp);
 $container->instance('\Monolog\Logger\channel-myLogger', $logger);
 
 // You can now use your logger
-$container->get('\Monolog\Logger\channel-myLogger')->info("My logger is now ready with first channel, based on single line container based logging object");
+$container->get('\Monolog\Logger\channel-myLogger')->info("This uses Monolog logger with first channel, based on single line container based logging object");
 
 /*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
+*--------------------------------------------------------------------------
+* Return The Application
+*--------------------------------------------------------------------------
+*
+* This script returns the application instance. The instance is given to
+* the calling script so we can separate the building of the instances
+* from the actual running of the application and sending responses.
+*
 */
-
 return $container;

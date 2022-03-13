@@ -22,13 +22,11 @@ class EAAppBrowserCacheHeadersMiddleware implements MiddlewareInterface
 	$data = [
             'foo' => 'bar',
         ]; 
-		
-		
+				
 	$result = array_merge($dataFromAppClass, $data);
 
         // Step 2: Inject data into the request, call the next middleware and wait for the response
         $response = $handler->handle($request->withAttribute(PassingAppClassDataToMiddleware::class, $result));
-
 
         //$response = $handler->handle($request);
 
@@ -46,15 +44,21 @@ class EAAppBrowserCacheHeadersMiddleware implements MiddlewareInterface
          */
 
         if (!$response->hasHeader('Last-Modified')) {
+			
                 $response = $response->withHeader('Last-Modified', gmdate( 'D, d M Y H:i:s' ) . ' GMT');
+				
         }
 
         if (!$response->hasHeader('Cache-Control')) {
+			
                 $response = $response->withHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+				
         }
 
         if ($response->hasHeader('Cache-Control')) {
+			
                 $response = $response->withAddedHeader('Cache-Control', 'pre-check=0', false); //post-check=0 is removed, as per guidelines of Fiddler 
+				
         }
 
         /* if (!$response->hasHeader('Pragma')) {

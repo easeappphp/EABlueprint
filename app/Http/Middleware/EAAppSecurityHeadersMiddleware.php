@@ -24,12 +24,16 @@ class EAAppSecurityHeadersMiddleware implements MiddlewareInterface
 		
 		//Prevent Mimetype Sniffing
 		if (!$response->hasHeader('x-content-type-options')) {
+			
 			$response = $response->withHeader('x-content-type-options', 'nosniff');
+			
 		}
 		
 		//XSS Protection
 		if (!$response->hasHeader('X-XSS-Protection')) {
+			
 			$response = $response->withHeader('X-XSS-Protection', '1; mode=block');
+			
 		}
 		
 		/* //Clickjacking Prevention, while allowing to iframe the page from sameorigin in php
@@ -39,20 +43,25 @@ class EAAppSecurityHeadersMiddleware implements MiddlewareInterface
 		
 		//Clickjacking Prevention overall without allowing sameorigin or a different origin from iframing the page in php
 		if (!$response->hasHeader('X-Frame-Options')) {
+			
 			$response = $response->withHeader('X-Frame-Options', 'DENY');
+			
 		}
 		
 		//Remove PHP Information (Version) Header (THIS IS NOT WORKING, NEED TO CHECK TO REMOVE HEADER METHOD AGAIN)
 		if (!$response->hasHeader('x-powered-by')) {
+			
 			$response = $response->withoutHeader('x-powered-by');
+			
 		}
 		
 		//This Header is to allow flash to share client side data between its applications in PHP
 		if (!$response->hasHeader('X-Permitted-Cross-Domain-Policies')) {
+			
 			$response = $response->withHeader('X-Permitted-Cross-Domain-Policies', 'master-only');
+			
 		}
-		
-		 
+				 
 		//echo "Application Security Headers";
 		return $response;
 		

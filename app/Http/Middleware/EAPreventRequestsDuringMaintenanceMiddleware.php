@@ -29,19 +29,18 @@ class EAPreventRequestsDuringMaintenanceMiddleware implements MiddlewareInterfac
 		
 		//CONSTRUCTION / MAINTENANCE / LIVE
 		if ($this->config["mainconfig"]["app_site_status"] == "CONSTRUCTION") {
+			
 			//echo "<center>This website is under rapid construction sessions, please visit us again, thank you</center>";
 		  
-			$this->response = $this->response->withStatus(503);
-			
+			$this->response = $this->response->withStatus(503);			
 			
 		} else if ($this->config["mainconfig"]["app_site_status"] == "MAINTENANCE") {
+			
 			//echo "<center>This website is taken down for maintenance, please visit us again, thank you</center>";
 			
-			$this->response = $this->response->withStatus(503);
+			$this->response = $this->response->withStatus(503);			
 			
-			
-		}
-		
+		}	
 
 		//echo "Site Status";
 		return $this->response;

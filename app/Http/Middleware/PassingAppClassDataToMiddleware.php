@@ -12,7 +12,8 @@ class PassingAppClassDataToMiddleware implements MiddlewareInterface
 {
     private $appClassData;
 	
-	public function __construct($appClassData) {
+	public function __construct($appClassData)
+	{
 		$this->appClassData = $appClassData;
 	}
 	

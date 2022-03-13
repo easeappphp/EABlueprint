@@ -3,13 +3,9 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Providers;
 
-use Illuminate\Container\Container;
-
+use \Illuminate\Container\Container;
 use \EaseAppPHP\Foundation\ServiceProvider;
-
 use \EaseAppPHP\Other\Log;
-
-//use \Odan\Session\PhpSession;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,6 +21,7 @@ class RouteServiceProvider extends ServiceProvider
     protected $middlewarePipeQueueEntries;
     private $constructedResponse = [];
 	protected $session;
+	protected $dbConn;
 	protected $baseWebResponse;
     
     /**
@@ -33,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
      * @param  string|null  $basePath
      * @return void
      */
-    public function __construct($container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }   
@@ -98,10 +95,15 @@ class RouteServiceProvider extends ServiceProvider
 			$requiredRouteType = $this->matchedRouteDetails["route_type"];
 			$requiredWithMiddleware = $this->matchedRouteDetails["with_middleware"];
 			$requiredWithoutMiddleware = $this->matchedRouteDetails["without_middleware"];
-			if($requiredWithMiddleware != ""){
+			
+			if ($requiredWithMiddleware != "") {
+				
 				$pageWithMiddlewareArray = explode(",", $requiredWithMiddleware);
+				
 			}
-			if($requiredWithoutMiddleware != ""){
+			
+			if ($requiredWithoutMiddleware != "") {
+				
 				$pageWithoutMiddlewareArray = explode(",", $requiredWithoutMiddleware);
 			}
 			
@@ -114,36 +116,29 @@ class RouteServiceProvider extends ServiceProvider
 
 			}
 			
-			//throw new \RuntimeException("Oopsie!");
-			
-			if($requiredRouteType != "" && array_key_exists($requiredRouteType, $this->config["mainconfig"]["route_type_middleware_group_mapping"])){
+			if ($requiredRouteType != "" && array_key_exists($requiredRouteType, $this->config["mainconfig"]["route_type_middleware_group_mapping"])) {
+				
                 $requiredRouteTypeMiddlewareGroupMappingValue = $this->config["mainconfig"]["route_type_middleware_group_mapping"][$requiredRouteType];
 				//echo "requiredRouteTypeMiddlewareGroupMappingValue: " . $requiredRouteTypeMiddlewareGroupMappingValue . "<br>\n";
+				
             }
 			
 			$this->baseWebResponse = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
 			
+			$this->dbConn = $this->container->get('\EaseAppPHP\PDOLight\PDOLight-dbConn');
+			
 			// Step 1: Do something first
 			$appClassData = [
-					'container' => $this->container,
-					'config' => $this->config,
-					'routes' => $this->routes,
-					'eaRouterinstance' => $this->eaRouterinstance,
-					'matchedRouteResponse' => $this->matchedRouteResponse,
-					'matchedRouteKey' => $this->matchedRouteKey,
-					'matchedRouteDetails' => $this->matchedRouteDetails,
-					'baseWebResponse' => $this->baseWebResponse,
+				'container' => $this->container,
+				'config' => $this->config,
+				'routes' => $this->routes,
+				'eaRouterinstance' => $this->eaRouterinstance,
+				'matchedRouteResponse' => $this->matchedRouteResponse,
+				'matchedRouteKey' => $this->matchedRouteKey,
+				'matchedRouteDetails' => $this->matchedRouteDetails,
+				'dbConn' => $this->dbConn,
+				'baseWebResponse' => $this->baseWebResponse,
 			];
-			
-	/* 		'session_based_authentication' => '1',
-	'active_session_backend' => env('SESSION_DRIVER', 'file'),
-	'files_based_session_storage_location_choice' => env('SESSION_STORAGE_LOCATION_SETTING', 'custom-location'),
-	'files_based_session_storage_custom_path' => env('APP_BASE_PATH') . 'sessions',
-	
-	'single_redis_server_session_backend_host' => 'tcp://localhost:6379',
-	'session_lifetime' => env('SESSION_LIFETIME', '86400'),
-	 */
-	
 			
 			if (($requiredRouteType == "frontend-web-app") || ($requiredRouteType == "backend-web-app") || ($requiredRouteType == "web-app-common") || ($requiredRouteType == "ajax") || ($requiredRouteType == "ajax-web-service-common")) {
 
@@ -171,12 +166,12 @@ class RouteServiceProvider extends ServiceProvider
             //Middleware is expected to pass on the details as attributes of serverRequest to the next middleware
             $this->middlewarePipeQueue->pipe(new \EaseAppPHP\EABlueprint\App\Http\Middleware\PassingAppClassDataToMiddleware($appClassData));
             
-            foreach ($this->config["middleware"]["middleware"] as $singleGlobalMiddlewareRowKey => $singleGlobalMiddlewareRowValue) {
-                
-				if(!in_array($singleGlobalMiddlewareRowValue, $this->constructedResponse)){
+            foreach ($this->config["middleware"]["middleware"] as $singleGlobalMiddlewareRowKey => $singleGlobalMiddlewareRowValue) {                
+				if (!in_array($singleGlobalMiddlewareRowValue, $this->constructedResponse)) {
+					
 					$this->constructedResponse[] = $singleGlobalMiddlewareRowValue;
-				}
-                
+					
+				}                
             }
             
             foreach ($this->config["middleware"]["middlewareGroups"] as $singleMiddlewareGroupRowKey => $singleMiddlewareGroupRowValue) {
@@ -198,47 +193,49 @@ class RouteServiceProvider extends ServiceProvider
               
             }
             
-			if(isset($requiredWithMiddlewareArray)){
-                foreach($requiredWithMiddlewareArray as $requiredWithMiddlewareArrayEntry){
+			if (isset($requiredWithMiddlewareArray)) {
+				
+                foreach ($requiredWithMiddlewareArray as $requiredWithMiddlewareArrayEntry) {
                     
-                    foreach($this->config["middleware"]["routeMiddleware"] as $singlerouteMiddlewareKey => $singlerouteMiddlewareValue){
+                    foreach ($this->config["middleware"]["routeMiddleware"] as $singlerouteMiddlewareKey => $singlerouteMiddlewareValue) {
 
-                        if($requiredWithMiddlewareArrayEntry == $singlerouteMiddlewareKey){
+                        if ($requiredWithMiddlewareArrayEntry == $singlerouteMiddlewareKey) {
                             
-                            if(!isset($this->constructedResponse[$requiredWithMiddlewareArrayEntry])){
+                            if (!isset($this->constructedResponse[$requiredWithMiddlewareArrayEntry])) {
+								
                                 $this->constructedResponse[] = $singlerouteMiddlewareValue;
+								
                             }
                             
                         }
 
                     }
                 }
+				
             }
-            if(isset($requiredWithoutMiddlewareArray)){
-                foreach($requiredWithoutMiddlewareArray as $requiredWithoutMiddlewareArrayEntry){
-                    foreach($this->config["middleware"]["routeMiddleware"] as $singlerouteMiddlewareKey => $singlerouteMiddlewareValue){
-
-                        if($requiredWithoutMiddlewareArrayEntry == $singlerouteMiddlewareKey){
+            if (isset($requiredWithoutMiddlewareArray)) {
+				
+                foreach ($requiredWithoutMiddlewareArray as $requiredWithoutMiddlewareArrayEntry) {
+                    foreach ($this->config["middleware"]["routeMiddleware"] as $singlerouteMiddlewareKey => $singlerouteMiddlewareValue) {
+                        if ($requiredWithoutMiddlewareArrayEntry == $singlerouteMiddlewareKey) {
                             
-                            if(isset($this->constructedResponse[$requiredWithoutMiddlewareArrayEntry])){
+                            if (isset($this->constructedResponse[$requiredWithoutMiddlewareArrayEntry])) {
+								
                                 unset($this->constructedResponse[$requiredWithoutMiddlewareArrayEntry]);
                                 //echo "middleware removed";
                                 
                                 //ISSUE TO BE FIXED
+								
                             }
                             
                         }
 
                     }
-                    
                 }
+				
             }
             
-			
-			//Get the instance of \Odan\Session\PhpSession
-			//$this->session = $this->container->get('\Odan\Session\PhpSession');
-            
-            foreach ($this->constructedResponse as $constructedResponseRowKey => $constructedResponseRowValue) 
+			foreach ($this->constructedResponse as $constructedResponseRowKey => $constructedResponseRowValue) 
 			{
                 //To provide input to constructor for SessionMiddleware
 				if ($constructedResponseRowValue == "Odan\Session\Middleware\SessionMiddleware") {
@@ -269,29 +266,6 @@ class RouteServiceProvider extends ServiceProvider
                 //$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue());
                 
             }
-			/* // Set session value
-			$this->session->set('bar', 'foo');
-
-			
-			$this->session->set('Srirama', 'Namaskaram Srirama');
-			
-			// Set session value
-			$this->session->set('bar1', 'foo1');
-
-			
-			$this->session->set('Srirama1', 'Namaskaram1'); */
-			
-			
-			
-			/* echo $this->session->get('Srirama');
-			echo "<br>";
-			echo $this->session->get('Srirama1');
-			echo "<br>";
-			echo $this->session->get('bar');
-			 exit; */
-
-			// Commit and close the session
-			//$this->session->save();
 			
             /*
              * FEATURES POSTPONED w.r.t. IMPLEMENTATION middleware priority, adding/removing specific middleware to/from a ROUTE, postponing these two features andi for now
@@ -307,11 +281,6 @@ class RouteServiceProvider extends ServiceProvider
             //Assign MiddlewarePipe entries into container
             $this->container->instance('middlewarePipeQueueEntries', $this->middlewarePipeQueue);
             
-            
         }
-        
-            
-        
     }
-    
 }

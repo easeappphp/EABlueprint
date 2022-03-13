@@ -1,4 +1,18 @@
+<?php
 
+if ($serverRequest->getParsedBody()) {
+	
+	if (($session->has('loggedin')) && ($session->get('loggedin') == "yes")) {
+		
+		header("Location: https://blueprint-dev.easeapp.org/admin/dashboard");
+		exit;
+		
+	}
+	
+	
+} else {
+
+?>
  <h1>Admin Login</h1>
  <form action="" method="post">
   <div class="imgcontainer">
@@ -6,11 +20,11 @@
   </div>
 
   <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
 
     <button type="submit">Login</button>
     <label>
@@ -23,3 +37,7 @@
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
 </form>
+<?php
+
+}
+?>

@@ -3,22 +3,16 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Providers;
 
-use Illuminate\Container\Container;
-
+use \Illuminate\Container\Container;
 use \EaseAppPHP\Foundation\ServiceProvider;
-
 use \EaseAppPHP\PDOLight\PDOLight;
 
 class DBServiceProvider extends ServiceProvider
 {
-    protected $container;
-	
-	protected $serverRequest;
-	
-	protected $dbConn;
-	
-	//protected $response;
-    
+    protected $container;	
+	protected $serverRequest;	
+	protected $dbConn;	
+	//protected $response;    
      
     /**
      * Create a new Illuminate application instance.
@@ -26,7 +20,7 @@ class DBServiceProvider extends ServiceProvider
      * @param  string|null  $basePath
      * @return void
      */
-    public function __construct($container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }   
@@ -38,8 +32,7 @@ class DBServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
-		if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
+        if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
             
             
         }
@@ -70,14 +63,5 @@ class DBServiceProvider extends ServiceProvider
 		
 		$this->dbConn = $this->container->get('\EaseAppPHP\PDOLight\PDOLight-dbConn');
 		
-		
-		
-		
-		$query = "SELECT * FROM `applications`";
-		$values_array = array();
-
-		$queryResult = $this->dbConn->executeQuery($query, $values_array, "selectMultiple");
-		//print_r($queryResult);
-		//exit;
     }
 }

@@ -3,18 +3,15 @@ declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Providers;
 
-use Illuminate\Container\Container;
-
+use \Illuminate\Container\Container;
 use \EaseAppPHP\Foundation\ServiceProvider;
 
 class OdanSessionServiceProvider extends ServiceProvider
 {
     protected $container;
 	protected $config;
-	protected $session;
-	
-	//protected $response;
-    
+	protected $session;	
+	//protected $response;    
      
     /**
      * Create a new Illuminate application instance.
@@ -22,7 +19,7 @@ class OdanSessionServiceProvider extends ServiceProvider
      * @param  string|null  $basePath
      * @return void
      */
-    public function __construct($container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
 		$this->config = $this->container->get('config');
@@ -46,18 +43,6 @@ class OdanSessionServiceProvider extends ServiceProvider
 				// You can use all the standard PHP session configuration options
 				// https://secure.php.net/manual/en/session.configuration.php
 
-				/* $session->setOptions([
-					'name' => 'easeapp_session',
-					'session.cookie_httponly' => 1,
-					'session.cookie_lifetime' => 0,
-					'session.use_cookies' => 1,
-					'session.use_only_cookies' => 1,
-					'session.use_trans_sid' => 0,
-					'session.gc_maxlifetime' => 86400,
-					'session.gc_probability' => 1,
-					'session.gc_divisor' => 100,
-					'session.same_site' => 'lax',
-				]); */
 				$session->setOptions([
 					'name' => 'easeapp_session',
 					'cookie_httponly' => 1,
@@ -72,18 +57,16 @@ class OdanSessionServiceProvider extends ServiceProvider
 					'same_site' => 'lax',
 				]);
 				
-				// Commit and close the session
-				//$session->save();
-				
+				// Start the session
+				$session->start();
+
 				//Bind an existing "\Odan\Session\PhpSession" class instance to the container
 				$this->container->instance('\Odan\Session\PhpSession', $session);
-				
 				
 			}
 			
         }
-        
-        
+		
     }
 
     /**
@@ -102,8 +85,7 @@ class OdanSessionServiceProvider extends ServiceProvider
 				
 			} else {
 				//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
-			}
-			
+			}			
 						
         }
     }

@@ -21,19 +21,27 @@ class EACorsMiddleware implements MiddlewareInterface
 		if (isset($request->getserverParams()['HTTP_ORIGIN'])) {
 			
 			if (!$response->hasHeader('Access-Control-Allow-Origin')) {
+				
 				$response = $response->withHeader('Access-Control-Allow-Origin', '*');
+				
 			}
 			
 			if (!$response->hasHeader('Access-Control-Allow-Credentials')) {
+				
 				$response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
+				
 			}
 			
 			if (!$response->hasHeader('Access-Control-Max-Age')) {
+				
 				$response = $response->withHeader('Access-Control-Max-Age', '86400');
+				
 			}
 			
 			if (!$response->hasHeader('Access-Control-Expose-Headers')) {
+				
 				$response = $response->withHeader('Access-Control-Expose-Headers', 'authorization');
+				
 			}
 		
 		}
@@ -45,15 +53,20 @@ class EACorsMiddleware implements MiddlewareInterface
 				
 				// may also be using PUT, PATCH, HEAD etc
 				if (!$response->hasHeader('Access-Control-Allow-Methods')) {
+					
 					$response = $response->withHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+					
 				}
 				
 			if (isset($request->getserverParams()['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
 				
 				if (!$response->hasHeader('Access-Control-Allow-Headers')) {
+					
 					$response = $response->withHeader('Access-Control-Allow-Headers', "{$request->getserverParams()['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+					
 				}
 				return $response;
+				
 			exit(0);
 		}
 

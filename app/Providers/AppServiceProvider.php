@@ -1,22 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EaseAppPHP\EABlueprint\App\Providers;
 
-use Illuminate\Container\Container;
-
+use \Illuminate\Container\Container;
 use \EaseAppPHP\Foundation\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    protected $container;
-	
-	protected $serverRequest;
-	
-	protected $whoopsHandler;
-	
-	//protected $response;
-    
+    protected $container;	
+	protected $serverRequest;	
+	protected $whoopsHandler;    
      
     /**
      * Create a new Illuminate application instance.
@@ -24,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      * @param  string|null  $basePath
      * @return void
      */
-    public function __construct($container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }   
@@ -78,7 +73,6 @@ class AppServiceProvider extends ServiceProvider
 				//$whoopsHandler->pushHandler(new \Whoops\Handler\XmlResponseHandler());
 				//$whoopsHandler->pushHandler(new \Whoops\Handler\JsonResponseHandler());
 				$whoopsHandler->register();
-				
 				
 				//throw new \RuntimeException("Oopsie!");
 				

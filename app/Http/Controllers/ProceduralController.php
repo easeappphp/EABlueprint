@@ -17,6 +17,7 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     public function webHtmlOutput()
     {
         //Get the instance of \Odan\Session\PhpSession
+		$this->session = $this->container->get('\Odan\Session\PhpSession');
 		$ses = $this->container->get('\Odan\Session\PhpSession')->get('bar');
 		// You can now use your logger
 		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging done in ProceduralController - ");
@@ -28,15 +29,16 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 		//include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
-		
 		//$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		$viewPageFileName = $data->routeRelTemplateFolderPathPrefix . "/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		//echo "viewPageFileName: " . $viewPageFileName . "<br>";exit;
-	$requestTimer = $this->container->get('\SebastianBergmann\Timer\Timer');
-$duration = $requestTimer->stop();
-//echo "as seconds: " . $duration->asNanoseconds()/1000000000 . "<br>";
-$data->requestTimeInSeconds = $duration->asNanoseconds()/1000000000;
-
+		$data->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
+		$data->session = $this->container->get('\Odan\Session\PhpSession');
+		
+		$requestTimer = $this->container->get('\SebastianBergmann\Timer\Timer');
+		$duration = $requestTimer->stop();
+		//echo "as seconds: " . $duration->asNanoseconds()/1000000000 . "<br>";
+		$data->requestTimeInSeconds = $duration->asNanoseconds()/1000000000;
 
 		if (file_exists($viewPageFileName)) {
 			

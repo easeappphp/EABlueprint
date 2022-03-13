@@ -69,6 +69,7 @@ class EASessionAuthCheckMiddleware implements MiddlewareInterface
 					//USE DEFAULT POST LOGIN PAGE AS INPUT HERE
 					//$response = new RedirectResponse('https://google.com/');
 					//return $response;
+					
 				}
 				
 			} else if ($requiredRouteRelAuthCheckRequirements == "post-login") {
@@ -78,6 +79,7 @@ class EASessionAuthCheckMiddleware implements MiddlewareInterface
 					//USE LOGIN PAGE AS INPUT HERE
 					//$response = new RedirectResponse('https://yahoo.com/');
 					//return $response;
+					
 				}
 				
 			} else {

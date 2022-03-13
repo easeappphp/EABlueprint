@@ -183,7 +183,33 @@ return [
                 'method_name' => 'webHtmlOutput',
                 'with_middleware' => '',
                 'without_middleware' => ''
-	],								
+	],
+	'admin-dashboard' => [
+		'route_value' => '/admin/dashboard',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-dashboard.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+                'controller_type' => 'procedural',
+                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+                'method_name' => 'webHtmlOutput',
+                'with_middleware' => '',
+                'without_middleware' => ''
+	],
+	'admin-user-logout' => [
+		'route_value' => '/admin-user/logout',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-user-logout.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+                'controller_type' => 'procedural',
+                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+                'method_name' => 'webHtmlOutput',
+                'with_middleware' => '',
+                'without_middleware' => ''
+	],
 	'rest-login' => [
 		'route_value' => '/rest/login',
 		'auth_check_requirements' => 'pre-login',

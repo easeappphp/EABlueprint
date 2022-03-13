@@ -19,6 +19,7 @@ class EARouterMiddleware implements MiddlewareInterface
 	private $matchedRouteKey;
 	private $matchedRouteDetails;
 	private $session;
+	private $dbConn;
 	private $response;
 	
 	public function process(
@@ -40,9 +41,11 @@ class EARouterMiddleware implements MiddlewareInterface
 		$this->matchedRouteResponse =  $dataFromAppClass["matchedRouteResponse"];
 		$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
 		$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
+		$this->dbConn =  $dataFromAppClass["dbConn"];
 		$this->response = $dataFromAppClass["baseWebResponse"];
 		//echo "matched route key (in EARouterMiddleware): " . $this->matchedRouteKey . "<br>";
 		//exit;
+		
 		if ($this->container->has('\Odan\Session\PhpSession') === true) {
 		
 			$this->session =  $dataFromAppClass["session"];
@@ -54,33 +57,30 @@ class EARouterMiddleware implements MiddlewareInterface
 			$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in EARouterMiddleware - " . $ses);
 			
 		} else {
+			
 			//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
+			
 		}
-
-		$pageFilename = $this->matchedRouteDetails["page_filename"];
-		//echo "pageFilename: " . $pageFilename . "\n";
-		$pageRouteType = $this->matchedRouteDetails["route_type"];
-		//echo "pageRouteType: " . $pageRouteType . "\n";
-		$pageAllowedRequestMethods = $this->matchedRouteDetails["allowed_request_methods"];
-		//echo "pageAllowedRequestMethods: " . $pageAllowedRequestMethods . "\n";
-		$implodedPageAllowedRequestMethods = implode(", ",$pageAllowedRequestMethods);
-		//echo "implodedPageAllowedRequestMethods: " . $implodedPageAllowedRequestMethods . "\n";
 		
+		$pageFilename = $this->matchedRouteDetails["page_filename"];
+		$pageRouteType = $this->matchedRouteDetails["route_type"];
+		$pageAllowedRequestMethods = $this->matchedRouteDetails["allowed_request_methods"];
+		$implodedPageAllowedRequestMethods = implode(", ",$pageAllowedRequestMethods);
 		$pageControllerType = $this->matchedRouteDetails["controller_type"];
-		//echo "pageControllerType: " . $pageControllerType . "\n";
 		$pageControllerClassName = $this->matchedRouteDetails["controller_class_name"];
-		//echo "pageControllerClassName: " . $pageControllerClassName . "\n";
 		$pageMethodName = $this->matchedRouteDetails["method_name"];
-		//echo "pageMethodName: " . $pageMethodName . "\n";
 		$pageWithMiddleware = $this->matchedRouteDetails["with_middleware"];
-		//echo "pageWithMiddleware: " . $pageWithMiddleware . "\n";
 		$pageWithoutMiddleware = $this->matchedRouteDetails["without_middleware"];
-		//echo "pageWithoutMiddleware: " . $pageWithoutMiddleware . "\n";
-		if($pageWithMiddleware != ""){
+		
+		if ($pageWithMiddleware != "") {
+			
 			$pageWithMiddlewareArray = explode(",", $pageWithMiddleware);
+			
 		}
-		if($pageWithoutMiddleware != ""){
+		if ($pageWithoutMiddleware != "") {
+			
 			$pageWithoutMiddlewareArray = explode(",", $pageWithoutMiddleware);
+			
 		}
 		
 		if ((isset($this->matchedRouteKey)) && ($this->matchedRouteKey != "header-response-only-404-not-found")) {
@@ -90,6 +90,7 @@ class EARouterMiddleware implements MiddlewareInterface
 				if ((isset($pageControllerType)) && (($pageControllerType == "procedural") || ($pageControllerType == "oop-mapped"))) {
 					
 					if (class_exists($pageControllerClassName)) {
+						
 						$matchedController = new $pageControllerClassName($this->container);
 					
 						$this->container->instance('MatchedControllerName', $matchedController);
@@ -125,7 +126,9 @@ class EARouterMiddleware implements MiddlewareInterface
 				
 				//Add Allow header in the response in 405 method not allowed scenario example: Allow: GET, POST, HEAD
 				if (!$this->response->hasHeader('Allow')) {
+					
 					$this->response = $this->response->withHeader('Allow', $implodedPageAllowedRequestMethods);
+					
 				}
 				
 				//Pass the request to the next middleware
@@ -134,6 +137,7 @@ class EARouterMiddleware implements MiddlewareInterface
 			}
 			
 		} else {
+			
 			//do automated check for oop controller enumeration
 			
 			//if ("success" == "success") {
@@ -160,7 +164,6 @@ class EARouterMiddleware implements MiddlewareInterface
 		
 		//Send Response
 		return $this->response;
-		
 		
     }
 }
