@@ -1,3 +1,9 @@
-
- <h1>Admin Dashboard</h1>
- <a href="https://blueprint-dev.easeapp.org/admin-user/logout">Logout</a>
+<section class="content">
+	<div class="container-fluid">
+		<div class="block-header">
+			<h2>Admin Dashboard</h2>
+			<a href="<?php echo htmlspecialchars($app_url, ENT_QUOTES); ?>admin-user/logout">Logout</a>
+		</div>
+	</div>
+</section>
+ 

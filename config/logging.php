@@ -25,19 +25,19 @@ return [
         
 		'single' => [
             'driver' => 'single',
-            'path' => '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/storage/logs/easeapp.log',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'path' => $this->serverRequest->getServerParams()['LOGGING_DRIVER_SINGLE'],
+            'level' => $this->serverRequest->getServerParams()['LOG_LEVEL'],
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/storage/logs/easeapp.log',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'path' => $this->serverRequest->getServerParams()['LOGGING_DRIVER_DAILY'],
+            'level' => $this->serverRequest->getServerParams()['LOG_LEVEL'],
             'days' => 14,
         ],
 
         'emergency' => [
-            'path' => '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/storage/logs/easeapp-emergency.log',
+            'path' => $this->serverRequest->getServerParams()['LOGGING_DRIVER_EMERGENCY'],
         ],
     ],
 

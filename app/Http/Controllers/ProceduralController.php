@@ -4,11 +4,7 @@ declare(strict_types=1);
 namespace EaseAppPHP\EABlueprint\App\Http\Controllers;
 
 use Illuminate\Container\Container;
-
-use \EaseAppPHP\EABlueprint\App\Models\AllUserDetails\Get;
-
 use \EaseAppPHP\Foundation\BaseWebModel;
-
 use \EaseAppPHP\Foundation\BaseWebView;
 
 class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebController
@@ -16,16 +12,32 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     
     public function webHtmlOutput()
     {
-        //Get the instance of \Odan\Session\PhpSession
+        $data = new \StdClass;
+		//$data->routeRelTemplateContext and $data->routeRelTemplateFolderPathPrefix to be defined for web applications with route_type = frontend-web-app | backend-web-app | web-app-common
+		if ($this->matchedRouteDetails["route_type"] == "frontend-web-app") {
+			
+			$data->routeRelTemplateContext = "frontend";
+			$data->routeRelTemplateFolderPathPrefix = $this->config["mainconfig"]["route_rel_templates_folder_path_prefix"] . '/' . $this->config["mainconfig"]["chosen_frontend_template"];			
+			
+		} elseif ($this->matchedRouteDetails["route_type"] == "backend-web-app") {
+			
+			$data->routeRelTemplateContext = "backend";
+			$data->routeRelTemplateFolderPathPrefix = $this->config["mainconfig"]["route_rel_templates_folder_path_prefix"] . '/' . $this->config["mainconfig"]["chosen_template"];
+			
+		} else {
+			
+			//$data->routeRelTemplateContext and $data->routeRelTemplateFolderPathPrefix to be defined
+			
+		}
+		
+		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
+
+		//Get the instance of \Odan\Session\PhpSession
 		$this->session = $this->container->get('\Odan\Session\PhpSession');
-		$ses = $this->container->get('\Odan\Session\PhpSession')->get('bar');
+		
 		// You can now use your logger
 		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging done in ProceduralController - ");
 		
-		$this->container->get('\Monolog\Logger\channel-myLogger')->info("logging session done in ProceduralController - " . $ses);
-		
-		
-		//echo "before models<br>";
 		//include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]) . ".php";
 		include "../app/Models/ProceduralModels/" . $this->createViewFileNameWithPath($this->matchedRouteDetails["page_filename"]);
 		
@@ -34,6 +46,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 		//echo "viewPageFileName: " . $viewPageFileName . "<br>";exit;
 		$data->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
 		$data->session = $this->container->get('\Odan\Session\PhpSession');
+		$data->app_url = $this->container->get('EAConfig')->getDotSeparatedKeyValue("mainconfig.app_url");
+		
 		
 		$requestTimer = $this->container->get('\SebastianBergmann\Timer\Timer');
 		$duration = $requestTimer->stop();

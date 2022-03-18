@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => $this->serverRequest->getServerParams()['SESSION_DRIVER'],
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => $this->serverRequest->getServerParams()['SESSION_LIFETIME'],
 
     'expire_on_close' => false,
 
@@ -59,7 +59,7 @@ return [
     |
     */
 
-    'files' => '/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/storage/framework/sessions',
+    'files' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'storage/framework/sessions',
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION'),
+    'connection' => $this->serverRequest->getServerParams()['SESSION_CONNECTION'],
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ return [
     |
     */
 
-    'store' => env('SESSION_STORE'),
+    'store' => $this->serverRequest->getServerParams()['SESSION_STORE'],
 
     /*
     |--------------------------------------------------------------------------
@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => $this->serverRequest->getServerParams()['SESSION_DOMAIN'],
 
     /*
     |--------------------------------------------------------------------------
@@ -168,7 +168,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    'secure' => $this->serverRequest->getServerParams()['SESSION_SECURE_COOKIE'],
 
     /*
     |--------------------------------------------------------------------------

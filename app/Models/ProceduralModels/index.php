@@ -1,5 +1,5 @@
 <?php
-
+/* 
 $data = new StdClass;
 //$data->routeRelTemplateContext and $data->routeRelTemplateFolderPathPrefix to be defined for web applications with route_type = frontend-web-app | backend-web-app | web-app-common
 if ($this->matchedRouteDetails["route_type"] == "frontend-web-app") {
@@ -16,7 +16,7 @@ if ($this->matchedRouteDetails["route_type"] == "frontend-web-app") {
 	
 	//$data->routeRelTemplateContext and $data->routeRelTemplateFolderPathPrefix to be defined
 	
-}
+} */
 			
 $data->name = "EaseApp";
 $this->session->set('license', 'MIT');

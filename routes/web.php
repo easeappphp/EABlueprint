@@ -407,7 +407,7 @@ return [
 	],
 	'backend-procedural-get-all-user-details' => [
 		'route_value' => '/backend/procedural/all-user-details/get',
-		'auth_check_requirements' => 'none',
+		'auth_check_requirements' => 'post-login',
 		'page_filename' => 'index.php',
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
@@ -420,7 +420,7 @@ return [
 	],
 	'frontend-procedural-get-all-user-details' => [
 		'route_value' => '/frontend/procedural/all-user-details/get',
-		'auth_check_requirements' => 'none',
+		'auth_check_requirements' => 'post-login',
 		'page_filename' => 'index.php',
 		'redirect_to' => '',
 		'route_type' => 'frontend-web-app',

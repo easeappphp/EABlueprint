@@ -50,13 +50,55 @@ $requestTimer->start();
 $whoops = new \Whoops\Run();
 $container->instance('\Whoops\Run', $whoops);
 
+
+/*
+*--------------------------------------------------------------------------
+* Define Folder path of the .env file
+*--------------------------------------------------------------------------
+*
+*/
+$envFilePath = dirname(dirname(__FILE__));
+
+/*
+*--------------------------------------------------------------------------
+* Load config data from .env file
+*--------------------------------------------------------------------------
+*
+*/
+$dotenv = \Dotenv\Dotenv::createImmutable($envFilePath);
+$dotenv->load();
+
+/*
+*--------------------------------------------------------------------------
+* Create a Server Request using Laminas\Diactoros PSR-7 Library
+*--------------------------------------------------------------------------
+* This returns new ServerRequest instance, using values from superglobals.
+* Attach the ServerRequest instance to the container.
+*
+*/
+$serverRequestInstance = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
+$container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
+$serverRequest = $container->get('\Laminas\Diactoros\ServerRequestFactory'); 
+
+/*
+*--------------------------------------------------------------------------
+* Define Default timezone
+*--------------------------------------------------------------------------
+*
+*/
+if (function_exists("date_default_timezone_set")) {
+		
+	date_default_timezone_set($serverRequest->getServerParams()['TIMEZONE']);
+
+}
+
 /*
 *--------------------------------------------------------------------------
 * Attach the Config class instance to the container by defining the Class Name as instance reference in the container
 *--------------------------------------------------------------------------
 *
 */
-$eaConfig = new EAConfig();
+$eaConfig = new EAConfig($container);
 $container->instance('EAConfig', $eaConfig);
 
 /*
@@ -103,18 +145,6 @@ $config = $container->get('config');
 
 /*
 *--------------------------------------------------------------------------
-* Define Default timezone
-*--------------------------------------------------------------------------
-*
-*/
-if (function_exists("date_default_timezone_set")) {
-		
-	date_default_timezone_set($container->get('config')["mainconfig"]["timezone"]);
-
-}
-	
-/*
-*--------------------------------------------------------------------------
 * Create Dot separated Config array
 *--------------------------------------------------------------------------
 * Attach dot separated config array to the container.
@@ -122,40 +152,7 @@ if (function_exists("date_default_timezone_set")) {
 */
 $dotSeparatedKeyBasedConfigArrayData = $container->get('EAConfig')->generateDotSeparatedKeyBasedConfigArray($collectedConfigData, $prefix = '');
 $container->instance('dotSeparatedConfig', $dotSeparatedKeyBasedConfigArrayData);
-/* echo "<pre>"; 
-echo $container->get('EAConfig')->getDotSeparatedKeyValue("session.driver");
-print_r($container->get('EAConfig')->getDotSeparatedKeyValue("hashing"));
-echo "<br><hr><br>";
-echo $eaConfig->getDotSeparatedKeyValue("session.driver");
-print_r($eaConfig->getDotSeparatedKeyValue("hashing"));   */
 
-/*
-*--------------------------------------------------------------------------
-* Define Folder path of the .env file
-*--------------------------------------------------------------------------
-*
-*/
-$envFilePath = dirname(dirname(__FILE__));
-
-/*
-*--------------------------------------------------------------------------
-* Load config data from .env file
-*--------------------------------------------------------------------------
-*
-*/
-$dotenv = \Dotenv\Dotenv::createImmutable($envFilePath);
-$dotenv->load();
-
-/*
-*--------------------------------------------------------------------------
-* Create a Server Request using Laminas\Diactoros PSR-7 Library
-*--------------------------------------------------------------------------
-* This returns new ServerRequest instance, using values from superglobals.
-* Attach the ServerRequest instance to the container.
-*
-*/
-$serverRequestInstance = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
-$container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
 
 /*
 *--------------------------------------------------------------------------
@@ -184,7 +181,7 @@ Log::channel($container, 'emergency')->emergency('This logs to the file handler 
 *
 */
 // Create some handlers
-$stream = new StreamHandler('/home/blueprint-easeapp-dev/webapps/app-blueprint-dev/storage/logs/easeapp.log', Logger::DEBUG);
+$stream = new StreamHandler($serverRequest->getServerParams()['LOGGING_DRIVER_SINGLE'], Logger::DEBUG);
 $firephp = new FirePHPHandler();
 
 // Create the main logger of the app

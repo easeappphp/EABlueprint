@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'EaseApp-PHP'),
+    'name' => $this->serverRequest->getServerParams()['APP_NAME'],
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => $this->serverRequest->getServerParams()['APP_ENV'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', true),
+    'debug' => (bool) $this->serverRequest->getServerParams()['APP_DEBUG'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -50,20 +50,8 @@ return [
     |
     */
 
-    'hostname' => env('APP_HOSTNAME', 'localhost'),
-    /*
-    |--------------------------------------------------------------------------
-    | Application URL
-    |--------------------------------------------------------------------------
-    |
-    | This URL shows the default web root.
-    |
-    */
-
-    'url' => env('APP_URL', 'http://localhost'),
-
-    'asset_url' => env('ASSET_URL', null),
-	
+    'hostname' => $this->serverRequest->getServerParams()['APP_HOSTNAME'],
+    
 	/*
     |--------------------------------------------------------------------------
     | Base Path
@@ -73,7 +61,7 @@ return [
     |
     */
 
-    'base_path' => env('APP_BASE_PATH'),
+    'base_path' => $this->serverRequest->getServerParams()['APP_BASE_PATH'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -84,14 +72,73 @@ return [
     |
     */
 
-    'web_root_path' => env('APP_WEB_ROOT_PATH'),
+    'web_root_path' => $this->serverRequest->getServerParams()['APP_WEB_ROOT_PATH'],
 	
-    'siteroot_basedir' => env('APP_BASE_PATH') . 'public_html',
-    'siteroot_basedir_command_line' => env('APP_BASE_PATH') . 'public_html',
-    'siteroot_basedir_command_line_dev' => env('APP_BASE_PATH') . 'public_html',
-    'site_home_path_full' => env('APP_BASE_PATH'),
-    'site_home_path_full_dev' => env('APP_BASE_PATH'),
+    'siteroot_basedir' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'public_html',
+    'siteroot_basedir_command_line' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'public_html',
+    'siteroot_basedir_command_line_dev' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'public_html',
+    'site_home_path_full' => $this->serverRequest->getServerParams()['APP_BASE_PATH'],
+    'site_home_path_full_dev' => $this->serverRequest->getServerParams()['APP_BASE_PATH'],
 	
+	/*
+    |--------------------------------------------------------------------------
+    | Chosen Template (Backend)
+    |--------------------------------------------------------------------------
+    |
+    | This is the Chosen Backend Template Name.
+    |
+    */
+
+    'chosen_template' => 'default-admin',
+	
+	/*
+    |--------------------------------------------------------------------------
+    | Chosen Template (Frontend)
+    |--------------------------------------------------------------------------
+    |
+    | This is the Chosen Frontend Template Name.
+    |
+    */
+
+    'chosen_frontend_template' => 'default-frontend',
+	
+	/*
+    |--------------------------------------------------------------------------
+    | Route rel Template Context - Common Page Scenario in both Frontend / Backend
+    |--------------------------------------------------------------------------
+    |
+    | This is Route related Template Context, that will have to be defined in Page Model, so routes/pages, that has route_type = web-app-common, can be loaded in Frontend /Backend | appropriately.
+	| Values include: frontend | backend
+	| 
+	| This applies specifically to 404 Not Found, 403 Forbidden etc... HTTP Error Code Scenarios, in Frontend / backend Web Application Context.
+    |
+    */
+
+    'route_rel_template_context' => '',
+	
+	/*
+    |--------------------------------------------------------------------------
+    | Route related Template Folder Path Prefix
+    |--------------------------------------------------------------------------
+    |
+    | This is the Folder name of the templates where all Views will be placed under different classfications (frontend & backend)
+    |
+    */
+
+    'route_rel_templates_folder_path_prefix' => __DIR__.'/../public/templates',
+	
+	/*
+    |--------------------------------------------------------------------------
+    | Application URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL shows the default web root.
+    |
+    */
+
+    'app_url' => $this->serverRequest->getServerParams()['APP_URL'],
+
+    'asset_url' => null,
 	
 	/*
     |--------------------------------------------------------------------------
@@ -102,7 +149,7 @@ return [
     |
     */
 
-    'app_generated_enc_auth_keys_foldername' => env('APP_GENERATED_ENC_AUTH_KEYS_FOLDERNAME'),
+    'app_generated_enc_auth_keys_foldername' => $this->serverRequest->getServerParams()['APP_GENERATED_ENC_AUTH_KEYS_FOLDERNAME'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -113,15 +160,15 @@ return [
     |
     */
 
-	'app_symmetric_encryption_key_filename' => env('APP_SYMMETRIC_ENCRYPTION_KEY_FILENAME'),
-	'app_symmetric_authentication_key_filename' => env('APP_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'),
-	'app_file_rel_symmetric_encryption_key_filename' => env('APP_FILE_REL_SYMMETRIC_ENCRYPTION_KEY_FILENAME'),
-	'app_file_rel_symmetric_authentication_key_filename' => env('APP_FILE_REL_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'),
-	'app_asymmetric_anonymous_encryption_keypair_filename' => env('APP_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'),
-	'app_asymmetric_authentication_keypair_filename' => env('APP_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'),
-	'app_file_rel_asymmetric_anonymous_encryption_keypair_filename' => env('APP_FILE_REL_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'),
-	'app_file_rel_asymmetric_authentication_keypair_filename' => env('APP_FILE_REL_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'),
-	'app_current_crypto_key_version' => env('APP_CURRENT_CRYPTO_KEY_VERSION'),
+	'app_symmetric_encryption_key_filename' => $this->serverRequest->getServerParams()['APP_SYMMETRIC_ENCRYPTION_KEY_FILENAME'],
+	'app_symmetric_authentication_key_filename' => $this->serverRequest->getServerParams()['APP_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'],
+	'app_file_rel_symmetric_encryption_key_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_SYMMETRIC_ENCRYPTION_KEY_FILENAME'],
+	'app_file_rel_symmetric_authentication_key_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'],
+	'app_asymmetric_anonymous_encryption_keypair_filename' => $this->serverRequest->getServerParams()['APP_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'],
+	'app_asymmetric_authentication_keypair_filename' => $this->serverRequest->getServerParams()['APP_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'],
+	'app_file_rel_asymmetric_anonymous_encryption_keypair_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'],
+	'app_file_rel_asymmetric_authentication_keypair_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'],
+	'app_current_crypto_key_version' => $this->serverRequest->getServerParams()['APP_CURRENT_CRYPTO_KEY_VERSION'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -140,12 +187,12 @@ return [
     */
 
     'session_based_authentication' => '1',
-	'active_session_backend' => env('SESSION_DRIVER', 'file'),
-	'files_based_session_storage_location_choice' => env('SESSION_STORAGE_LOCATION_SETTING', 'custom-location'),
-	'files_based_session_storage_custom_path' => env('APP_BASE_PATH') . 'sessions',
+	'active_session_backend' => $this->serverRequest->getServerParams()['SESSION_DRIVER'],
+	'files_based_session_storage_location_choice' => $this->serverRequest->getServerParams()['SESSION_STORAGE_LOCATION_SETTING'],
+	'files_based_session_storage_custom_path' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'sessions',
 	
 	'single_redis_server_session_backend_host' => 'tcp://localhost:6379',
-	'session_lifetime' => env('SESSION_LIFETIME', '86400'),
+	'session_lifetime' => $this->serverRequest->getServerParams()['SESSION_LIFETIME'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -180,7 +227,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => $this->serverRequest->getServerParams()['TIMEZONE'],
 
     /*
     |--------------------------------------------------------------------------
@@ -264,13 +311,13 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('MYSQL_DB_URL'),
-            'host' => env('MYSQL_DB_HOST', 'localhost'),
-            'port' => env('MYSQL_DB_PORT', '3306'),
-            'database' => env('MYSQL_DB_DATABASE', 'ccc_dev1'),
-            'username' => env('MYSQL_DB_USERNAME', 'ccc_dev'),
-            'password' => env('MYSQL_DB_PASSWORD', 'ccc_dev'),
-            'unix_socket' => env('MYSQl_DB_SOCKET', ''),
+            'url' => $this->serverRequest->getServerParams()['MYSQL_DB_URL'],
+            'host' => $this->serverRequest->getServerParams()['MYSQL_DB_HOST'],
+            'port' => $this->serverRequest->getServerParams()['MYSQL_DB_PORT'],
+            'database' => $this->serverRequest->getServerParams()['MYSQL_DB_DATABASE'],
+            'username' => $this->serverRequest->getServerParams()['MYSQL_DB_USERNAME'],
+            'password' => $this->serverRequest->getServerParams()['MYSQL_DB_PASSWORD'],
+            'unix_socket' => $this->serverRequest->getServerParams()['MYSQl_DB_SOCKET'],
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -318,53 +365,6 @@ return [
 	],
 	
 	/*
-    |--------------------------------------------------------------------------
-    | Chosen Template (Backend)
-    |--------------------------------------------------------------------------
-    |
-    | This is the Chosen Backend Template Name.
-    |
-    */
-
-    'chosen_template' => 'default-admin',
-	
-	/*
-    |--------------------------------------------------------------------------
-    | Chosen Template (Frontend)
-    |--------------------------------------------------------------------------
-    |
-    | This is the Chosen Frontend Template Name.
-    |
-    */
-
-    'chosen_frontend_template' => 'default-frontend',
-	
-	/*
-    |--------------------------------------------------------------------------
-    | Route rel Template Context - Common Page Scenario in both Frontend / Backend
-    |--------------------------------------------------------------------------
-    |
-    | This is Route related Template Context, that will have to be defined in Page Model, so routes/pages, that has route_type = web-app-common, can be loaded in Frontend /Backend | appropriately.
-	| Values include: frontend | backend
-	| 
-	| This applies specifically to 404 Not Found, 403 Forbidden etc... HTTP Error Code Scenarios, in Frontend / backend Web Application Context.
-    |
-    */
-
-    'route_rel_template_context' => '',
-	
-	/*
-    |--------------------------------------------------------------------------
-    | Route related Template Folder Path Prefix
-    |--------------------------------------------------------------------------
-    |
-    | This is the Folder name of the templates where all Views will be placed under different classfications (frontend & backend)
-    |
-    */
-
-    'route_rel_templates_folder_path_prefix' => __DIR__.'/../public/templates',
-	
-    /*
     |--------------------------------------------------------------------------
     | Other Config
     |--------------------------------------------------------------------------
@@ -418,13 +418,13 @@ return [
     |
     */
 
-    'vonage_communications_api_key' => env('VONAGE_COMMUNICATIONS_API_KEY'),
-	'vonage_communications_api_secret1' => env('VONAGE_COMMUNICATIONS_API_SECRET1'),
-	'vonage_communications_api_secret2' => env('VONAGE_COMMUNICATIONS_API_SECRET2'),
-	'vonage_communications_application_name' => env('VONAGE_COMMUNICATIONS_APPLICATION_NAME'),
-	'vonage_communications_application_id' => env('VONAGE_COMMUNICATIONS_APPLICATION_ID'),
-	'vonage_communications_application_rel_private_key_filename' => env('VONAGE_COMMUNICATIONS_APPLICATION_REL_PRIVATE_KEY_FILENAME'),
-    
+   /*  'vonage_communications_api_key' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_API_KEY'],
+	'vonage_communications_api_secret1' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_API_SECRET1'],
+	'vonage_communications_api_secret2' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_API_SECRET2'],
+	'vonage_communications_application_name' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_APPLICATION_NAME'],
+	'vonage_communications_application_id' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_APPLICATION_ID'],
+	'vonage_communications_application_rel_private_key_filename' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_APPLICATION_REL_PRIVATE_KEY_FILENAME'],
+     */
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -486,7 +486,7 @@ return [
     |
     */
 
-    'app_site_status' => env('APP_SITE_STATUS', 'LIVE'),
+    'app_site_status' => $this->serverRequest->getServerParams()['APP_SITE_STATUS'],
     
 	
 ];
