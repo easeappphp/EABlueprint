@@ -67,8 +67,8 @@ class EASessionAuthCheckMiddleware implements MiddlewareInterface
 				if ($this->session->get('loggedin') == "yes") {
 					
 					//USE DEFAULT POST LOGIN PAGE AS INPUT HERE
-					//$response = new RedirectResponse('https://google.com/');
-					//return $response;
+					$response = new RedirectResponse($this->container->get('APP_URL') . 'admin/dashboard');
+					return $response;
 					
 				}
 				
@@ -77,8 +77,8 @@ class EASessionAuthCheckMiddleware implements MiddlewareInterface
 				if ($this->session->get('loggedin') == "no") {
 					
 					//USE LOGIN PAGE AS INPUT HERE
-					//$response = new RedirectResponse('https://yahoo.com/');
-					//return $response;
+					$response = new RedirectResponse($this->container->get('APP_URL') . 'admin-user/login');
+					return $response;
 					
 				}
 				

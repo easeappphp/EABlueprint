@@ -80,14 +80,9 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
         
 		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
-		$dataObject = $getModel->index();
+		$dataObject = $getModel->json();
 		
-		$data = array("name"=>"srirama","place"=>"ayodhya, near Saryu River"); 
-		/*  $data = new \stdClass;
-		$data->name = "srirama";
-		$data->place ="ayodhya";  */
-		
-		$result = $this->response->setJson($data, 200);
+		$result = $this->response->setJson($dataObject->response, 200);
 		
 		return $result;
 		
@@ -98,7 +93,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
         
 		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
-		$dataObject = $getModel->index();
+		$dataObject = $getModel->xml();
 		
 		$xml='<?xml version="1.0" encoding="UTF-8"?><note>
 		<to>Ram</to>
@@ -107,7 +102,7 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
 		<body>To return as promised</body>
 		</note>';
 		
-		$result = $this->response->setXml($xml, 200);
+		$result = $this->response->setXml($dataObject->response, 200);
 		
 		return $result;
 		
@@ -118,14 +113,13 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
         
 		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
-		$dataObject = $getModel->index();
+		$data = $getModel->json();
 		
-		$data = array("name"=>"srirama","place"=>"ayodhya"); 
-		/*  $data = new \stdClass;
-		$data->name = "srirama";
-		$data->place ="ayodhya";  */
-		
-		$result = $this->response->setJson($data, 200);
+		if ((isset($data->response)) && ((is_object($data->response)) || (is_array($data->response)))) {
+			
+			$result = $this->response->setJson($data->response, 200);
+			
+		}
 		
 		return $result;
 		
@@ -136,16 +130,13 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
         
 		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
-		$dataObject = $getModel->index();
+		$data = $getModel->xml();
 		
-		$xml='<?xml version="1.0" encoding="UTF-8"?><note>
-		<to>Ram</to>
-		<from>Bharat</from>
-		<heading>Reminder</heading>
-		<body>To return as promised</body>
-		</note>';
-		
-		$result = $this->response->setXml($xml, 200);
+		if ((isset($data->response)) && (is_string($data->response))) {
+			
+			$result = $this->response->setXml($data->response, 200);
+			
+		}
 		
 		return $result;
 		
@@ -156,17 +147,14 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
         
 		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
-		$dataObject = $getModel->index();
+		$data = $getModel->html();
 		
-		$renderedView = "<!DOCTYPE html>
-<html>
- <body>
- <h1>Ram</h1>
- <div>Ayodhya</div>
- </body>
-</html>";
+		if ((isset($data->response)) && (is_string($data->response))) {
+			
+			$result = $this->response->setHtml($data->response, 200);
+			
+		}
 		
-		$result = $this->response->setHtml($renderedView, 200);
 		
 		return $result;
 		
@@ -177,9 +165,13 @@ class GetController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\WebCont
         
 		$getModel = new Get($this->container, $this->config, $this->matchedRouteDetails, $this->queryParams);
 		
-		$dataObject = $getModel->index();
+		$data = $getModel->text();
 		
-		$result = $this->response->setText("SriRama", 200);
+		if ((isset($data->response)) && (is_string($data->response))) {
+			
+			$result = $this->response->setText($data->response, 200);
+			
+		}
 		
 		return $result;
 		

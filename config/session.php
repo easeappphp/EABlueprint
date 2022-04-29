@@ -1,7 +1,5 @@
 <?php
 
-//use Illuminate\Support\Str;
-
 return [
 
     /*
@@ -18,7 +16,7 @@ return [
     |
     */
 
-    'driver' => $this->serverRequest->getServerParams()['SESSION_DRIVER'],
+    'driver' => $_ENV['SESSION_DRIVER'],
 
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => $this->serverRequest->getServerParams()['SESSION_LIFETIME'],
+    'lifetime' => $_ENV['SESSION_LIFETIME'],
 
     'expire_on_close' => false,
 
@@ -59,7 +57,7 @@ return [
     |
     */
 
-    'files' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'storage/framework/sessions',
+    'files' => $_ENV['APP_BASE_PATH'] . 'storage/framework/sessions',
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +70,7 @@ return [
     |
     */
 
-    'connection' => $this->serverRequest->getServerParams()['SESSION_CONNECTION'],
+    'connection' => $_ENV['SESSION_CONNECTION'],
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +98,7 @@ return [
     |
     */
 
-    'store' => $this->serverRequest->getServerParams()['SESSION_STORE'],
+    'store' => $_ENV['SESSION_STORE'],
 
     /*
     |--------------------------------------------------------------------------
@@ -155,7 +153,7 @@ return [
     |
     */
 
-    'domain' => $this->serverRequest->getServerParams()['SESSION_DOMAIN'],
+    'domain' => $_ENV['SESSION_DOMAIN'],
 
     /*
     |--------------------------------------------------------------------------
@@ -168,7 +166,7 @@ return [
     |
     */
 
-    'secure' => $this->serverRequest->getServerParams()['SESSION_SECURE_COOKIE'],
+    'secure' => $_ENV['SESSION_SECURE_COOKIE'],
 
     /*
     |--------------------------------------------------------------------------

@@ -70,6 +70,25 @@ $dotenv->load();
 
 /*
 *--------------------------------------------------------------------------
+* Attach Basepath and other info to the Container
+*--------------------------------------------------------------------------
+*
+*/
+$container->instance('APP_NAME', $_ENV["APP_NAME"]);
+$container->instance('APP_ENV', $_ENV["APP_ENV"]);
+$container->instance('APP_DEBUG', $_ENV["APP_DEBUG"]);
+$container->instance('APP_HOSTNAME', $_ENV["APP_HOSTNAME"]);
+$container->instance('APP_URL', $_ENV["APP_URL"]);
+$container->instance('APP_BASE_PATH', $_ENV["APP_BASE_PATH"]);
+$container->instance('APP_WEB_ROOT_PATH', $_ENV["APP_WEB_ROOT_PATH"]);
+$container->instance('APP_SITE_STATUS', $_ENV["APP_SITE_STATUS"]);
+$container->instance('TIMEZONE', $_ENV["TIMEZONE"]);
+
+$routes_folder_Path = $container->get('APP_BASE_PATH') . 'routes';
+$container->instance('ROUTES_FOLDER_PATH', $routes_folder_Path);
+
+/*
+*--------------------------------------------------------------------------
 * Create a Server Request using Laminas\Diactoros PSR-7 Library
 *--------------------------------------------------------------------------
 * This returns new ServerRequest instance, using values from superglobals.

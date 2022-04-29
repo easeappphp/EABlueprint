@@ -7,11 +7,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'web-app-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'forbidden' => [
 		'auth_check_requirements' => 'none',
@@ -19,11 +19,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'web-app-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'bad-request' => [
 		'auth_check_requirements' => 'none',
@@ -31,11 +31,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'web-app-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'unauthorized' => [
 		'auth_check_requirements' => 'none',
@@ -43,11 +43,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'web-app-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'method-not-allowed' => [
 		'auth_check_requirements' => 'none',
@@ -55,11 +55,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'web-app-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'not-acceptable' => [
 		'auth_check_requirements' => 'none',
@@ -67,11 +67,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'web-app-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'default-home' => [
 		'route_value' => '/',
@@ -80,11 +80,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'frontend-web-app',
 		'allowed_request_methods' => ['POST','HEAD','GET'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => 'webHtmlOutput',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'default-home1' => [
 		'route_value' => '/index.php',
@@ -93,11 +93,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'frontend-web-app',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'header-response-only-400-bad-request' => [
 		'auth_check_requirements' => 'none',
@@ -105,11 +105,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'header-response-only-401-unauthorized' => [
 		'auth_check_requirements' => 'none',
@@ -117,11 +117,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'header-response-only-403-forbidden' => [
 		'auth_check_requirements' => 'none',
@@ -129,11 +129,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'header-response-only-404-not-found' => [
 		'auth_check_requirements' => 'none',
@@ -141,11 +141,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => 'auth,hostnamecheck',
-                'without_middleware' => 'startsession'
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => 'auth,hostnamecheck',
+		'without_middleware' => 'startsession'
 	],
 	'header-response-only-405-method-not-allowed' => [
 		'auth_check_requirements' => 'none',
@@ -153,11 +153,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'header-response-only-406-not-acceptable' => [
 		'auth_check_requirements' => 'none',
@@ -165,11 +165,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'ajax-web-service-common',
 		'allowed_request_methods' => ['ANY'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'admin-user-login' => [
 		'route_value' => '/admin-user/login',
@@ -178,11 +178,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
 		'allowed_request_methods' => ['GET','POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => 'webHtmlOutput',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'admin-dashboard' => [
 		'route_value' => '/admin/dashboard',
@@ -191,11 +191,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
 		'allowed_request_methods' => ['GET','POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => 'webHtmlOutput',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'admin-user-logout' => [
 		'route_value' => '/admin-user/logout',
@@ -204,11 +204,389 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
 		'allowed_request_methods' => ['GET','POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => 'webHtmlOutput',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-target-activities-list' => [
+		'route_value' => '/admin-panel/adss/target-activities/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-target-activities-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-target-activity-add' => [
+		'route_value' => '/admin-panel/adss/target-activity/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-target-activity-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-triggering-methods-list' => [
+		'route_value' => '/admin-panel/adss/triggering-methods/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-triggering-methods-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-triggering-method-add' => [
+		'route_value' => '/admin-panel/adss/triggering-method/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-triggering-method-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-datacenters-list' => [
+		'route_value' => '/admin-panel/datacenters/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-datacenters-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-datacenter-add' => [
+		'route_value' => '/admin-panel/datacenter/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-datacenter-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	
+	'admin-panel-dns-record-type-add' => [
+		'route_value' => '/admin-panel/dns-record-type/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-dns-record-type-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-applications-list' => [
+		'route_value' => '/admin-panel/applications/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-applications-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-application-on-board' => [
+		'route_value' => '/admin-panel/application/on-board',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-application-on-board.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-application-info-edit' => [
+		'route_value' => '/admin-panel/app-id/:routing_eng_var_3/application-info/edit',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-application-info-edit.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-app-deployment-switchover-steps-list' => [
+		'route_value' => '/admin-panel/app-deployment/switchover-steps/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-app-deployment-switchover-steps-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-app-deployment-switchover-step-add' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-app-deployment-switchover-step-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-ec-commands-list' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/commands/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-ec-commands-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-ec-command-add' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/command/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-ec-command-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-es-scripts-list' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/scripts/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-es-scripts-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-es-script-add' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/script/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-es-script-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-dns-record-types-list' => [
+		'route_value' => '/admin-panel/dns-record-types/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-dns-record-types-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-udzrr-dns-records-list' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/dns-records/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-udzrr-dns-records-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-udzrr-dns-record-add' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/dns-record/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-udzrr-dns-record-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-uhfe-hosts-file-entries-list' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/hosts-file-entries/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-uhfe-hosts-file-entries-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-uhfe-hosts-file-entry-add' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/hosts-file-entry/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-uhfe-hosts-file-entry-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-uhfe-hosts-file-dmgs-list' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/hosts-file-dmgs/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-uhfe-hosts-file-dmgs-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-ta-uhfe-hosts-file-dmg-add' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/hosts-file-dmg/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-ta-uhfe-hosts-file-dmg-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-target-servers-list' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/target-activity-id/:routing_eng_var_8/target-servers/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-target-servers-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-adss-target-server-add' => [
+		'route_value' => '/admin-panel/app-deployment/app-id/:routing_eng_var_4/switchover-step/:routing_eng_var_6/target-activity-id/:routing_eng_var_8/target-server/add',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-adss-target-server-add.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-app-switchover-schedules-list' => [
+		'route_value' => '/admin-panel/app/switchover/schedules/list',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-app-switchover-schedules-list.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-app-switchover-schedule' => [
+		'route_value' => '/admin-panel/app/switchover/schedule',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-app-switchover-schedule.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-app-switchover-schedule-data-single-view' => [
+		'route_value' => '/admin-panel/app-id/:routing_eng_var_3/switchover/schedule/:routing_eng_var_6/data/single-view',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-app-switchover-schedule-data-single-view.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
+	],
+	'admin-panel-app-switchover-schedule-activity-timeline' => [
+		'route_value' => '/admin-panel/app-id/:routing_eng_var_3/switchover/schedule/:routing_eng_var_6/activity/timeline',
+		'auth_check_requirements' => 'post-login',
+		'page_filename' => 'admin-panel-app-switchover-schedule-activity-timeline.php',
+		'redirect_to' => '',
+		'route_type' => 'backend-web-app',
+		'allowed_request_methods' => ['GET','POST'],
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => 'webHtmlOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-login' => [
 		'route_value' => '/rest/login',
@@ -217,11 +595,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-logout' => [
 		'route_value' => '/rest/logout',
@@ -230,11 +608,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-register-password' => [
 		'route_value' => '/rest/register-password',
@@ -243,11 +621,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-password-setup-request-ref-code-status-check' => [
 		'route_value' => '/rest/password-setup-request-ref-code/status-check',
@@ -256,11 +634,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-change-password' => [
 		'route_value' => '/rest/change-password',
@@ -269,11 +647,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-forgot-password' => [
 		'route_value' => '/rest/forgot-password',
@@ -282,11 +660,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-reset-password' => [
 		'route_value' => '/rest/reset-password',
@@ -295,11 +673,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-user-delete' => [
 		'route_value' => '/rest/user/delete',
@@ -308,11 +686,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-user-change-status' => [
 		'route_value' => '/rest/user/change-status',
@@ -321,11 +699,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-re-send-activation-email' => [
 		'route_value' => '/rest/re-send/activation-email',
@@ -334,11 +712,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-get-user-details' => [
 		'route_value' => '/rest/user-details/get',
@@ -347,11 +725,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-user-groups-list' => [
 		'route_value' => '/rest/user-groups/list',
@@ -360,11 +738,11 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'rest-user-account-close' => [
 		'route_value' => '/rest/user-account/close',
@@ -373,37 +751,37 @@ return [
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['POST'],
-                'controller_type' => 'procedural',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
-                'method_name' => '',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'procedural',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\ProceduralController::class,
+		'method_name' => '',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
     'rest-get-all-user-details' => [
 		'route_value' => '/rest/all-user-details/get',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index.php',
+		'page_filename' => '',
 		'redirect_to' => '',
 		'route_type' => 'backend-web-app',
 		'allowed_request_methods' => ['GET'],
-                'controller_type' => 'oop-mapped',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails\GetController::class,
-                'method_name' => 'restApiJsonOutput',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'oop-mapped',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails\GetController::class,
+		'method_name' => 'restApiJsonOutput',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'frontend-oop-mapped-get-all-user-details' => [
 		'route_value' => '/frontend/oop-mapped/all-user-details/get',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index.php',
+		'page_filename' => '',
 		'redirect_to' => '',
 		'route_type' => 'frontend-web-app',
 		'allowed_request_methods' => ['GET'],
-                'controller_type' => 'oop-mapped',
-                'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails\GetController::class,
-                'method_name' => 'index',
-                'with_middleware' => '',
-                'without_middleware' => ''
+		'controller_type' => 'oop-mapped',
+		'controller_class_name' => \EaseAppPHP\EABlueprint\App\Http\Controllers\AllUserDetails\GetController::class,
+		'method_name' => 'index',
+		'with_middleware' => '',
+		'without_middleware' => ''
 	],
 	'backend-procedural-get-all-user-details' => [
 		'route_value' => '/backend/procedural/all-user-details/get',

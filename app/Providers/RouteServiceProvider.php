@@ -11,6 +11,7 @@ class RouteServiceProvider extends ServiceProvider
 {
     protected $container;
     protected $eaRouterinstance;
+	protected $eaCliRouterinstance;
     protected $config;
     protected $serverRequest;
     protected $eaRequestConsoleStatusResult;
@@ -23,6 +24,8 @@ class RouteServiceProvider extends ServiceProvider
 	protected $session;
 	protected $dbConn;
 	protected $baseWebResponse;
+	protected $argv;
+	protected $argc;
     
     /**
      * Create a new Illuminate application instance.
@@ -48,6 +51,13 @@ class RouteServiceProvider extends ServiceProvider
             $this->container->instance('\EARouter\EARouter', $eaRouter);
         
         }
+		
+		if ($this->container->get('EARequestConsoleStatusResult') == "Console") {
+			
+			$eaCliRouter = new \EACliRouter\EACliRouter();
+            $this->container->instance('\EACliRouter\EACliRouter', $eaCliRouter);
+			
+		}
     }
 
     /**
@@ -280,6 +290,57 @@ class RouteServiceProvider extends ServiceProvider
 			
             //Assign MiddlewarePipe entries into container
             $this->container->instance('middlewarePipeQueueEntries', $this->middlewarePipeQueue);
+            
+        }
+		
+		if ($this->container->get('EARequestConsoleStatusResult') == "Console") {
+            
+            $this->eaCliRouterinstance = $this->container->get('\EACliRouter\EACliRouter');
+        
+            $this->config = $this->container->get('config');
+			
+			$this->argc = $this->container->get('argc'); 
+			
+			$this->argv = $this->container->get('argv');
+			
+			//Get Routes from /routes folder w.r.t. console related file. This scenario covers CLI primarily.
+            $this->routes = $this->eaCliRouterinstance->getFromSingleFile($_ENV["APP_BASE_PATH"] . 'routes/console.php');
+            //var_dump($this->routes);
+
+            $this->container->instance('routes', $this->routes);
+            $this->routesList = $this->container->get('routes');
+			
+			if ($this->argc >= "2") {
+				
+				if (($this->argv[0] == "console.php") && (is_string($this->argv[1])) && ($this->argv[1] != "")) {
+					//echo "inside 1th argument, i.e., $this->argv[0] == "console.php" condition\n";
+					
+					//Match Route			
+					$this->matchedRouteResponse = $this->eaCliRouterinstance->matchRoute($this->routes, $this->argv[1], $this->config["mainconfig"]["routing_rule_length"]);
+					/* echo "\n";
+					print_r($this->matchedRouteResponse);
+					exit; */
+					$this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
+						  
+					$matchedRouteKey = $this->container->get('matchedRouteResponse')["matched_route_key"];
+					
+					$this->container->instance('MatchedRouteKey', $matchedRouteKey);
+					$this->matchedRouteKey = $this->container->get('MatchedRouteKey'); 
+					//echo "matched route key (before mutation, in RouteServiceProvider): " . $this->matchedRouteKey . "<br>";
+					$matchedRouteDetails = $this->routesList[$this->matchedRouteKey];
+					
+					$this->container->instance('MatchedRouteDetails', $matchedRouteDetails);
+					/* $this->matchedRouteDetails = $this->container->get('MatchedRouteDetails'); 
+					
+					$requiredRouteType = "";
+					$requiredRouteType = $this->matchedRouteDetails["route_type"];
+					 */
+				} 
+				
+				
+				
+			}
+			
             
         }
     }

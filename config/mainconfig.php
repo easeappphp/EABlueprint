@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => $this->serverRequest->getServerParams()['APP_NAME'],
+    'name' => $_ENV['APP_NAME'],
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'env' => $this->serverRequest->getServerParams()['APP_ENV'],
+    'env' => $_ENV['APP_ENV'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) $this->serverRequest->getServerParams()['APP_DEBUG'],
+    'debug' => (bool) $_ENV['APP_DEBUG'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'hostname' => $this->serverRequest->getServerParams()['APP_HOSTNAME'],
+    'hostname' => $_ENV['APP_HOSTNAME'],
     
 	/*
     |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'base_path' => $this->serverRequest->getServerParams()['APP_BASE_PATH'],
+    'base_path' => $_ENV['APP_BASE_PATH'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -72,13 +72,13 @@ return [
     |
     */
 
-    'web_root_path' => $this->serverRequest->getServerParams()['APP_WEB_ROOT_PATH'],
+    'web_root_path' => $_ENV['APP_WEB_ROOT_PATH'],
 	
-    'siteroot_basedir' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'public_html',
-    'siteroot_basedir_command_line' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'public_html',
-    'siteroot_basedir_command_line_dev' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'public_html',
-    'site_home_path_full' => $this->serverRequest->getServerParams()['APP_BASE_PATH'],
-    'site_home_path_full_dev' => $this->serverRequest->getServerParams()['APP_BASE_PATH'],
+    'siteroot_basedir' => $_ENV['APP_BASE_PATH'] . 'public_html',
+    'siteroot_basedir_command_line' => $_ENV['APP_BASE_PATH'] . 'public_html',
+    'siteroot_basedir_command_line_dev' => $_ENV['APP_BASE_PATH'] . 'public_html',
+    'site_home_path_full' => $_ENV['APP_BASE_PATH'],
+    'site_home_path_full_dev' => $_ENV['APP_BASE_PATH'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -125,7 +125,8 @@ return [
     |
     */
 
-    'route_rel_templates_folder_path_prefix' => __DIR__.'/../public/templates',
+    //'route_rel_templates_folder_path_prefix' => __DIR__.'/../public/templates',
+	'route_rel_templates_folder_path_prefix' => $_ENV["APP_BASE_PATH"] . 'public/templates',
 	
 	/*
     |--------------------------------------------------------------------------
@@ -136,7 +137,7 @@ return [
     |
     */
 
-    'app_url' => $this->serverRequest->getServerParams()['APP_URL'],
+    'app_url' => $_ENV['APP_URL'],
 
     'asset_url' => null,
 	
@@ -149,7 +150,7 @@ return [
     |
     */
 
-    'app_generated_enc_auth_keys_foldername' => $this->serverRequest->getServerParams()['APP_GENERATED_ENC_AUTH_KEYS_FOLDERNAME'],
+    'app_generated_enc_auth_keys_foldername' => $_ENV['APP_GENERATED_ENC_AUTH_KEYS_FOLDERNAME'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -160,15 +161,15 @@ return [
     |
     */
 
-	'app_symmetric_encryption_key_filename' => $this->serverRequest->getServerParams()['APP_SYMMETRIC_ENCRYPTION_KEY_FILENAME'],
-	'app_symmetric_authentication_key_filename' => $this->serverRequest->getServerParams()['APP_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'],
-	'app_file_rel_symmetric_encryption_key_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_SYMMETRIC_ENCRYPTION_KEY_FILENAME'],
-	'app_file_rel_symmetric_authentication_key_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'],
-	'app_asymmetric_anonymous_encryption_keypair_filename' => $this->serverRequest->getServerParams()['APP_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'],
-	'app_asymmetric_authentication_keypair_filename' => $this->serverRequest->getServerParams()['APP_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'],
-	'app_file_rel_asymmetric_anonymous_encryption_keypair_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'],
-	'app_file_rel_asymmetric_authentication_keypair_filename' => $this->serverRequest->getServerParams()['APP_FILE_REL_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'],
-	'app_current_crypto_key_version' => $this->serverRequest->getServerParams()['APP_CURRENT_CRYPTO_KEY_VERSION'],
+	'app_symmetric_encryption_key_filename' => $_ENV['APP_SYMMETRIC_ENCRYPTION_KEY_FILENAME'],
+	'app_symmetric_authentication_key_filename' => $_ENV['APP_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'],
+	'app_file_rel_symmetric_encryption_key_filename' => $_ENV['APP_FILE_REL_SYMMETRIC_ENCRYPTION_KEY_FILENAME'],
+	'app_file_rel_symmetric_authentication_key_filename' => $_ENV['APP_FILE_REL_SYMMETRIC_AUTHENTICATION_KEY_FILENAME'],
+	'app_asymmetric_anonymous_encryption_keypair_filename' => $_ENV['APP_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'],
+	'app_asymmetric_authentication_keypair_filename' => $_ENV['APP_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'],
+	'app_file_rel_asymmetric_anonymous_encryption_keypair_filename' => $_ENV['APP_FILE_REL_ASYMMETRIC_ANONYMOUS_ENCRYPTION_KEYPAIR_FILENAME'],
+	'app_file_rel_asymmetric_authentication_keypair_filename' => $_ENV['APP_FILE_REL_ASYMMETRIC_AUTHENTICATION_KEYPAIR_FILENAME'],
+	'app_current_crypto_key_version' => $_ENV['APP_CURRENT_CRYPTO_KEY_VERSION'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -187,12 +188,12 @@ return [
     */
 
     'session_based_authentication' => '1',
-	'active_session_backend' => $this->serverRequest->getServerParams()['SESSION_DRIVER'],
-	'files_based_session_storage_location_choice' => $this->serverRequest->getServerParams()['SESSION_STORAGE_LOCATION_SETTING'],
-	'files_based_session_storage_custom_path' => $this->serverRequest->getServerParams()['APP_BASE_PATH'] . 'sessions',
+	'active_session_backend' => $_ENV['SESSION_DRIVER'],
+	'files_based_session_storage_location_choice' => $_ENV['SESSION_STORAGE_LOCATION_SETTING'],
+	'files_based_session_storage_custom_path' => $_ENV['APP_BASE_PATH'] . 'sessions',
 	
 	'single_redis_server_session_backend_host' => 'tcp://localhost:6379',
-	'session_lifetime' => $this->serverRequest->getServerParams()['SESSION_LIFETIME'],
+	'session_lifetime' => $_ENV['SESSION_LIFETIME'],
 	
 	/*
     |--------------------------------------------------------------------------
@@ -227,7 +228,7 @@ return [
     |
     */
 
-    'timezone' => $this->serverRequest->getServerParams()['TIMEZONE'],
+    'timezone' => $_ENV['TIMEZONE'],
 
     /*
     |--------------------------------------------------------------------------
@@ -311,13 +312,13 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => $this->serverRequest->getServerParams()['MYSQL_DB_URL'],
-            'host' => $this->serverRequest->getServerParams()['MYSQL_DB_HOST'],
-            'port' => $this->serverRequest->getServerParams()['MYSQL_DB_PORT'],
-            'database' => $this->serverRequest->getServerParams()['MYSQL_DB_DATABASE'],
-            'username' => $this->serverRequest->getServerParams()['MYSQL_DB_USERNAME'],
-            'password' => $this->serverRequest->getServerParams()['MYSQL_DB_PASSWORD'],
-            'unix_socket' => $this->serverRequest->getServerParams()['MYSQl_DB_SOCKET'],
+            'url' => $_ENV['MYSQL_DB_URL'],
+            'host' => $_ENV['MYSQL_DB_HOST'],
+            'port' => $_ENV['MYSQL_DB_PORT'],
+            'database' => $_ENV['MYSQL_DB_DATABASE'],
+            'username' => $_ENV['MYSQL_DB_USERNAME'],
+            'password' => $_ENV['MYSQL_DB_PASSWORD'],
+            'unix_socket' => $_ENV['MYSQl_DB_SOCKET'],
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -356,12 +357,19 @@ return [
 		__DIR__.'/routing-engine-app-specific-rules1.php',
 		__DIR__.'/routing-engine-app-specific-rules2.php',
 	], */
-	'routing_engine_rule_files' => [
+	/* 'routing_engine_rule_files' => [
 		__DIR__.'/../routes/web.php',
 		__DIR__.'/../routes/ajax.php',
 		__DIR__.'/../routes/ajax-web-service-common.php',
 		__DIR__.'/../routes/rest-api.php',
 		__DIR__.'/../routes/soap-api.php',
+	], */
+	'routing_engine_rule_files' => [
+		$_ENV["APP_BASE_PATH"] . 'routes/web.php',
+		$_ENV["APP_BASE_PATH"] . 'routes/ajax.php',
+		$_ENV["APP_BASE_PATH"] . 'routes/ajax-web-service-common.php',
+		$_ENV["APP_BASE_PATH"] . 'routes/rest-api.php',
+		$_ENV["APP_BASE_PATH"] . 'routes/soap-api.php',
 	],
 	
 	/*
@@ -418,12 +426,12 @@ return [
     |
     */
 
-   /*  'vonage_communications_api_key' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_API_KEY'],
-	'vonage_communications_api_secret1' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_API_SECRET1'],
-	'vonage_communications_api_secret2' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_API_SECRET2'],
-	'vonage_communications_application_name' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_APPLICATION_NAME'],
-	'vonage_communications_application_id' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_APPLICATION_ID'],
-	'vonage_communications_application_rel_private_key_filename' => $this->serverRequest->getServerParams()['VONAGE_COMMUNICATIONS_APPLICATION_REL_PRIVATE_KEY_FILENAME'],
+   /*  'vonage_communications_api_key' => $_ENV['VONAGE_COMMUNICATIONS_API_KEY'],
+	'vonage_communications_api_secret1' => $_ENV['VONAGE_COMMUNICATIONS_API_SECRET1'],
+	'vonage_communications_api_secret2' => $_ENV['VONAGE_COMMUNICATIONS_API_SECRET2'],
+	'vonage_communications_application_name' => $_ENV['VONAGE_COMMUNICATIONS_APPLICATION_NAME'],
+	'vonage_communications_application_id' => $_ENV['VONAGE_COMMUNICATIONS_APPLICATION_ID'],
+	'vonage_communications_application_rel_private_key_filename' => $_ENV['VONAGE_COMMUNICATIONS_APPLICATION_REL_PRIVATE_KEY_FILENAME'],
      */
     /*
     |--------------------------------------------------------------------------
@@ -486,7 +494,7 @@ return [
     |
     */
 
-    'app_site_status' => $this->serverRequest->getServerParams()['APP_SITE_STATUS'],
+    'app_site_status' => $_ENV['APP_SITE_STATUS'],
     
 	
 ];

@@ -32,17 +32,18 @@ return [
         'ajax' => [
             \Odan\Session\Middleware\SessionMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EASessionAuthCheckMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'web' => [
-            //\EaseAppPHP\EABlueprint\App\Http\Middleware\SessionMiddleware::class,
-			//\Mezzio\Session\SessionMiddleware::class,
-			\Odan\Session\Middleware\SessionMiddleware::class,
+            \Odan\Session\Middleware\SessionMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EASessionAuthCheckMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'api' => [
-            \EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
+            \EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
+			\EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         
@@ -59,8 +60,7 @@ return [
 
     'routeMiddleware' => [
         'throttle' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAThrottleRequestsMiddleware::class,
-		'hostnamecheck' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
-        'auth' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAuthMiddleware::class,        
+		'auth' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAuthMiddleware::class,        
     ],
     
     /*

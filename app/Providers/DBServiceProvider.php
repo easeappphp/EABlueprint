@@ -32,12 +32,7 @@ class DBServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
-            
-            
-        }
-		
-		$dbHost = $this->container->get('config')["mainconfig"]["connections"]["mysql"]["host"];
+        $dbHost = $this->container->get('config')["mainconfig"]["connections"]["mysql"]["host"];
 		$dbUsername = $this->container->get('config')["mainconfig"]["connections"]["mysql"]["username"];
 		$dbPassword = $this->container->get('config')["mainconfig"]["connections"]["mysql"]["password"];
 		$dbName = $this->container->get('config')["mainconfig"]["connections"]["mysql"]["database"];
@@ -47,7 +42,6 @@ class DBServiceProvider extends ServiceProvider
 
 		$pdoConn = new PDOLight($dbHost, $dbUsername, $dbPassword, $dbName, $charset, $port, $pdoAttrDefaultFetchMode);
 		$this->container->instance('\EaseAppPHP\PDOLight\PDOLight-dbConn', $pdoConn);
-        
     }
 
     /**
@@ -57,11 +51,6 @@ class DBServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
-                        		
-        }
-		
-		$this->dbConn = $this->container->get('\EaseAppPHP\PDOLight\PDOLight-dbConn');
-		
-    }
+        $this->dbConn = $this->container->get('\EaseAppPHP\PDOLight\PDOLight-dbConn');
+	}
 }

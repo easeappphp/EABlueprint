@@ -4,7 +4,7 @@ return [
 	'rest-user-details-api' => [
 		'route_value' => '/rest/user-details/api',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index',
+		'page_filename' => '',
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['GET'],
@@ -17,7 +17,7 @@ return [
 	'rest-user-details-xml-api' => [
 		'route_value' => '/rest/user-details/xml-api',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index',
+		'page_filename' => '',
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['GET'],
@@ -30,7 +30,7 @@ return [
 	'rest-procedural-user-details-api' => [
 		'route_value' => '/rest/procedural/user-details/api',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'index',
+		'page_filename' => 'rest-procedural-user-details-api.php',
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['GET'],
@@ -43,7 +43,7 @@ return [
 	'rest-procedural-user-details-xml-api' => [
 		'route_value' => '/rest/procedural/user-details/xml-api',
 		'auth_check_requirements' => 'none',
-		'page_filename' => 'indexXml',
+		'page_filename' => 'rest-procedural-user-details-xml-api.php',
 		'redirect_to' => '',
 		'route_type' => 'rest-web-service',
 		'allowed_request_methods' => ['GET'],

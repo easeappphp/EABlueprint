@@ -11,8 +11,7 @@ class OdanSessionServiceProvider extends ServiceProvider
     protected $container;
 	protected $config;
 	protected $session;	
-	//protected $response;    
-     
+	 
     /**
      * Create a new Illuminate application instance.
      *
@@ -54,7 +53,7 @@ class OdanSessionServiceProvider extends ServiceProvider
 					'gc_maxlifetime' => 86400,
 					'gc_probability' => 1,
 					'gc_divisor' => 100,
-					'same_site' => 'lax',
+					'cookie_samesite' => 'Lax',
 				]);
 				
 				// Start the session

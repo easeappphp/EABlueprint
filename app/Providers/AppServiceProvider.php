@@ -32,20 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
-            
-            /* //1. Create a Server Request using Laminas\Diactoros PSR-7 Library
-            // Returns new ServerRequest instance, using values from superglobals:
-            $serverRequestInstance = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
-
-            //Bind an existing "serverRequest" class instance to the container, by defining the Class Name as instance reference in the container
-            $this->container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
-			 */
-			/* //2. Create a Response Object
-			$responseInstance = new \EaseAppPHP\Foundation\BaseWebResponse($this->container);
-			
-			//Bind an existing "response" class instance to the container, by defining the Class Name as instance reference in the container
-            $this->container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance); */
-			
+           
         }
         
         
@@ -61,8 +48,6 @@ class AppServiceProvider extends ServiceProvider
         if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
             
             $this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
-			
-			//$this->response = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
 			
 			if ($this->serverRequest->getServerParams()['APP_DEBUG'] == "true") {
 				

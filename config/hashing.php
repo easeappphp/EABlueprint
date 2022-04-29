@@ -29,7 +29,7 @@ return [
     */
 
     'bcrypt' => [
-        'rounds' => $this->serverRequest->getServerParams()['BCRYPT_ROUNDS'],
+        'rounds' => $_ENV['BCRYPT_ROUNDS'],
     ],
 
     /*

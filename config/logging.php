@@ -25,19 +25,19 @@ return [
         
 		'single' => [
             'driver' => 'single',
-            'path' => $this->serverRequest->getServerParams()['LOGGING_DRIVER_SINGLE'],
-            'level' => $this->serverRequest->getServerParams()['LOG_LEVEL'],
+            'path' => $_ENV['LOGGING_DRIVER_SINGLE'],
+            'level' => $_ENV['LOG_LEVEL'],
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => $this->serverRequest->getServerParams()['LOGGING_DRIVER_DAILY'],
-            'level' => $this->serverRequest->getServerParams()['LOG_LEVEL'],
+            'path' => $_ENV['LOGGING_DRIVER_DAILY'],
+            'level' => $_ENV['LOG_LEVEL'],
             'days' => 14,
         ],
 
         'emergency' => [
-            'path' => $this->serverRequest->getServerParams()['LOGGING_DRIVER_EMERGENCY'],
+            'path' => $_ENV['LOGGING_DRIVER_EMERGENCY'],
         ],
     ],
 
