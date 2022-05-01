@@ -17,7 +17,7 @@ defined('START') or define("START", "No Direct Access");
 
 /*
 *--------------------------------------------------------------------------
-* Register the Auto Loader
+* Build Foundation - Register the Auto Loader
 *--------------------------------------------------------------------------
 *
 * Composer provides a convenient, automatically generated class loader to autoload files for
@@ -30,17 +30,14 @@ use EaseAppPHP\App;
 
 /*
 *--------------------------------------------------------------------------
-* Run The Application
+* Construct your Dream Building - Bootstrap the Application
 *--------------------------------------------------------------------------
 *
-* Once we have the application, we can handle the incoming server request using
-* the application.A response will be sent back
-* to the client's browser.
+* Bootstrap the building, i.e., load dependencies and connect them to the PSR-11 compatible dependency injection container.
 *
 */
 $container = require_once __DIR__.'/../bootstrap/app.php';
 
-//$application = new App($envFilePath, $container, 'From-Single-Folder', 'string', $singleFolderConfigFilePath);
 $application = new App($container);
 $container->instance('App', $application);
 
@@ -48,4 +45,13 @@ $app = $container->get('App');
 
 $app->init();
 
+/*
+*--------------------------------------------------------------------------
+* Enjoy the moments - Run the Application
+*--------------------------------------------------------------------------
+*
+* Once we have the application, we can handle incoming server requests for web (web pages / Ajax calls / REST APIs / SOAP
+* APIs) with a response back to the client's browser.
+*
+*/
 $app->run();

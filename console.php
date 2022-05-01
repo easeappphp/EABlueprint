@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 /*
 *--------------------------------------------------------------------------
-* Register the Auto Loader
+* Build Foundation - Register the Auto Loader
 *--------------------------------------------------------------------------
 *
 * Composer provides a convenient, automatically generated class loader to autoload files for
@@ -20,11 +20,10 @@ use EaseAppPHP\App;
 
 /*
 *--------------------------------------------------------------------------
-* Run The Console Application / Cron Job
+* Construct your Dream Building - Bootstrap the Application
 *--------------------------------------------------------------------------
 *
-* Once we have the console application, we can handle the cron job/initiated cli application request using
-* the console application.
+* Bootstrap the building, i.e., load dependencies and connect them to the PSR-11 compatible dependency injection container.
 *
 */
 $container = require_once __DIR__.'/bootstrap/app-cli.php';
@@ -36,4 +35,13 @@ $app = $container->get('App');
 
 $app->init();
 
+/*
+*--------------------------------------------------------------------------
+* Enjoy the moments - Run The Console Application / Cron Job
+*--------------------------------------------------------------------------
+*
+* Once we have the console application, we can handle requests to CLI console (Cron jobs / Message Queue Workers / Commands)
+* to perform the designated activities.
+*
+*/
 $app->run();
