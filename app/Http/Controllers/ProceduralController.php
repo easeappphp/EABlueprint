@@ -30,6 +30,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 			
 		}
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 
@@ -94,6 +96,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     {
         $data = new \StdClass;
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 
@@ -146,6 +150,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     {
         $data = new \StdClass;
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 
@@ -207,6 +213,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     {
         $data = new \StdClass;
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 
@@ -263,6 +271,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     {
         $data = new \StdClass;
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 
@@ -319,6 +329,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     {
         $data = new \StdClass;
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 
@@ -375,6 +387,8 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
     {
         $data = new \StdClass;
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 

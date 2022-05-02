@@ -13,6 +13,8 @@ class ProceduralCliController extends \EaseAppPHP\EABlueprint\App\Console\Contro
     {
         $data = new \StdClass;
 		
+		$data->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+		$data->matchedRouteDetails = $this->matchedRouteDetails;
 		$data->matchedRoutePageFilename = $this->matchedRouteDetails["page_filename"];
 		$data->pageFilename = $this->matchedRouteDetails["page_filename"];
 		
