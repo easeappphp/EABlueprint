@@ -132,7 +132,7 @@ class ProceduralController extends \EaseAppPHP\EABlueprint\App\Http\Controllers\
 		}
 		clearstatcache();
 		
-		if ((isset($data->response)) && (is_object($data->response))) {
+		if ((isset($data->response)) && ((is_object($data->response)) || (is_array($data->response)))) {
 			
 			$result = $this->response->setJson($data->response, 200);
 		

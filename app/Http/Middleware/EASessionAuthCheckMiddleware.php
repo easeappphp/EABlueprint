@@ -30,17 +30,33 @@ class EASessionAuthCheckMiddleware implements MiddlewareInterface
         $dataFromAppClass = $request->getAttribute(PassingAppClassDataToMiddleware::class);
 		
 		$this->container = $dataFromAppClass["container"];
-		$this->config = $dataFromAppClass["config"];
-		$this->routes =  $dataFromAppClass["matchedRouteResponse"];
-		$this->eaRouterinstance =  $dataFromAppClass["eaRouterinstance"];
-		$this->matchedRouteResponse =  $dataFromAppClass["matchedRouteResponse"];
-		$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
-		$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
-		$this->response = $dataFromAppClass["baseWebResponse"];
+		//$this->config = $dataFromAppClass["config"];
+		$this->config = $this->container->get('config');
+		
+		//$this->routes =  $dataFromAppClass["matchedRouteResponse"];
+		$this->routes =  $this->container->get('routes');
+		
+		//$this->eaRouterinstance =  $dataFromAppClass["eaRouterinstance"];
+		$this->eaRouterinstance =  $this->container->get('\EARouter\EARouter');
+		
+		//$this->matchedRouteResponse =  $dataFromAppClass["matchedRouteResponse"];
+		$this->matchedRouteResponse =  $this->container->get('matchedRouteResponse');
+		
+		//$this->matchedRouteKey =  $dataFromAppClass["matchedRouteKey"];
+		$this->matchedRouteKey =  $this->container->get('MatchedRouteKey');
+		
+		//$this->matchedRouteDetails =  $dataFromAppClass["matchedRouteDetails"];
+		$this->matchedRouteDetails =  $this->container->get('MatchedRouteDetails');
+		
+		//$this->dbConn =  $dataFromAppClass["dbConn"];
+		$this->dbConn =  $this->container->get('\EaseAppPHP\PDOLight\PDOLight-dbConn');
+		
+		//$this->response = $dataFromAppClass["baseWebResponse"];
+		$this->response = $this->container->get('\EaseAppPHP\Foundation\BaseWebResponse');
 		
 
 		if ($this->container->has('\Odan\Session\PhpSession') === true) {
-		
+			
 			$this->session =  $dataFromAppClass["session"];
 			
 			//check if Session exists

@@ -16,6 +16,7 @@ return [
 		\EaseAppPHP\EABlueprint\App\Http\Middleware\EAPreventRequestsDuringMaintenanceMiddleware::class,
         \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppBrowserCacheHeadersMiddleware::class,
 		\EaseAppPHP\EABlueprint\App\Http\Middleware\EAAppSecurityHeadersMiddleware::class,
+		\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
         
     ],
     
@@ -32,17 +33,19 @@ return [
         'ajax' => [
             \Odan\Session\Middleware\SessionMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EASessionAuthCheckMiddleware::class,
-			\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
+			//\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'web' => [
-            \Odan\Session\Middleware\SessionMiddleware::class,
+            //\EaseAppPHP\EABlueprint\App\Http\Middleware\SessionMiddleware::class,
+			//\Mezzio\Session\SessionMiddleware::class,
+			\Odan\Session\Middleware\SessionMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EASessionAuthCheckMiddleware::class,
-			\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
+			//\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
         'api' => [
-            \EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
+            //\EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\HelloMiddleware::class,
 			\EaseAppPHP\EABlueprint\App\Http\Middleware\EARouterMiddleware::class,
         ],
@@ -60,7 +63,8 @@ return [
 
     'routeMiddleware' => [
         'throttle' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAThrottleRequestsMiddleware::class,
-		'auth' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAuthMiddleware::class,        
+		//'hostnamecheck' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAHostnameCheckMiddleware::class,
+        'auth' => \EaseAppPHP\EABlueprint\App\Http\Middleware\EAAuthMiddleware::class,        
     ],
     
     /*

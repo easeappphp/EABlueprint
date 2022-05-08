@@ -23,7 +23,8 @@ class EAPreventRequestsDuringMaintenanceMiddleware implements MiddlewareInterfac
         $dataFromAppClass = $request->getAttribute(PassingAppClassDataToMiddleware::class);
 		
 		$this->container = $dataFromAppClass["container"];
-		$this->config = $dataFromAppClass["config"];
+		//$this->config = $dataFromAppClass["config"];
+		$this->config = $this->container->get('config');
 		
 		$this->response = $handler->handle($request);
 		

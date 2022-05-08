@@ -74,6 +74,9 @@ class RouteServiceProvider extends ServiceProvider
             $this->config = $this->container->get('config');
             $this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
 			
+			
+			//file_put_contents('filename.txt', var_export($b, true));
+			
 			//Get Routes from /routes folder w.r.t. web, ajax, ajax-web-service-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
             $this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["mainconfig"]["routing_engine_rule_files"]);
             //var_dump($this->routes);
@@ -81,10 +84,12 @@ class RouteServiceProvider extends ServiceProvider
             $this->routesList = $this->container->get('routes');
         
             //Match Route			
-            $this->matchedRouteResponse = $this->eaRouterinstance->matchRoute($this->routes, $this->serverRequest->getUri()->getPath(), $this->serverRequest->getQueryParams(), $this->serverRequest->getMethod(), $this->config["mainconfig"]["routing_rule_length"]);
+            $matchedRouteResponse = $this->eaRouterinstance->matchRoute($this->routes, $this->serverRequest->getUri()->getPath(), $this->serverRequest->getQueryParams(), $this->serverRequest->getMethod(), $this->config["mainconfig"]["routing_rule_length"]);
             
-			$this->container->instance('matchedRouteResponse', $this->matchedRouteResponse);
-                  
+			$this->container->instance('matchedRouteResponse', $matchedRouteResponse);
+			
+			$this->matchedRouteResponse = $this->container->get('matchedRouteResponse');
+			
 			$matchedRouteKey = $this->container->get('matchedRouteResponse')["matched_route_key"];
 			
 			$this->container->instance('MatchedRouteKey', $matchedRouteKey);
@@ -137,8 +142,11 @@ class RouteServiceProvider extends ServiceProvider
 			
 			$this->dbConn = $this->container->get('\EaseAppPHP\PDOLight\PDOLight-dbConn');
 			
+			
+			
+			
 			// Step 1: Do something first
-			$appClassData = [
+			/* $appClassData = [
 				'container' => $this->container,
 				'config' => $this->config,
 				'routes' => $this->routes,
@@ -148,13 +156,28 @@ class RouteServiceProvider extends ServiceProvider
 				'matchedRouteDetails' => $this->matchedRouteDetails,
 				'dbConn' => $this->dbConn,
 				'baseWebResponse' => $this->baseWebResponse,
+			]; */
+			
+			$appClassData = [
+				'container' => $this->container,
 			];
 			
 			if (($requiredRouteType == "frontend-web-app") || ($requiredRouteType == "backend-web-app") || ($requiredRouteType == "web-app-common") || ($requiredRouteType == "ajax") || ($requiredRouteType == "ajax-web-service-common")) {
 
-				if ($this->container->has('\Odan\Session\PhpSession') === true) {
-			
+				//if ($this->container->has('\Odan\Session\PhpSession') === true) {
+				if ($this->container->has('BeforeSessionStart') === true) {	
+					
 					//Get the instance of \Odan\Session\PhpSession
+					//$this->session = $this->container->get('\Odan\Session\PhpSession');
+					$session = $this->container->get('BeforeSessionStart');
+					
+					// Start the session
+					$session->start();
+					
+					//Bind an existing "\Odan\Session\PhpSession" class instance to the container
+					$this->container->instance('\Odan\Session\PhpSession', $session);
+					
+					//Get the instance of \Odan\Session\PhpSession after Session Start
 					$this->session = $this->container->get('\Odan\Session\PhpSession');
 					
 					$appClassData["session"] = $this->session;
@@ -255,7 +278,7 @@ class RouteServiceProvider extends ServiceProvider
 					if (($requiredRouteType == "frontend-web-app") || ($requiredRouteType == "backend-web-app") || ($requiredRouteType == "web-app-common") || ($requiredRouteType == "ajax") || ($requiredRouteType == "ajax-web-service-common")) {
 
 						if ($this->container->has('\Odan\Session\PhpSession') === true) {
-						
+							
 							$this->middlewarePipeQueue->pipe(new $constructedResponseRowValue($this->session));
 							
 						} else {
@@ -266,7 +289,7 @@ class RouteServiceProvider extends ServiceProvider
 						
 						throw new \Exception("Sessions will be enabled only for ajax and web requests. Do remove Session Middleware otherwise.");
 						
-					}
+					} 
 					
 				} else {
 					

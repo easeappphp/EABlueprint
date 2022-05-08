@@ -23,7 +23,8 @@ class EAHostnameCheckMiddleware implements MiddlewareInterface
         $dataFromAppClass = $request->getAttribute(PassingAppClassDataToMiddleware::class);
 		
 		$this->container = $dataFromAppClass["container"];
-		$this->config = $dataFromAppClass["config"];
+		//$this->config = $dataFromAppClass["config"];
+		$this->config = $this->container->get('config');
 		
 		//echo "https: " . $request->getServerParams()['HTTPS'] . "\n";
 		if (strstr($request->getServerParams()['HTTP_HOST'], $_ENV['APP_HOSTNAME'])) {

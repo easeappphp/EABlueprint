@@ -11,7 +11,8 @@ class OdanSessionServiceProvider extends ServiceProvider
     protected $container;
 	protected $config;
 	protected $session;	
-	 
+	//protected $response;    
+     
     /**
      * Create a new Illuminate application instance.
      *
@@ -56,11 +57,8 @@ class OdanSessionServiceProvider extends ServiceProvider
 					'cookie_samesite' => 'Lax',
 				]);
 				
-				// Start the session
-				$session->start();
-
 				//Bind an existing "\Odan\Session\PhpSession" class instance to the container
-				$this->container->instance('\Odan\Session\PhpSession', $session);
+				$this->container->instance('BeforeSessionStart', $session);
 				
 			}
 			
@@ -77,14 +75,39 @@ class OdanSessionServiceProvider extends ServiceProvider
     {
         if ($this->container->get('EARequestConsoleStatusResult') == "Web") {
             
-            if ($this->container->has('\Odan\Session\PhpSession') === true) {
+            if ($this->container->has('BeforeSessionStart') === true) {
+		
+				//Get the instance of BeforeSessionStart
+				$this->session = $this->container->get('BeforeSessionStart');
+				
+			} else {
+				//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
+			}
+			/* if ($this->container->has('\Odan\Session\PhpSession') === true) {
 		
 				//Get the instance of \Odan\Session\PhpSession
 				$this->session = $this->container->get('\Odan\Session\PhpSession');
 				
 			} else {
 				//throw https://www.php-fig.org/psr/psr-11/#not-found-exception exception
-			}			
+			} */
+
+			/* try {
+				if ($this->container->has('\Odan\Session\PhpSession') === true) {
+		
+					//Get the instance of \Odan\Session\PhpSession
+					$this->session = $this->container->get('\Odan\Session\PhpSession');
+					
+				} else {
+					
+					throw new \Psr\Container\NotFoundExceptionInterface("The entry is not found in the container.");
+					
+				}
+			} catch (Exception $e) {
+				
+				echo "Exception: " . html_escaped_output($e->getMessage());
+				
+			} */
 						
         }
     }
