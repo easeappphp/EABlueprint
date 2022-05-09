@@ -68,6 +68,17 @@ $envFilePath = dirname(dirname(__FILE__));
 $dotenv = \Dotenv\Dotenv::createImmutable($envFilePath);
 $dotenv->load();
 
+/*
+*--------------------------------------------------------------------------
+* Create a Server Request using Laminas\Diactoros PSR-7 Library
+*--------------------------------------------------------------------------
+* This returns new ServerRequest instance, using values from superglobals.
+* Attach the ServerRequest instance to the container.
+*
+*/
+/* $serverRequestInstance = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
+$container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
+$serverRequest = $container->get('\Laminas\Diactoros\ServerRequestFactory');  */
 
 /*
 *--------------------------------------------------------------------------
@@ -141,6 +152,17 @@ $config = $container->get('config');
 */
 $dotSeparatedKeyBasedConfigArrayData = $container->get('EAConfig')->generateDotSeparatedKeyBasedConfigArray($collectedConfigData, $prefix = '');
 $container->instance('dotSeparatedConfig', $dotSeparatedKeyBasedConfigArrayData);
+
+
+/*
+*--------------------------------------------------------------------------
+* Create a Response Object
+*--------------------------------------------------------------------------
+* Attach the response object instance to the container.
+*
+*/
+//$responseInstance = new \EaseAppPHP\Foundation\BaseWebResponse($container);
+//$container->instance('\EaseAppPHP\Foundation\BaseWebResponse', $responseInstance);
 
 /*
 *--------------------------------------------------------------------------

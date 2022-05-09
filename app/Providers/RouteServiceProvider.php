@@ -73,10 +73,74 @@ class RouteServiceProvider extends ServiceProvider
         
             $this->config = $this->container->get('config');
             $this->serverRequest = $this->container->get('\Laminas\Diactoros\ServerRequestFactory');
+			/* 
+			echo "ROUTE_CACHE_USAGE_STATUS: " . $_ENV["ROUTE_CACHE_USAGE_STATUS"] . "<br>";
+			echo "ROUTE_CACHE_DRIVER: " . $_ENV["ROUTE_CACHE_DRIVER"] . "<br>";
+			echo "ROUTE_CACHE_FILE_PATH: " . $_ENV["ROUTE_CACHE_FILE_PATH"] . "<br>";
 			
-			
-			//file_put_contents('filename.txt', var_export($b, true));
-			
+			if ($_ENV["ROUTE_CACHE_USAGE_STATUS"] == "on") {
+				
+				if ($_ENV["ROUTE_CACHE_DRIVER"] == "file") {
+				
+					if((is_file($_ENV["ROUTE_CACHE_FILE_PATH"])) && (file_exists($_ENV["ROUTE_CACHE_FILE_PATH"]))) {
+						
+						//check for last modified time and then create combined version (if there is any change in the route related files)
+						$lastModifiedTimeCachedRouteFile = filemtime($_ENV["ROUTE_CACHE_FILE_PATH"]);
+						
+						$routeFilesList = $this->config["mainconfig"]["routing_engine_rule_files"];
+						echo "routeFilesList: " . $routeFilesList . "<br>";exit;
+						foreach($routeFilesList as $routeFileRow) {
+										
+							if (file_exists($routeFileRow)) {
+							
+								$lastModifiedTimeRouteFileRow = filemtime($routeFileRow);
+								if($lastModifiedTimeRouteFileRow > $lastModifiedTimeCachedRouteFile) {
+									
+									//echo "There is a route file that was recently modified.";
+									
+									$this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["mainconfig"]["routing_engine_rule_files"]);
+						
+									//update the routes in file based cache
+									file_put_contents($_ENV["ROUTE_CACHE_FILE_PATH"], serialize($this->routes));
+									
+										
+								}
+							}
+						  
+						}
+					} else {
+						
+						echo "combined file does not exist.";
+						
+						$this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["mainconfig"]["routing_engine_rule_files"]);
+						var_dump($this->routes);
+						//store the config in file based cache
+						file_put_contents($_ENV["CONFIG_CACHE_FILE_PATH"], serialize($this->routes));
+						
+					}
+					clearstatcache();
+				
+				} else {
+					
+					//echo "file option is not supported. Redis | Memcache |MySQL | Flysystem etc...";
+					
+				}
+				
+			} else {
+				
+				//echo "Show routes data directly using the EARouter class.";
+				
+				$this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["mainconfig"]["routing_engine_rule_files"]);
+				
+			}
+
+			if ($_ENV["ROUTE_CACHE_DRIVER"] == "file") {
+				
+				$this->routes = unserialize(file_get_contents($_ENV["ROUTE_CACHE_FILE_PATH"]));
+				
+			}
+			 */
+
 			//Get Routes from /routes folder w.r.t. web, ajax, ajax-web-service-common, rest-api, soap-api related files. This scenario excludes CLI and Channels primarily.
             $this->routes = $this->eaRouterinstance->getFromFilepathsArray($this->config["mainconfig"]["routing_engine_rule_files"]);
             //var_dump($this->routes);

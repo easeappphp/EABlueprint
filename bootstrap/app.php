@@ -134,7 +134,73 @@ $dotSeparatedKeyBasedConfigArrayData =[];
 $configSource = 'From-Single-Folder';
 $configSourceValueDataType = 'string';
 $configSourceValueData = $singleFolderConfigFilePath;
+/* 
+if ($_ENV["CONFIG_CACHE_USAGE_STATUS"] == "on") {
+	
+	if ($_ENV["CONFIG_CACHE_DRIVER"] == "file") {
+	
+		if((is_file($_ENV["CONFIG_CACHE_FILE_PATH"])) && (file_exists($_ENV["CONFIG_CACHE_FILE_PATH"]))) {
+			
+			//check for last modified time and then create combined version (if there is any change in the config files)
+			$lastModifiedTimeCachedConfigFile = filemtime($_ENV["CONFIG_CACHE_FILE_PATH"]);
+			
+			$configFilesList = glob($configSourceValueData . "/*.php");
+			
+			foreach($configFilesList as $configFileRow) {
+			  				
+				if (file_exists($configFileRow)) {
+				
+					$lastModifiedTimeConfigFileRow = filemtime($configFileRow);
+					if($lastModifiedTimeConfigFileRow > $lastModifiedTimeCachedConfigFile) {
+						
+						//echo "There is a config file that was recently modified.";
+						
+						$collectedConfigData = $container->get('EAConfig')->get($configSource, $configSourceValueDataType, $configSourceValueData);
+			
+						//update the config in file based cache
+						file_put_contents($_ENV["CONFIG_CACHE_FILE_PATH"], serialize($collectedConfigData));
+						
+							
+					}
+				}
+			  
+			}
+		} else {
+			
+			//echo "combined file does not exist.";
+			
+			$collectedConfigData = $container->get('EAConfig')->get($configSource, $configSourceValueDataType, $configSourceValueData);
+			
+			//store the config in file based cache
+			file_put_contents($_ENV["CONFIG_CACHE_FILE_PATH"], serialize($collectedConfigData));
+			
+		}
+		clearstatcache();
+	
+	} else {
+		
+		//echo "file option is not supported. Redis | Memcache |MySQL | Flysystem etc...";
+		
+	}
+	
+} else {
+	
+	//echo "Show config data from the EAConfig class.";
+	
+	$collectedConfigData = $container->get('EAConfig')->get($configSource, $configSourceValueDataType, $configSourceValueData);
+	
+}
 
+if ($_ENV["CONFIG_CACHE_DRIVER"] == "file") {
+	
+	$collectedConfigData = unserialize(file_get_contents($_ENV["CONFIG_CACHE_FILE_PATH"]));
+	
+}
+ */
+$collectedConfigData = $container->get('EAConfig')->get($configSource, $configSourceValueDataType, $configSourceValueData);
+
+
+/* 
 if (($configSource == 'As-Array') && ($configSourceValueDataType == 'array') && (is_array($configSourceValueData))) {
 
 	$collectedConfigData = $container->get('EAConfig')->getAsArray($configSourceValueData);
@@ -151,8 +217,8 @@ if (($configSource == 'As-Array') && ($configSourceValueDataType == 'array') && 
 
 	$collectedConfigData = $container->get('EAConfig')->getFromFilepathsArray($configSourceValueData);
 
-}
-
+} 
+ */
 /*
 *--------------------------------------------------------------------------
 * Attach the config data instance to the container
