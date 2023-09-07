@@ -29,7 +29,10 @@ class ProceduralCliController extends \EaseAppPHP\EABlueprint\App\Console\Contro
 		extract($seo_url_params, EXTR_PREFIX_ALL, 'routing_eng_var');
 		foreach($seo_url_params as $k => $v)
 		{
-		$routing_eng_var_.$k = (null !== $$routing_eng_var_.$k) ? trim(filter_var($$routing_eng_var_.$k, FILTER_SANITIZE_STRING)) : '';
+		//$routing_eng_var_.$k = (null !== $$routing_eng_var_.$k) ? trim(filter_var($$routing_eng_var_.$k, FILTER_SANITIZE_STRING)) : '';
+		$routing_eng_var_.$k = (null !== $$routing_eng_var_.$k) ? trim(filter_var($$routing_eng_var_.$k, FILTER_UNSAFE_RAW,
+           FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW | FILTER_FLAG_NO_ENCODE_QUOTES)) : '';
+		
 		}
 		
 		$data->app_url = $this->container->get('EAConfig')->getDotSeparatedKeyValue("mainconfig.app_url");

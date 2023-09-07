@@ -95,21 +95,21 @@ $container->instance('ROUTES_FOLDER_PATH', $routes_folder_Path);
 * Attach the ServerRequest instance to the container.
 *
 */
-$serverRequestInstance = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
+/* $serverRequestInstance = \Laminas\Diactoros\ServerRequestFactory::fromGlobals();
 $container->instance('\Laminas\Diactoros\ServerRequestFactory', $serverRequestInstance);
-$serverRequest = $container->get('\Laminas\Diactoros\ServerRequestFactory'); 
-
+$serverRequest = $container->get('\Laminas\Diactoros\ServerRequestFactory');  
+ */
 /*
 *--------------------------------------------------------------------------
 * Define Default timezone
 *--------------------------------------------------------------------------
 *
 */
-if (function_exists("date_default_timezone_set")) {
+/* if (function_exists("date_default_timezone_set")) {
 		
-	date_default_timezone_set($serverRequest->getServerParams()['TIMEZONE']);
+	date_default_timezone_set($_ENV['TIMEZONE']);
 
-}
+} */
 
 /*
 *--------------------------------------------------------------------------
@@ -265,8 +265,8 @@ Log::channel($container, 'emergency')->emergency('This logs to the file handler 
 * Attach the logger object instance to the container.
 *
 */
-// Create some handlers
-$stream = new StreamHandler($serverRequest->getServerParams()['LOGGING_DRIVER_SINGLE'], Logger::DEBUG);
+ // Create some handlers
+$stream = new StreamHandler($_ENV['LOGGING_DRIVER_SINGLE'], Logger::DEBUG);
 $firephp = new FirePHPHandler();
 
 // Create the main logger of the app
@@ -278,7 +278,7 @@ $logger->pushHandler($firephp);
 $container->instance('\Monolog\Logger\channel-myLogger', $logger);
 
 // You can now use your logger
-$container->get('\Monolog\Logger\channel-myLogger')->info("This uses Monolog logger with first channel, based on single line container based logging object");
+$container->get('\Monolog\Logger\channel-myLogger')->info("This uses Monolog logger with first channel, based on single line container based logging object"); 
 
 /*
 *--------------------------------------------------------------------------
