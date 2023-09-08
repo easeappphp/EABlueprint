@@ -12,5 +12,5 @@ composer install
 Alternatively, if EABlueprint is to be downloaded as a dependency using Composer then run,
 
 ```sh
-composer require easeappphp/eablueprint:^1.0.11
+composer require easeappphp/eablueprint:^1.0.12
 ```
