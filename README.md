@@ -1,10 +1,9 @@
 # easeapp-EABlueprint
 This is the blueprint or the base for creating an Easeapp PHP Framework based application. This will be useful to create a REST API/Web Application.
 
-To Start creating an application, download the code by either cloning the repository or by downloading the .zip file and unzip the archive. Then use composer to download Easeapp framework and other dependencies.
 
 ### Getting started
-To deploy EABlueprint as an application and then download dependencies using Composer, run
+To Start creating a REST API/web application, download the code by either cloning the repository or by downloading the .zip file and unzip the archive. Then use composer to download Easeapp framework and other dependencies. To do so, run
 
 ```sh
 composer install
