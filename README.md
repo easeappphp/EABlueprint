@@ -4,13 +4,13 @@ This is the blueprint or the base for creating an Easeapp PHP Framework based ap
 To Start creating an application, download the code by either cloning the repository or by downloading the .zip file and unzip the archive. Then use composer to download Easeapp framework and other dependencies.
 
 ### Getting started
-With Composer, run
+To deploy EABlueprint as an application and then download dependencies using Composer, run
 
 ```sh
 composer install
 ```
 
-Alternatively, if EABlueprint is to be downloaded into vendor folder as a dependency then,
+Alternatively, if EABlueprint is to be downloaded as a dependency using Composer then run,
 
 With Composer, run
 
