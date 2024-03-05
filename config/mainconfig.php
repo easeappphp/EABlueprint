@@ -89,8 +89,8 @@ return [
     |
     */
 
-    'chosen_template' => 'star-admin2-pro',
-	//'chosen_template' => 'default-admin',
+    //'chosen_template' => 'star-admin2-pro',
+	'chosen_template' => 'default-admin',
 	
 	/*
     |--------------------------------------------------------------------------

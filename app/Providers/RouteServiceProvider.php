@@ -18,6 +18,8 @@ class RouteServiceProvider extends ServiceProvider
     protected $routesList;
     protected $routes;
     protected $matchedRouteResponse;
+	protected $matchedRouteKey;
+	protected $matchedRouteDetails;
     private $middlewarePipeQueue;
     protected $middlewarePipeQueueEntries;
     private $constructedResponse = [];
