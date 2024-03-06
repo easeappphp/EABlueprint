@@ -9,8 +9,32 @@ To Start creating a REST API/web application, download the code by either clonin
 composer install
 ```
 
-Alternatively, if EABlueprint is to be downloaded as a dependency using Composer then run,
+Alternatively, latest version of EABlueprint can be downloaded using Composer, with the following command,
 
 ```sh
-composer require easeappphp/eablueprint:^1.0.12
+composer require easeappphp/eablueprint
 ```
+
+If EABlueprint is to be downloaded based on a specific version using Composer, then run,
+
+```sh
+composer require easeappphp/eablueprint:^1.0.16
+```
+
+### Supported PHP versions
+PHP versions 8.2 & 8.3
+
+
+### Supported PHP setups
++ Nginx (as reverse proxy) + Apache (as web server) + PHP
++ Nginx (as web server) + Fast-CGI + PHP-FPM + PHP
+
+
+### Supporters
++ Pradeep Ganapathy
++ Saran Varma Namburi
++ Srikanth Maggidi
++ many other colleagues/friends/open source project authors who contributed inputs / supported in code
+
+
+
